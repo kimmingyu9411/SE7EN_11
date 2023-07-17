@@ -1,7 +1,8 @@
-import { App } from "./app";
+import { App } from "./app.js";
+import { config } from "./config.js";
 
 const app = new App();
 
 app.setup();
 app.connetDB();
-app.runServer();
+app.runServer(config.server);
