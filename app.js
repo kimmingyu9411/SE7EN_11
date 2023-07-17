@@ -2,8 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import cookie from 'cookie-parser';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
-dotenv.config();
 
 export class App{
     constructor(){
@@ -23,9 +21,9 @@ export class App{
         
     }
 
-    runServer(){
-        this.app.listen(process.env[PORT],()=>{
-            console.log(`Server is running on http://localhost:${process.env[PORT]}`);
+    runServer(server){
+        this.app.listen(server.port,()=>{
+            console.log(`Server is running on http://localhost:${server.port}`);
         })
     }
 }
