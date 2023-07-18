@@ -5,13 +5,47 @@ export class StoreController {
     this.storeService = new StoreService();
   }
 
-  getAllStore = (req, res, next) => {};
+  getAllStore = async (req, res, next) => {
+    return await this.storeService.getAllStore();
+  };
 
-  getOneStore = (req, res, next) => {};
+  getOneStore = async (req, res, next) => {
+    const storeId = req.params;
 
-  createStore = (req, res, next) => {};
+    return await this.storeService.getOneStore(storeId);
+  };
 
-  updateStore = (req, res, next) => {};
+  createStore = async (req, res, next) => {
+    const userId = req.locals.payload;
+    const { isOner, storeName, storeAddress, storeImage } = req.body;
 
-  deleteStore = (req, res, next) => {};
+    return await this.storeService.createStore(
+      isOner,
+      storeName,
+      storeAddress,
+      storeImage,
+      userId
+    );
+  };
+
+  updateStore = async (req, res, next) => {
+    const storeId = req.params;
+    const userId = req.locals.payload;
+    const { storeName, storeAddress, storeImage } = req.body;
+
+    return await this.storeService.updateStore(
+      userId,
+      storeId,
+      storeName,
+      storeAddress,
+      storeImage
+    );
+  };
+
+  deleteStore = async (req, res, next) => {
+    const storeId = req.params
+    const {userId, isOner} = req.locals.payload
+
+    return await this.storeService.deleteStore(storeId, userId, isOner)
+  };
 }
