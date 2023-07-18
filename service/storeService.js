@@ -1,18 +1,11 @@
+const StoreRepository = require("../repository/store.repository.js");
 
-const StoreRepository = require('../repository/store.repository.js');
-
-class StoreService{
-    constructor(){
-        this.storeRepository = new StoreRepository();
-    }
+class StoreService {
+  constructor() {
+    this.storeRepository = new StoreRepository();
+  }
   //상점 등록
-  createStore = async ({
-    userId,
-    isOner,
-    storeName,
-    storeAddress,
-    storeImage,
-  }) => {
+  createStore = async ({ userId, isOner, name }) => {
     try {
       if (!isOner) {
         throw new Error("권한이 없습니다.");
@@ -21,9 +14,7 @@ class StoreService{
       return await this.storeRepository.createStore({
         userId,
         isOner,
-        storeName,
-        storeAddress,
-        storeImage,
+        name,
       });
     } catch (err) {
       console.log(err);
@@ -41,27 +32,13 @@ class StoreService{
   };
 
   //상점 정보 업데이트
-  updatedStore = async ({
-    storeId,
-    userId,
-    isOner,
-    storeName,
-    storeAddress,
-    storeImage,
-  }) => {
-    return await this.storeRepository.updatedStore(
-      storeId,
-      userId,
-      isOner,
-      storeName,
-      storeAddress,
-      storeImage
-    );
+  updatedStore = async ({ storeId, userId, name }) => {
+    return await this.storeRepository.updatedStore(storeId, userId, name);
   };
 
   //상점 정보 삭제
-  deleteStore = async ({storeId, userId, isOner}) => {
+  deleteStore = async ({ storeId, userId, isOner }) => {
     return await this.storeRepository.deleteStore(storeId, userId, isOner);
   };
 }
-module.exports = StoreService
+module.exports = StoreService;
