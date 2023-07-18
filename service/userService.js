@@ -1,18 +1,19 @@
+const UserRepository = require("../repository/user.repository.js");
+const auth = require("../middleware/auth.js");
 
-const UserRepository = require('../repository/user.repository.js');
-
-class UserService{
-    constructor(){
-        this.userRepository = new UserRepository();
-    }
-    //회원 가입 
+class UserService {
+  constructor() {
+    this.userRepository = new UserRepository();
+  }
+  //회원 가입
   createUser = async ({
     email,
+    name,
     password,
     confirmPassword,
     nickname,
-    userAddress,
-    isOner,
+    address,
+    isOwner,
   }) => {
     const emailReg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -30,16 +31,17 @@ class UserService{
       if (!nickname) {
         throw new Error("닉네임을 기입하지 않았습니다.");
       }
-      if (!userAddress) {
+      if (!address) {
         throw new Error("주소를 기입하지 않았습니다.");
       }
 
       return await this.userRepository.createUser(
         email,
+        name,
         password,
         nickname,
         userAddress,
-        isOner
+        isOwner
       );
     } catch (err) {
       console.log(err);
@@ -58,7 +60,7 @@ class UserService{
   };
 
   //프로필 조회
-  profile = async ({userId}) => {
+  profile = async ({ userId }) => {
     const userprofile = await this.userRepository.profile(userId);
     if (!userprofile) {
       throw new Error("해당 유저는 존재하지 않습니다.");
@@ -67,14 +69,14 @@ class UserService{
   };
 
   //프로필 업데이트
-  userUpdate = async ({userId, nickname, userAddress}) => {
-   return await this.userRepository.userUpdate(userId, nickname, userAddress)
+  userUpdate = async ({ name, nickname, address }) => {
+    return await this.userRepository.userUpdate(name, nickname, address);
   };
 
   //회원 탈퇴
-  userDelete = async ({userId}) => {
-    return await this.userRepository.userDelete(userId)
-   };
+  userDelete = async ({ userId }) => {
+    return await this.userRepository.userDelete(userId);
+  };
 }
 
 module.exports = UserService;
