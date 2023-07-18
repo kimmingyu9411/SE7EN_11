@@ -4,6 +4,7 @@ const cookie = require('cookie-parser');
 const bodyParser = require('body-parser');
 const connector = require('./database/db.js');
 const config = require('./config.js');
+const router = require('./routes/index.js');
 
 class App{
     constructor(){
@@ -18,6 +19,7 @@ class App{
         this.app.use(cookie());
         this.app.use(express.json());
         this.app.use(bodyParser.urlencoded({extended:false}));
+        this.app.use('/',router);
     }
 
     runServer(){

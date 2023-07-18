@@ -1,7 +1,9 @@
-import {ReviewRepository} from '../repository/review.repository.js';
+const ReviewRepository = require('../repository/review.repository.js');
 
-export class ReviewService{
+class ReviewService{
     constructor(){
         this.reviewRepository = new ReviewRepository();
     }
 }
+
+module.exports = ReviewService;

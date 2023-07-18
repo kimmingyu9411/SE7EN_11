@@ -1,7 +1,9 @@
-import {ProductRepository} from '../repository/product.repository.js';
+const ProductRepository = require('../repository/product.repository.js');
 
-export class ProductService{
+class ProductService{
     constructor(){
         this.productRepository = new ProductRepository();
     }
 }
+
+module.exports = ProductService;

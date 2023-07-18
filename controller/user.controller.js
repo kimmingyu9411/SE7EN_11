@@ -1,7 +1,9 @@
-import {UserService} from '../service/userService.js';
+const UserService = require('../service/userService.js');
 
-export class UserController{
+class UserController{
     constructor(){
         this.userService = new UserService();
     }
 }
+
+module.exports = UserController;

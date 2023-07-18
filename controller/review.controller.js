@@ -1,7 +1,9 @@
-import {ReviewService} from '../service/reviewService.js'
+const ReviewService = require('../service/reviewService.js');
 
-export class ReviewController{
+class ReviewController{
     constructor(){
         this.reviewService = new ReviewService();
     }
 }
+
+module.exports = ReviewController;

@@ -1,9 +1,11 @@
-import express from 'express';
-import * as orderRouter from './order.routes.js';
-import * as productRouter from './product.routes.js';
-import * as reviewRouter from './review.routes.js';
-import * as storeRouter from './store.routes.js';
-import * as userRouter from './user.routes.js';
+const express = require('express');
+const orderRouter = require('./order.routes.js');
+const productRouter = require('./product.routes.js');
+const reviewRouter = require('./review.routes.js');
+const storeRouter = require('./store.routes.js');
+const userRouter = require('./user.routes.js');
+
+const router = express.Router();
 
 const defaultRouters = [
     {
@@ -32,4 +34,4 @@ defaultRouters.forEach(r=>{
     router.use(r.path,r.router);
 });
 
-export const router = express.Router();
+module.exports=router;

@@ -1,7 +1,9 @@
-import {StoreService} from '../service/storeService.js';
+const StoreService = require('../service/storeService.js');
 
-export class StoreController{
+class StoreController{
     constructor(){
         this.storeService = new StoreService();
     }
 }
+
+module.exports = StoreController;

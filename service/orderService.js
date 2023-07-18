@@ -1,7 +1,9 @@
-import {OrderRepository} from '../repository/order.repository.js';
+const OrderRepository = require('../repository/order.repository.js');
 
-export class OrderService{
+class OrderService{
     constructor(){
         this.orderRepository = new OrderRepository();
     }
 }
+
+module.exports=OrderService;

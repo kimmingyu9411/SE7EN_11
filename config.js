@@ -19,8 +19,10 @@ const config = {
         password : getValue('DB_PASSWORD',''),
     },
     jwt:{
-        secretKey : getValue('JWT_SECRET_KEY','gMhHLk&9dzpv$4#rP!3NdAr00gTq3$SS'),
-        expiresIn : getValue('JWT_EXPIRES_IN','1h')
+        accessSecretKey : getValue('JWT_ACCESS_SECRET_KEY','gMhHLk&9dzpv$4#rP!3NdAr00gTq3$SS'),
+        accessExpiresIn : getValue('JWT_ACCESS_EXPIRES_IN',180000),
+        refreshSecretKey : getValue('JWT_REFRESH_SECRET_KEY','oUUOfKw2@r9^WpN*iNmoQrLWZf0$z7mq'),
+        refreshExpiresIn : getValue('JWT_REFRESH_EXPIRES_IN','7d')
     },
     server:{
         port:getValue('PORT',8080)

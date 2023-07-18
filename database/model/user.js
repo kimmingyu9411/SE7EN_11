@@ -8,6 +8,10 @@ const User = connector.sequelize.define('user',{
         allowNull:false,
         autoIncrement:true,
     },
+    password:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
     nickname:{
         type : DataTypes.STRING,
         allowNull:false
@@ -15,6 +19,29 @@ const User = connector.sequelize.define('user',{
     name:{
         type : DataTypes.STRING,
         allowNull:false
+    },
+    isOwner:{
+        type : DataTypes.BOOLEAN,
+        allowNull:false
+    },
+    email:{
+        type : DataTypes.STRING,
+        allowNull:false,
+        unique:true
+    },
+    point:{
+        type : DataTypes.INTEGER,
+        set(){
+            if(this.isOwner){
+                this.setDataValue('point',0);
+            }else{
+                this.setDataValue('point',1000000);
+            }
+        }
+    },
+    address:{
+        type : DataTypes.TEXT,
+        allowNull:true
     }
 },{timestamps:true});
 
