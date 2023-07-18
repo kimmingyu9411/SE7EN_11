@@ -11,7 +11,6 @@ class App{
         this.app = express();
         this.connector = connector;
     }
-
     setup(){
         this.app.use(cors({
             origin:'*'
