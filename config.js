@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config()
 
 function getValue(key, defaultValue=undefined){
     const value = process.env[key] || defaultValue;
@@ -11,18 +11,20 @@ function getValue(key, defaultValue=undefined){
     }
 };
 
-export const config = {
-    // db:{
-    //     database : this.getValue('DB_DATABASE',''),
-    //     host : this.getValue('DB_HOST',''),
-    //     username : this.getValue('DB_USERNAME',''),
-    //     password : this.getValue('DB_PASSWORD',''),
-    // },
-    // jwt:{
-    //     secretKey : this.getValue('JWT_SECRET_KEY','gMhHLk&9dzpv$4#rP!3NdAr00gTq3$SS'),
-    //     expiresIn : this.getValue('JWT_EXPIRES_IN','1h')
-    // },
+const config = {
+    db:{
+        database : getValue('DB_DATABASE',''),
+        host : getValue('DB_HOST',''),
+        username : getValue('DB_USERNAME',''),
+        password : getValue('DB_PASSWORD',''),
+    },
+    jwt:{
+        secretKey : getValue('JWT_SECRET_KEY','gMhHLk&9dzpv$4#rP!3NdAr00gTq3$SS'),
+        expiresIn : getValue('JWT_EXPIRES_IN','1h')
+    },
     server:{
-        port:Number(getValue('PORT',8080))
+        port:getValue('PORT',8080)
     }
 };
+
+module.exports = config;
