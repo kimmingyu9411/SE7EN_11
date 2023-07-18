@@ -14,7 +14,7 @@ export class UserController {
 
   createUser = async (req, res, next) => {
     const { email, password, confirmPassword, nickname, isOner } = req.body;
-    const payload = await this.userService.createUser(
+    await this.userService.createUser(
       email,
       password,
       confirmPassword,
