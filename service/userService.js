@@ -5,6 +5,7 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
+  //회원가입 
   createUser = async ({
     email,
     password,
@@ -45,6 +46,7 @@ export class UserService {
     }
   };
 
+  //로그인
   login = async ({ email, password }) => {
     try {
       const user = await this.userRepository.login({ email, password });
@@ -55,6 +57,7 @@ export class UserService {
     }
   };
 
+  //프로필 조회
   profile = async ({userId}) => {
     const userprofile = await this.userRepository.profile(userId);
     if (!userprofile) {
@@ -63,10 +66,12 @@ export class UserService {
     return userprofile;
   };
 
+  //프로필 업데이트
   userUpdate = async ({userId, nickname, userAddress}) => {
    return await this.userRepository.userUpdate(userId, nickname, userAddress)
   };
 
+  //회원탈퇴
   userDelete = async ({userId}) => {
     return await this.userRepository.userDelete(userId)
    };
