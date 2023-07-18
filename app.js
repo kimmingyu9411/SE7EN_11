@@ -1,11 +1,14 @@
-import express from 'express';
-import cors from 'cors';
-import cookie from 'cookie-parser';
-import bodyParser from 'body-parser';
+const express = require('express');
+const cors = require('cors');
+const cookie = require('cookie-parser');
+const bodyParser = require('body-parser');
+const connector = require('./database/db.js');
+const config = require('./config.js');
 
-export class App{
+class App{
     constructor(){
         this.app = express();
+        this.connector = connector;
     }
 
     setup(){
@@ -17,13 +20,13 @@ export class App{
         this.app.use(bodyParser.urlencoded({extended:false}));
     }
 
-    connetDB(){
-        
-    }
-
-    runServer(server){
-        this.app.listen(server.port,()=>{
-            console.log(`Server is running on http://localhost:${server.port}`);
+    runServer(){
+        this.app.listen(config.server.port,()=>{
+            console.log('🔥'.repeat(40));
+            console.log(`Server is running on http://localhost:${config.server.port}`);
+            console.log('🔥'.repeat(40));
         })
     }
 }
+
+module.exports=App;
