@@ -1,5 +1,8 @@
 const mysql = require("mysql");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 function getValue(key, defaultValue = undefined) {
   const value = process.env[key] || defaultValue;
 
