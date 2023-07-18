@@ -2,7 +2,7 @@ const User = require("../database/model/user");
 const jwt = require("jsonwebtoken");
 
 class UserRepository {
-  async createUser(email, password, nickname, userAddress, isOwner) {
+  async createUser(email, password, nickname, address, isOwner) {
     try {
       // 이미 존재하는 이메일인지 확인
       const existingUser = await User.findOne({ where: { email } });
@@ -18,7 +18,7 @@ class UserRepository {
         email,
         password,
         nickname,
-        address: userAddress,
+        address,
         isOwner,
       });
 
@@ -88,7 +88,7 @@ class UserRepository {
   }
 
   // 프로필 업데이트
-  async userUpdate(userId, nickname, userAddress) {
+  async userUpdate(userId, nickname, address) {
     try {
       const user = await User.findByPk(userId);
 
@@ -100,7 +100,7 @@ class UserRepository {
       }
 
       user.nickname = nickname;
-      user.address = userAddress;
+      user.address = address;
       await user.save();
 
       return user;

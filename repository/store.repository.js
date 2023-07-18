@@ -1,14 +1,3 @@
-// import Store from '../database/model/store.js';
-
-// class StoreRepository{
-//     getStores(){}
-//     getStore(){}
-//     createStore(){}
-//     updateStore(){}
-//     deleteStore(){}
-// }
-// module.exports = StoreRepository
-
 const Store = require("../database/model/store");
 
 class StoreRepository {
@@ -20,7 +9,7 @@ class StoreRepository {
 
       return store.id;
     } catch (error) {
-      console.log(error);
+      console.error("점포 생성 중 오류:", error);
       return {
         status: 400,
         errorMessage: "점포 생성 중 오류가 발생했습니다.",
@@ -33,7 +22,7 @@ class StoreRepository {
       const store = await Store.findByPk(storeId);
 
       if (!store) {
-        console.log(!store);
+        console.error(!store);
         return {
           status: 400,
           errorMessage: "해당 점포를 찾을 수 없습니다.",
@@ -42,7 +31,7 @@ class StoreRepository {
 
       return store;
     } catch (error) {
-      console.log(error);
+      console.error("점포 조회 중 오류:", error);
       return {
         status: 400,
         errorMessage: "점포 조회 중 오류가 발생했습니다.",
@@ -56,7 +45,7 @@ class StoreRepository {
 
       return stores;
     } catch (error) {
-      console.log(error);
+      console.error("점포 목록 조회 중 오류:", error);
       return {
         status: 400,
         errorMessage: "점포 목록 조회 중 오류가 발생했습니다.",
@@ -69,7 +58,7 @@ class StoreRepository {
       const store = await Store.findByPk(storeId);
 
       if (!store) {
-        console.log(!store);
+        console.error(!store);
         return {
           status: 400,
           errorMessage: "해당 점포를 찾을 수 없습니다.",
@@ -81,7 +70,7 @@ class StoreRepository {
 
       return store;
     } catch (error) {
-      console.log(error);
+      console.error("점포 이름 업데이트 중 오류:", error);
       return {
         status: 400,
         errorMessage: "점포 이름 업데이트 중 오류가 발생했습니다.",
@@ -94,7 +83,7 @@ class StoreRepository {
       const store = await Store.findByPk(storeId);
 
       if (!store) {
-        console.log(!store);
+        console.error(!store);
         return {
           status: 400,
           errorMessage: "해당 점포를 찾을 수 없습니다.",
@@ -105,7 +94,7 @@ class StoreRepository {
 
       return "점포 삭제가 완료되었습니다.";
     } catch (error) {
-      console.log(error);
+      console.error("점포 삭제 중 오류:", error);
       return {
         status: 400,
         errorMessage: "점포 삭제 중 오류가 발생했습니다.",
