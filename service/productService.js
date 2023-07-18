@@ -1,10 +1,10 @@
-import { ProductRepository } from "../repository/product.repository.js";
 
-export class ProductService {
-  constructor() {
-    this.productRepository = new ProductRepository();
-  }
+const ProductRepository = require('../repository/product.repository.js');
 
+class ProductService{
+    constructor(){
+        this.productRepository = new ProductRepository();
+    }
   //상품 등록
   createProduct = async ({ productName, price, category, productImage }) => {
     try {
@@ -63,3 +63,5 @@ export class ProductService {
     }
   };
 }
+
+module.exports = ProductService;

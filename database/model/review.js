@@ -7,6 +7,14 @@ const Review = connector.sequelize.define('review',{
         primaryKey:true,
         allowNull:false,
         autoIncrement:true
+    },
+    star:{
+        type:DataTypes.INTEGER,
+        allowNull:false
+    },
+    content:{
+        type:DataTypes.TEXT,
+        allowNull:true
     }
 },{timestamps:true});
 

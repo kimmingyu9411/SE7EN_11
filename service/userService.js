@@ -1,11 +1,11 @@
-import { UserRepository } from "../repository/user.repository.js";
 
-export class UserService {
-  constructor() {
-    this.userRepository = new UserRepository();
-  }
+const UserRepository = require('../repository/user.repository.js');
 
-  //회원 가입 
+class UserService{
+    constructor(){
+        this.userRepository = new UserRepository();
+    }
+    //회원 가입 
   createUser = async ({
     email,
     password,
@@ -75,5 +75,6 @@ export class UserService {
   userDelete = async ({userId}) => {
     return await this.userRepository.userDelete(userId)
    };
-
 }
+
+module.exports = UserService;

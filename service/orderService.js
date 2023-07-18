@@ -1,9 +1,9 @@
-import { OrderRepository } from "../repository/order.repository.js";
+const OrderRepository = require('../repository/order.repository.js');
 
-export class OrderService {
-  constructor() {
-    this.orderRepository = new OrderRepository();
-  }
+class OrderService{
+    constructor(){
+        this.orderRepository = new OrderRepository();
+    }
   //장바구니 상품 추가
   insertOrder = async ({ productName, price }) => {
     try {
@@ -57,3 +57,6 @@ export class OrderService {
     }
   };
 }
+
+module.exports=OrderService;
+
