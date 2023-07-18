@@ -5,7 +5,7 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
-  //회원가입 
+  //회원 가입 
   createUser = async ({
     email,
     password,
@@ -71,7 +71,7 @@ export class UserService {
    return await this.userRepository.userUpdate(userId, nickname, userAddress)
   };
 
-  //회원탈퇴
+  //회원 탈퇴
   userDelete = async ({userId}) => {
     return await this.userRepository.userDelete(userId)
    };
