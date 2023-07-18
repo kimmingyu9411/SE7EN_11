@@ -1,10 +1,9 @@
-import { StoreService } from "../service/storeService.js";
+const StoreService = require('../service/storeService.js');
 
-export class StoreController {
-  constructor() {
-    this.storeService = new StoreService();
-  }
-
+class StoreController{
+    constructor(){
+        this.storeService = new StoreService();
+    }
   getAllStore = async (req, res, next) => {
     return await this.storeService.getAllStore();
   };
@@ -49,3 +48,5 @@ export class StoreController {
     return await this.storeService.deleteStore(storeId, userId, isOner)
   };
 }
+
+module.exports = StoreController;

@@ -1,7 +1,9 @@
 // import Review from '../database/model/review.js';
 
-export class ReviewRepository{
+class ReviewRepository{
     createReview(){}
     updateReview(){}
     deleteReview(){}
 }
+
+module.exports = ReviewRepository;

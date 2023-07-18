@@ -1,12 +1,5 @@
 const { User } = require("../database/model/user");
 
-// export class UserRepository {
-//   getUserDetail() {}
-//   createUser() {}
-//   updateUser() {}
-//   deleteUser() {}
-// }
-
 export class UserRepository {
   constructor() {
     this.users = []; // 사

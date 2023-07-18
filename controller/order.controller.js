@@ -1,4 +1,4 @@
-import { OrderService } from "../service/orderService.js";
+const OrderService = require('../service/orderService.js');
 
 class OrderController {
   constructor() {
@@ -20,8 +20,7 @@ class OrderController {
         message: "주문 조회 실패",
       });
     }
-  };
-
+  }
   createOrder = async (req, res, next) => {
     const payload = res.locals.payload;
 
@@ -37,3 +36,5 @@ class OrderController {
     const productId = req.params;
   };
 }
+
+module.exports = OrderController
