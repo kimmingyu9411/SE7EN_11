@@ -1,6 +1,6 @@
 const ProductService = require('../service/productService.js')
 
-export class ProductController{
+class ProductController{
     constructor(){
         this.productService = new ProductService();
     }
