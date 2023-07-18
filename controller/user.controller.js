@@ -6,30 +6,27 @@ export class UserController {
   }
 
   profile = async (req, res, next) => {
-    const userId = req.locals.payload;
+    const {userId} = req.locals.payload;
 
-    const profile = await this.userService.profile(userId);
-    return profile;
+    return await this.userService.profile(userId);
   };
 
   createUser = async (req, res, next) => {
     const { email, password, confirmPassword, nickname, isOner } = req.body;
-    await this.userService.createUser(
+    
+    return await this.userService.createUser(
       email,
       password,
       confirmPassword,
       nickname,
       isOner
     );
-
-    return payload;
   };
 
   loginUser = async (req, res, next) => {
     const { email, password } = req.body;
 
-    const login = await this.userService.login(email, password);
-    return login;
+    return await this.userService.login(email, password);
   };
 
   updateUser = async (req, res, next) => {
