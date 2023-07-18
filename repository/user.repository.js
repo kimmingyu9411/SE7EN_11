@@ -1,58 +1,141 @@
-const { User } = require("../database/model/user");
+const User = require("../database/model/user");
+const jwt = require("jsonwebtoken");
 
-export class UserRepository {
-  constructor() {
-    this.users = []; // 사
+class UserRepository {
+  async createUser(email, password, nickname, userAddress, isOwner) {
+    try {
+      // 이미 존재하는 이메일인지 확인
+      const existingUser = await User.findOne({ where: { email } });
+
+      if (existingUser) {
+        return {
+          status: 400,
+          errorMessage: "이미 사용 중인 이메일입니다.",
+        };
+      }
+      // 존재하지 않는 경우, 새로운 유저 생성
+      const user = await User.create({
+        email,
+        password,
+        nickname,
+        address: userAddress,
+        isOwner,
+      });
+
+      // // 회원 가입 성공한 경우, 포인트 지급
+      // if (isOwner) {
+      //   // 사장님은 0 포인트 지급
+      //   await user.update({ points: 0 });
+      // } else {
+      //   // 일반 회원은 100만 포인트로 지급
+      //   await user.update({ points: 1000000 });
+      // }
+
+      return user.id;
+    } catch (error) {
+      console.log(error);
+      return {
+        status: 400,
+        errorMessage: "회원가입 중 오류가 발생하였습니다",
+      };
+    }
   }
 
-  async createUser(email, password, nickname, userAddress, isOner) {
-    const user = {
-      userId: this.generateUserId(), // 가정: 임의로 사용자 ID 생성
-      email,
-      password,
-      nickname,
-      userAddress,
-      isOner,
-    };
-    this.users.push(user);
-    return user;
-  }
-
+  // 로그인
   async login({ email, password }) {
-    const user = this.users.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (!user) {
-      throw new Error("이메일 또는 패스워드가 일치하지 않습니다.");
+    try {
+      const user = await User.findOne({
+        where: { email, password },
+      });
+
+      if (!user) {
+        return {
+          status: 400,
+          errorMessage: "일치하는 이메일과 패스워드를 가진 유저가 없습니다.",
+        };
+      }
+
+      return user;
+    } catch (error) {
+      console.log(error);
+      return {
+        status: 400,
+        errorMessage: "로그인 중 오류가 발생했습니다.",
+      };
     }
-    return user;
   }
 
+  // 프로필 조회
   async profile(userId) {
-    return this.users.find((user) => user.userId === userId);
+    try {
+      const userProfile = await User.findByPk(userId);
+
+      if (!userProfile) {
+        return {
+          status: 400,
+          errorMessage: "해당 유저는 존재하지 않습니다.",
+        };
+      }
+
+      return userProfile;
+    } catch (error) {
+      console.log(error);
+      return {
+        status: 400,
+        errorMessage: "프로필 조회 중 오류가 발생했습니다.",
+      };
+    }
   }
 
+  // 프로필 업데이트
   async userUpdate(userId, nickname, userAddress) {
-    const user = this.users.find((user) => user.userId === userId);
-    if (!user) {
-      throw new Error("해당 유저는 존재하지 않습니다.");
+    try {
+      const user = await User.findByPk(userId);
+
+      if (!user) {
+        return {
+          status: 400,
+          errorMessage: "해당 유저는 존재하지 않습니다.",
+        };
+      }
+
+      user.nickname = nickname;
+      user.address = userAddress;
+      await user.save();
+
+      return user;
+    } catch (error) {
+      console.log(error);
+      return {
+        status: 400,
+        errorMessage: "프로필 업데이트 중 오류가 발생했습니다.",
+      };
     }
-    user.nickname = nickname;
-    user.userAddress = userAddress;
-    return user;
   }
 
+  // 회원 탈퇴
   async userDelete(userId) {
-    const index = this.users.findIndex((user) => user.userId === userId);
-    if (index === -1) {
-      throw new Error("해당 유저는 존재하지 않습니다.");
-    }
-    const deletedUser = this.users.splice(index, 1);
-    return deletedUser[0];
-  }
+    try {
+      const user = await User.findByPk(userId);
 
-  // 가정: 임의로 사용자 ID 생성 함수
-  generateUserId() {
-    return Date.now().toString();
+      if (!user) {
+        return {
+          status: 400,
+          errorMessage: "해당 유저는 존재하지 않습니다.",
+        };
+      }
+
+      await user.destroy();
+
+      return "회원 탈퇴가 완료되었습니다.";
+    } catch (error) {
+      console.log(error);
+      return {
+        status: 400,
+        errorMessage: "회원 탈퇴 중 오류가 발생했습니다.",
+      };
+    }
   }
 }
+
+module.exports = UserRepository;
