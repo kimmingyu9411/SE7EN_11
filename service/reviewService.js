@@ -1,27 +1,18 @@
+const ReviewRepository = require("../repository/review.repository.js");
 
-const ReviewRepository = require('../repository/review.repository.js');
-
-class ReviewService{
-    constructor(){
-        this.reviewRepository = new ReviewRepository();
-    }
+class ReviewService {
+  constructor() {
+    this.reviewRepository = new ReviewRepository();
+  }
   //리뷰 작성
-  createReview = async ({
-    userId,
-    nickname,
-    storeId,
-    productId,
-    reviewContent,
-    starScore,
-  }) => {
+  createReview = async ({ userId, productId, content, star }) => {
     try {
       return await this.reviewRepository.createReview({
         userId,
-        nickname,
         storeId,
         productId,
-        reviewContent,
-        starScore,
+        content,
+        star,
       });
     } catch (err) {
       console.log(err);
@@ -29,22 +20,14 @@ class ReviewService{
   };
 
   //리뷰 수정
-  updateReview = async ({
-    userId,
-    storeId,
-    productId,
-    reviewId,
-    reviewContent,
-    starScore,
-  }) => {
+  updateReview = async ({ userId, productId, reviewId, content, star }) => {
     try {
       return await this.reviewRepository.updateReview({
         userId,
-        storeId,
         productId,
         reviewId,
-        reviewContent,
-        starScore,
+        content,
+        star,
       });
     } catch (err) {
       console.log(err);
@@ -52,11 +35,10 @@ class ReviewService{
   };
 
   //리뷰 삭제
-  deleteReview = async ({ userId, storeId, productId, reviewId }) => {
+  deleteReview = async ({ userId, productId, reviewId }) => {
     try {
       return await this.reviewRepository.updateReview({
         userId,
-        storeId,
         productId,
         reviewId,
       });

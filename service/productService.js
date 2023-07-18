@@ -1,18 +1,18 @@
+const ProductRepository = require("../repository/product.repository.js");
 
-const ProductRepository = require('../repository/product.repository.js');
-
-class ProductService{
-    constructor(){
-        this.productRepository = new ProductRepository();
-    }
+class ProductService {
+  constructor() {
+    this.productRepository = new ProductRepository();
+  }
   //상품 등록
-  createProduct = async ({ productName, price, category, productImage }) => {
+  createProduct = async ({ name, price, category, productImage, storeId }) => {
     try {
-      return await this.productRepository.createPost(
-        productName,
+      return await this.productRepository.createProduct(
+        name,
         price,
         category,
-        productImage
+        productImage,
+        storeId
       );
     } catch (err) {
       console.log(err);
