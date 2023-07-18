@@ -4,6 +4,8 @@ export class StoreService {
   constructor() {
     this.storeRepository = new StoreRepository();
   }
+
+  //상점 등록
   createStore = async ({
     userId,
     isOner,
@@ -28,14 +30,17 @@ export class StoreService {
     }
   };
 
+  //전체 지점 검색
   getAllStore = async () => {
     return await this.storeRepository.getAllStore();
   };
 
+  //특정 지점 검색
   getOneStore = async (storeId) => {
     return await this.storeRepository.getOneStore(storeId);
   };
 
+  //상점 정보 업데이트
   updatedStore = async ({
     storeId,
     userId,
@@ -54,6 +59,7 @@ export class StoreService {
     );
   };
 
+  //상점 정보 삭제
   deleteStore = async ({storeId, userId, isOner}) => {
     return await this.storeRepository.deleteStore(storeId, userId, isOner);
   };
