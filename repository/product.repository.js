@@ -1,9 +1,11 @@
 // import Product from '../database/model/product.js';
 
-export class ProductRepository{
+class ProductRepository{
     getProductsByCategoryNum(){}
     getProductDetail(){}
     createProduct(){}
     updateProduct(){}
     deleteProduct(){}
 }
+
+module.exports= ProductRepository;

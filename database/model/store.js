@@ -7,7 +7,12 @@ const Store = connector.sequelize.define('store',{
         primaryKey:true,
         allowNull:false,
         autoIncrement:true
-    }
+    },
+    name:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+
 },{timestamps:true});
 
 module.exports = Store;

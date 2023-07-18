@@ -1,10 +1,10 @@
-import { UserService } from "../service/userService.js";
+const UserService = require('../service/userService.js');
 
-export class UserController {
-  constructor() {
-    this.userService = new UserService();
-  }
-
+class UserController{
+    constructor(){
+        this.userService = new UserService();
+    }
+    getUser = (req, res, next) => {};
   profile = async (req, res, next) => {
     const {userId} = req.locals.payload;
 
@@ -42,3 +42,5 @@ export class UserController {
     return await this.userService.userDelete(userId, isOner);
   };
 }
+
+module.exports = UserController;

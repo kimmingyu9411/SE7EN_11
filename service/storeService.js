@@ -1,10 +1,10 @@
-import { StoreRepository } from "../repository/store.repository.js";
 
-export class StoreService {
-  constructor() {
-    this.storeRepository = new StoreRepository();
-  }
+const StoreRepository = require('../repository/store.repository.js');
 
+class StoreService{
+    constructor(){
+        this.storeRepository = new StoreRepository();
+    }
   //상점 등록
   createStore = async ({
     userId,
@@ -64,3 +64,4 @@ export class StoreService {
     return await this.storeRepository.deleteStore(storeId, userId, isOner);
   };
 }
+module.exports = StoreService

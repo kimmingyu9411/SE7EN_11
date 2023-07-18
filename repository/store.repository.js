@@ -1,9 +1,10 @@
 // import Store from '../database/model/store.js';
 
-export class StoreRepository{
+class StoreRepository{
     getStores(){}
     getStore(){}
     createStore(){}
     updateStore(){}
     deleteStore(){}
 }
+module.exports = StoreRepository

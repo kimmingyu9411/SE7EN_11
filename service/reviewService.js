@@ -1,10 +1,10 @@
-import { ReviewRepository } from "../repository/review.repository.js";
 
-export class ReviewService {
-  constructor() {
-    this.reviewRepository = new ReviewRepository();
-  }
+const ReviewRepository = require('../repository/review.repository.js');
 
+class ReviewService{
+    constructor(){
+        this.reviewRepository = new ReviewRepository();
+    }
   //리뷰 작성
   createReview = async ({
     userId,
@@ -65,3 +65,5 @@ export class ReviewService {
     }
   };
 }
+
+module.exports = ReviewService;
