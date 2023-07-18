@@ -9,7 +9,6 @@ class ReviewService {
     try {
       return await this.reviewRepository.createReview({
         userId,
-        storeId,
         productId,
         content,
         star,
