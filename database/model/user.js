@@ -31,14 +31,16 @@ const User = connector.sequelize.define('user',{
     },
     point:{
         type : DataTypes.INTEGER,
-        allowNull:false
+        set(){
+            if(this.isOwner){
+                this.setDataValue('point',0);
+            }else{
+                this.setDataValue('point',1000000);
+            }
+        }
     },
     address:{
         type : DataTypes.TEXT,
-        allowNull:true
-    },
-    token:{
-        type : DataTypes.STRING,
         allowNull:true
     }
 },{timestamps:true});

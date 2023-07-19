@@ -1,8 +1,4 @@
-const SequelizeMock = require('sequelize-mock');
+import * as SequelizeMock from 'sequelize-mock';
 
-const sqMock = new SequelizeMock();
-
-
-
-module.exports = sqMock;
+export const sqMock = new SequelizeMock();
 

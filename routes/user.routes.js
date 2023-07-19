@@ -12,10 +12,12 @@ const userController = new UserController();
     DELETE 'users/:userId' 회원 탈퇴
 */
 
+
 router.post('/signup',userController.createUser)
 router.post('/login',userController.loginUser)
 
 router.get('/me',auth.verify,userController.profile);
+
 
 router.route('/:userId')
 .put(auth.verify,userController.updateUser)

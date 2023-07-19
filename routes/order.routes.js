@@ -12,9 +12,9 @@ const orderController = new OrderController();
 */
 
 router.route('/:orderId')
-.get(auth.verify,orderController.getOrder)
-.post(auth.verify,orderController.createOrder)
-.put(auth.verify,orderController.updateOrder)
-.delete(auth.verify,orderController.deleteOrder)
+.get(auth.verify,)
+.post(auth.verify)
+.put(auth.verify)
+.delete(auth.verify)
 
 module.exports = router;
