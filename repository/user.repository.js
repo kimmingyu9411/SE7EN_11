@@ -6,7 +6,6 @@ class UserRepository {
     email,
     password,
     name,
-    confirmPassword,
     nickname,
     address,
     isOwner
