@@ -38,7 +38,7 @@ class UserController {
 
   loginUser = async (req, res, next) => {
     const { email, password } = req.body;
-    const login = await this.userService.loginUser(email, password);
+    const login = await this.userService.login(email, password);
 
     res.status(200).json({ message: "로그인 성공" });
   };
