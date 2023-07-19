@@ -2,14 +2,7 @@ const User = require("../database/model/user");
 const jwt = require("jsonwebtoken");
 
 class UserRepository {
-  async createUser(
-    email,
-    password,
-    name,
-    nickname,
-    address,
-    isOwner
-  ) {
+  async createUser(email, password, name, nickname, address, isOwner, point) {
     try {
       // 이미 존재하는 이메일인지 확인
       const existingUser = await User.findOne({ where: { email } });
@@ -29,18 +22,9 @@ class UserRepository {
         nickname,
         address,
         isOwner,
+        point,
       });
-
-      // 회원 가입 성공한 경우, 포인트 지급
-      if (isOwner) {
-        // 사장님은 0 포인트 지급
-        await user.update({ points: 0 });
-      } else {
-        // 일반 회원은 100만 포인트로 지급
-        await user.update({ points: 1000000 });
-      }
-
-      return user.id;
+      return user;
     } catch (error) {
       console.log(error);
       return {
@@ -51,19 +35,11 @@ class UserRepository {
   }
 
   // 로그인
-  async login({ email, password }) {
+  async login( email ) {
     try {
       const user = await User.findOne({
-        where: { email, password },
+        where: { email },
       });
-
-      if (!user) {
-        return {
-          status: 400,
-          errorMessage: "일치하는 이메일과 패스워드를 가진 유저가 없습니다.",
-        };
-      }
-
       return user;
     } catch (error) {
       console.log(error);

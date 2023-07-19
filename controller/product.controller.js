@@ -53,6 +53,7 @@ class ProductController {
     const { storeId, productId } = req.params;
     const { name, price, productImage } = req.body;
 
+
     const updateProduct = await this.productService.updateProduct(
       productId,
       storeId,
