@@ -1,9 +1,9 @@
 const UserService = require("../service/userService.js");
 
 class UserController {
-  constructor() {
-    this.userService = new UserService();
-  }
+    constructor() {
+        this.userService = new UserService();
+    }
 
   profile = async (req, res, next) => {
     const { userId } = req.locals.user;
