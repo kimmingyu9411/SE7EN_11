@@ -6,17 +6,21 @@ const userController = new UserController();
 
 /*
     GET '/users/me' 개인 정보 조회
-    POST '/users' 회원 가입
+    POST '/users/signup' 회원 가입
+    POST '/users/login' 로그인
     PUT '/users/:userId' 정보 수정
     DELETE 'users/:userId' 회원 탈퇴
 */
 
-router.post('/')
 
-router.get('/me',auth.verify);
+router.post('/signup',userController.createUser)
+router.post('/login',userController.loginUser)
+
+router.get('/me',auth.verify,userController.profile);
+
 
 router.route('/:userId')
-.put(auth.verify)
-.delete(auth.verify)
+.put(auth.verify,userController.updateUser)
+.delete(auth.verify,userController.deleteUser)
 
 module.exports = router;
