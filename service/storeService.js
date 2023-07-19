@@ -5,15 +5,15 @@ class StoreService {
     this.storeRepository = new StoreRepository();
   }
   //상점 등록
-  createStore = async ({ userId, isOner, name }) => {
+  createStore = async (userId, isOwner, name) => {
     try {
-      if (!isOner) {
+      if (!isOwner) {
         throw new Error("권한이 없습니다.");
       }
 
       return await this.storeRepository.createStore({
         userId,
-        isOner,
+        isOwner,
         name,
       });
     } catch (err) {
@@ -32,13 +32,13 @@ class StoreService {
   };
 
   //상점 정보 업데이트
-  updatedStore = async ({ storeId, userId, name }) => {
+  updatedStore = async (storeId, userId, name) => {
     return await this.storeRepository.updatedStore(storeId, userId, name);
   };
 
   //상점 정보 삭제
-  deleteStore = async ({ storeId, userId, isOner }) => {
-    return await this.storeRepository.deleteStore(storeId, userId, isOner);
+  deleteStore = async (storeId, userId, isOwner) => {
+    return await this.storeRepository.deleteStore(storeId, userId, isOwner);
   };
 }
 module.exports = StoreService;
