@@ -8,7 +8,7 @@
 
 // module.exports = ReviewRepository;
 
-const Review = require("./review"); // Review 모델을 불러옵니다.
+const Review = require("../database/model/review"); // Review 모델을 불러옵니다.
 
 class ReviewRepository {
   async createReview(userId, productId, content, star) {

@@ -10,7 +10,7 @@
 
 // module.exports= ProductRepository;
 
-const Product = require("../models/product");
+const Product = require("../database/model/product");
 
 class ProductRepository {
   async createProduct(name, price, category, productImage, storeId) {
