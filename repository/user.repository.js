@@ -2,7 +2,7 @@ const User = require("../database/model/user");
 const jwt = require("jsonwebtoken");
 
 class UserRepository {
-  async createUser(email, password, nickname, address, isOwner) {
+  async createUser(email, password, nickname, address, isOwner, name) {
     try {
       // 이미 존재하는 이메일인지 확인
       const existingUser = await User.findOne({ where: { email } });
@@ -16,6 +16,7 @@ class UserRepository {
       // 존재하지 않는 경우, 새로운 유저 생성
       const user = await User.create({
         email,
+        name,
         password,
         nickname,
         address,
