@@ -69,8 +69,13 @@ class UserService {
   };
 
   //프로필 업데이트
-  userUpdate = async ({ name, nickname, address }) => {
-    return await this.userRepository.userUpdate(name, nickname, address);
+  userUpdate = async ({ userId, name, nickname, address }) => {
+    return await this.userRepository.userUpdate(
+      userId,
+      name,
+      nickname,
+      address
+    );
   };
 
   //회원 탈퇴
