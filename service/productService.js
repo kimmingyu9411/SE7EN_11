@@ -38,12 +38,24 @@ class ProductService {
   };
 
   //상품 업데이트
-  updateProduct = async ({ productId, storeId, userId }) => {
+  updateProduct = async ({
+    productId,
+    storeId,
+    userId,
+    name,
+    price,
+    category,
+    menuimage,
+  }) => {
     try {
       return await this.productRepository.updateProduct(
         productId,
         storeId,
-        userId
+        userId,
+        name,
+        price,
+        category,
+        menuimage
       );
     } catch (err) {
       console.log(err);
