@@ -33,12 +33,8 @@ class UserService {
         throw new Error("닉네임을 기입하지 않았습니다.");
       }
 
-      let point = 0;
-      if (isOwner) {
-        let point = 0;
-      } else {
-        let point = 1000000;
-      }
+      let point;
+      isOwner == true ? point = 0 : point = 1000000;
 
       const hashPassword = await bcrypt.hash(password, 5);
 

@@ -12,16 +12,16 @@ class DBConnector{
                     db.password
                     ,{
                         host:db.host,
-                        dialect:'mysql'
+                        dialect:'mysql',
+                        logging:false
                     }
                 );
             }
     connectDB(){
         this.sequelize.sync()
         .then(()=>{
-            console.log('✨'.repeat(40));
             console.log('Datebase is Connected 👍');
-            console.log('✨'.repeat(40));
+            console.log('🔥'.repeat(40));
         })
         .catch((e)=>{
             console.error(e);
@@ -31,9 +31,8 @@ class DBConnector{
     testConnectDB(){
         this.sequelize.authenticate()
         .then(()=>{
-            console.log('✨'.repeat(40));
+            console.log('🛸'.repeat(40));
             console.log('Test Connection is Success 😍');
-            console.log('✨'.repeat(40));
         })
         .catch((e)=>{
             console.error(e);

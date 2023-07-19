@@ -14,10 +14,10 @@ const productController = new ProductController();
 
 // router.get('/:productId',productController.getDetailProduct)
 
-// router.route('/')
+router.route('/')
 // .get(productController.getProductsByCategory)
-// .post(auth.verify,productController.createProduct)
-// .put(auth.verify,productController.updateProduct)
-// .delete(auth.verify,productController.deleteProduct)
+.post(auth.verify,productController.createProduct)
+.put(auth.verify,productController.updateProduct)
+.delete(auth.verify,productController.deleteProduct)
 
 module.exports = router;
