@@ -73,8 +73,8 @@ class UserService {
   };
 
   //프로필 조회
-  profile = async (userId) => {
-    const userProfile = await this.userRepository.profile(userId);
+  profile = async (id) => {
+    const userProfile = await this.userRepository.profile(id);
     if (!userProfile) {
       throw new Error("해당 유저는 존재하지 않습니다.");
     }
