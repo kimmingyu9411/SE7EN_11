@@ -4,7 +4,7 @@ class ProductController {
   constructor() {
     this.productService = new ProductService();
   }
-  // 상품 조회 storeId 노필요?
+
   getProductsByCategory = async (req, res, next) => {
     const { category, storeId } = req.params;
 
