@@ -2,15 +2,7 @@ const User = require("../database/model/user");
 const jwt = require("jsonwebtoken");
 
 class UserRepository {
-  async createUser(
-    email,
-    password,
-    name,
-    nickname,
-    address,
-    isOwner,
-    point
-  ) {
+  async createUser(email, password, name, nickname, address, isOwner, point) {
     try {
       // 이미 존재하는 이메일인지 확인
       const existingUser = await User.findOne({ where: { email } });
@@ -30,8 +22,8 @@ class UserRepository {
         nickname,
         address,
         isOwner,
+        point,
       });
-
       return user;
     } catch (error) {
       console.log(error);
@@ -43,19 +35,11 @@ class UserRepository {
   }
 
   // 로그인
-  async login({ email, password }) {
+  async login( email ) {
     try {
       const user = await User.findOne({
-        where: { email, password },
+        where: { email },
       });
-
-      if (!user) {
-        return {
-          status: 400,
-          errorMessage: "일치하는 이메일과 패스워드를 가진 유저가 없습니다.",
-        };
-      }
-
       return user;
     } catch (error) {
       console.log(error);
@@ -67,9 +51,9 @@ class UserRepository {
   }
 
   // 프로필 조회
-  async profile(userId) {
+  async profile(id) {
     try {
-      const userProfile = await User.findByPk(userId);
+      const userProfile = await User.findByPk(id);
 
       if (!userProfile) {
         return {
@@ -89,22 +73,15 @@ class UserRepository {
   }
 
   // 프로필 업데이트
-  async userUpdate(userId, nickname, address) {
+  async userUpdate(updateValues) {
     try {
-      const user = await User.findByPk(userId);
-
-      if (!user) {
-        return {
-          status: 400,
-          errorMessage: "해당 유저는 존재하지 않습니다.",
-        };
-      }
-
-      user.nickname = nickname;
-      user.address = address;
-      await user.save();
-
-      return user;
+      await User.update(
+        updateValues,
+        {
+            where: { id: updateValues.id }
+        }
+    );
+      return {message:"프로필이 업데이트 됐습니다."};
     } catch (error) {
       console.log(error);
       return {
