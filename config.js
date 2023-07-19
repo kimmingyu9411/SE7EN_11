@@ -23,7 +23,7 @@ const config = {
       "JWT_ACCESS_SECRET_KEY",
       "gMhHLk&9dzpv$4#rP!3NdAr00gTq3$SS"
     ),
-    accessExpiresIn: getValue("JWT_ACCESS_EXPIRES_IN", 180000),
+    accessExpiresIn: getValue("JWT_ACCESS_EXPIRES_IN", "30m"),
     refreshSecretKey: getValue(
       "JWT_REFRESH_SECRET_KEY",
       "oUUOfKw2@r9^WpN*iNmoQrLWZf0$z7mq"

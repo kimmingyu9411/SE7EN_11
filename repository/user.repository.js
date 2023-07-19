@@ -53,16 +53,7 @@ class UserRepository {
   // 프로필 조회
   async profile(id) {
     try {
-      const userProfile = await User.findByPk(id);
-
-      if (!userProfile) {
-        return {
-          status: 400,
-          errorMessage: "해당 유저는 존재하지 않습니다.",
-        };
-      }
-
-      return userProfile;
+      return await User.findByPk(id);
     } catch (error) {
       console.log(error);
       return {
@@ -92,16 +83,9 @@ class UserRepository {
   }
 
   // 회원 탈퇴
-  async userDelete(userId) {
+  async userDelete(id) {
     try {
-      const user = await User.findByPk(userId);
-
-      if (!user) {
-        return {
-          status: 400,
-          errorMessage: "해당 유저는 존재하지 않습니다.",
-        };
-      }
+      const user = await User.findByPk(id);
 
       await user.destroy();
 
