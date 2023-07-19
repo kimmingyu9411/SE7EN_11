@@ -29,7 +29,7 @@ header h1 {
 }
 
 .searchbar {
-  background-image: url("/SE7EN_11/img/배경.jpg");
+  background-image: url("../img/배경.jpg");
   height: 150px;
   text-align: center;
 }
@@ -49,6 +49,10 @@ header h1 {
   width: 45px;
   cursor: pointer;
   color: #fff;
+}
+
+body {
+  background-color: #fafafa;
 }
 
 .products ul {
