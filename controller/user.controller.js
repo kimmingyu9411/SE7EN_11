@@ -6,9 +6,9 @@ class UserController {
   }
 
   profile = async (req, res, next) => {
-    const { userId } = req.locals.user;
+    const { id } = res.locals.user;
 
-    const data = await this.userService.profile(userId);
+    const data = await this.userService.profile(id);
 
     res.status(201).json({ data: data });
   };

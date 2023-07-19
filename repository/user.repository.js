@@ -51,9 +51,9 @@ class UserRepository {
   }
 
   // 프로필 조회
-  async profile(userId) {
+  async profile(id) {
     try {
-      const userProfile = await User.findByPk(userId);
+      const userProfile = await User.findByPk(id);
 
       if (!userProfile) {
         return {
