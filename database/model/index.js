@@ -1,25 +1,34 @@
 // Models
-const Order = require('./order.js');
+const Log = require('./log.js');
 const Product = require('./product.js');
 const Review = require('./review.js');
 const Store = require('./store.js');
 const User = require('./user.js');
+const Cart = require('./cart.js');
+const CartProduct = require('./cartProduct.js');
 
 // User
-
 User.hasOne(Store);
-User.hasOne(Order);
-User.hasMany(Review,{foreignKey:'userId',as:'wroteReviews'});
-//Product
-Product.hasMany(Review,{foreignKey:'productId',as:'reviews'});
-Product.belongsTo(Order);
+User.hasOne(Cart);
+User.hasMany(Log);
+User.hasMany(Review);
+
+// Product
+Product.hasMany(Review);
 Product.belongsTo(Store);
-//Review
+Product.belongsToMany(Cart,{through:CartProduct, as:'ProductList'});
+Product.belongsToMany(Log,{through:'LogProduct', as:'PurchaseDescription'});
+
+// Cart
+Cart.belongsToMany(Product,{through:CartProduct});
+
+// Log
+Log.belongsToMany(Product,{through:'LogProduct'});
+
+// Review
 Review.belongsTo(User);
 Review.belongsTo(Product);
-//Store
-Store.hasMany(Product,{foreignKey:'storeId'});
-//Order
-Order.hasMany(Product,{foreignKey:'orderId',as:'products'})
+// Store
+Store.hasMany(Product);
 
-module.exports = [Order, Product, Review, Store, User];
+module.exports = [Log, Product, Review, Store, User, Cart, CartProduct];

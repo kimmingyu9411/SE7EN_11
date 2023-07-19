@@ -42,13 +42,17 @@ class UserService {
         throw new Error("닉네임을 기입하지 않았습니다.");
       }
 
+      let point;
+      isOwner == true ? point = 1000000 : point = 0 ;
+
       return await this.userRepository.createUser(
         email,
         password,
         name,
         nickname,
         address,
-        isOwner
+        isOwner,
+        point
       );
     } catch (err) {
       console.log(err);

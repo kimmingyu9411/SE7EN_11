@@ -18,7 +18,7 @@ class Auth{
 
         if(accessToken){
             let token = accessToken.split(' ')[1];
-
+            
             const accessPayload = this.jwt.verify(token,accessSecretKey,(err,decoded)=>{
                 if(err){ // accessToken 이 비정상일 경우
                     return null;
@@ -31,7 +31,7 @@ class Auth{
                 const id = accessPayload.userId;
                 const user = await this.User.findByPk(id);
 
-                req.locals.user = user.dataValues;
+                res.locals.user = user.dataValues;
                 next();
             }else{ // accessToken이 유효하지 않을경우
                 const refreshToken = req.cookie('refreshToken');
@@ -55,7 +55,7 @@ class Auth{
                             const newAccessToken = this.getAccessToken(id);
                             res.cookie('accessToken',newAccessToken,{httpOnly:true});
 
-                            req.locals.user = user.dataValues;
+                            res.locals.user = user.dataValues;
                             next();
                         }else{ // user 가 없거나 DB상의 토큰값이 일치하지 않을때
                             res.status(404).json({

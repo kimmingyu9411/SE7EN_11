@@ -25,7 +25,6 @@ class App{
         this.app.listen(config.server.port,()=>{
             console.log('🔥'.repeat(40));
             console.log(`Server is running on http://localhost:${config.server.port}`);
-            console.log('🔥'.repeat(40));
         })
     }
 }
