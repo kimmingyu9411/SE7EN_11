@@ -34,7 +34,7 @@ class UserService {
       }
 
       let point;
-      isOwner == true ? point = 0 : point = 1000000;
+      isOwner == true ? (point = 0) : (point = 1000000);
 
       const hashPassword = await bcrypt.hash(password, 5);
 
@@ -65,7 +65,6 @@ class UserService {
       if (user && passwordMatch) {
         const accToken = auth.getAccessToken(user.dataValues.id);
         const refToken = auth.getRefreshToken(user.dataValues.id);
-        console.log(accToken, refToken);
         await user.update({ token: refToken });
         return { accToken, refToken };
       } else {
@@ -123,8 +122,12 @@ class UserService {
   };
 
   //회원 탈퇴
-  userDelete = async (userId) => {
-    return await this.userRepository.userDelete(userId);
+  userDelete = async (user, password) => {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      throw new Error("비밀번호가 일치하지 않습니다.");
+    }
+    return await this.userRepository.userDelete(user.id);
   };
 }
 
