@@ -5,7 +5,7 @@ class ProductService {
     this.productRepository = new ProductRepository();
   }
   //상품 등록
-  createProduct = async ({ name, price, category, productImage, storeId }) => {
+  createProduct = async (name, price, category, productImage, storeId) => {
     try {
       return await this.productRepository.createProduct(
         name,
@@ -20,7 +20,7 @@ class ProductService {
   };
 
   //카테고리 별 조회
-  getCategoryProduct = async ({ category }) => {
+  getCategoryProduct = async (category) => {
     try {
       return await this.productRepository.getCategoryProduct(category);
     } catch (err) {
@@ -29,7 +29,7 @@ class ProductService {
   };
 
   //상품 상세 조회
-  getDetailProduct = async ({ productId }) => {
+  getDetailProduct = async (productId) => {
     try {
       return await this.productRepository.getDetailProduct(productId);
     } catch (err) {
@@ -38,12 +38,24 @@ class ProductService {
   };
 
   //상품 업데이트
-  updateProduct = async ({ productId, storeId, userId }) => {
+  updateProduct = async (
+    productId,
+    storeId,
+    userId,
+    name,
+    price,
+    category,
+    productImage
+  ) => {
     try {
       return await this.productRepository.updateProduct(
         productId,
         storeId,
-        userId
+        userId,
+        name,
+        price,
+        category,
+        productImage
       );
     } catch (err) {
       console.log(err);
@@ -51,7 +63,7 @@ class ProductService {
   };
 
   //상품 삭제
-  deleteProduct = async ({ productId, storeId, userId }) => {
+  deleteProduct = async (productId, storeId, userId) => {
     try {
       return await this.productRepository.deleteProduct(
         productId,
