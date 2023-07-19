@@ -12,9 +12,8 @@ DELETE '/reviews?id=:reviewId' 리뷰 삭제
 */
 
 router.route('/')
-.get()
-.post(auth.verify,)
-.put(auth.verify,)
-.delete(auth.verify,)
+.post(auth.verify,reviewController.createReview)
+.put(auth.verify,reviewController.updateReview)
+.delete(auth.verify,reviewController.deleteReview)
 
 module.exports = router;

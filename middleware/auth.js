@@ -35,7 +35,7 @@ class Auth{
                 next();
             }else{ // accessToken이 유효하지 않을경우
                 const refreshToken = req.cookie('refreshToken');
-                
+
                 if(refreshToken){
                     token = refreshToken.split(' ')[1];
 
@@ -53,7 +53,7 @@ class Auth{
                         
                         if(user && user.dataValues.token==refreshToken){
                             const newAccessToken = this.getAccessToken(id);
-                            res.cookie('accessToken',newAccessToken);
+                            res.cookie('accessToken',newAccessToken,{httpOnly:true});
 
                             req.locals.user = user.dataValues;
                             next();

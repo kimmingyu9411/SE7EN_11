@@ -22,7 +22,7 @@ const Product = connector.sequelize.define('product',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    menuImage:{
+    productImage:{
         type:DataTypes.STRING,
         allowNull:true
     }

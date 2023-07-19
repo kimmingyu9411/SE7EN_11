@@ -14,8 +14,13 @@ const Store = connector.sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    address:{
+        type:DataTypes.STRING,
+        allowNull:false
+    }
   },
   { timestamps: true }
 );
+
 
 module.exports = Store;

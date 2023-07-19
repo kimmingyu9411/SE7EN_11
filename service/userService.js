@@ -41,9 +41,6 @@ class UserService {
       if (!nickname) {
         throw new Error("닉네임을 기입하지 않았습니다.");
       }
-      if (!address) {
-        throw new Error("주소를 기입하지 않았습니다.");
-      }
 
       return await this.userRepository.createUser(
         email,
