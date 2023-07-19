@@ -40,7 +40,7 @@ class UserService {
         name,
         password,
         nickname,
-        userAddress,
+        address,
         isOwner
       );
     } catch (err) {
@@ -51,7 +51,7 @@ class UserService {
   //로그인
   login = async (email, password) => {
     try {
-      const user = await this.userRepository.login( email, password );
+      const user = await this.userRepository.login(email, password);
       const token = jwt.sign({ userId: user.userId }, "custom-secret-key");
       return token;
     } catch (err) {
