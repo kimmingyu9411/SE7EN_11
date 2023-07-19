@@ -45,14 +45,18 @@ class UserController {
   };
 
   updateUser = async (req, res, next) => {
-    const { name, address } = req.body;
-    const userId = req.locals.user;
+    const { name, address, nickname, password, newPassword, newComfirm } =
+      req.body;
+    const user = res.locals.user;
 
     const update = await this.userService.userUpdate(
-      userId,
       name,
+      address,
       nickname,
-      address
+      password,
+      newPassword,
+      newComfirm,
+      user
     );
 
     res.status(200).json({ data: update });

@@ -73,22 +73,15 @@ class UserRepository {
   }
 
   // 프로필 업데이트
-  async userUpdate(userId, nickname, address) {
+  async userUpdate(updateValues) {
     try {
-      const user = await User.findByPk(userId);
-
-      if (!user) {
-        return {
-          status: 400,
-          errorMessage: "해당 유저는 존재하지 않습니다.",
-        };
-      }
-
-      user.nickname = nickname;
-      user.address = address;
-      await user.save();
-
-      return user;
+      await User.update(
+        updateValues,
+        {
+            where: { id: updateValues.id }
+        }
+    );
+      return {message:"프로필이 업데이트 됐습니다."};
     } catch (error) {
       console.log(error);
       return {

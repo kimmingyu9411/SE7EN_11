@@ -51,7 +51,7 @@ class Auth {
         next();
       } else {
         // accessToken이 유효하지 않을경우
-        const refreshToken = req.cookie("refreshToken");
+        const refreshToken = req.cookies.refreshToken;
 
         if (refreshToken) {
           token = refreshToken.split(" ")[1];
