@@ -1,12 +1,12 @@
 const UserService = require("../service/userService.js");
 
-class UserController {
+export class UserController {
   constructor() {
     this.userService = new UserService();
   }
 
   profile = async (req, res, next) => {
-    const { userId } = req.locals.payload;
+    const { userId } = req.locals.user;
 
     const data = await this.userService.profile(userId);
 
@@ -45,7 +45,7 @@ class UserController {
 
   updateUser = async (req, res, next) => {
     const { name, address } = req.body;
-    const userId = req.locals.payload;
+    const userId = req.locals.user;
 
     const update = await this.userService.userUpdate(
       userId,
@@ -65,5 +65,6 @@ class UserController {
     res.status(200).json({ message: "회원 탈퇴가 완료되었습니다." });
   };
 }
+
 
 module.exports = UserController;
