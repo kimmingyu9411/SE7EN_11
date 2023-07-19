@@ -3,6 +3,14 @@ const Store = require("../database/model/store");
 class StoreRepository {
   async createStore(name) {
     try {
+      const existingStore = await User.findOne({ where: { name } });
+
+      if (existingStore) {
+        return {
+          status: 400,
+          errorMessage: "이미 사용 중인 점포명입니다.",
+        };
+      }
       const store = await Store.create({
         name,
       });

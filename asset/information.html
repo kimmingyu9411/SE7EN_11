@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INFORMATION html</title>
+  </head>
+  <body>
+    <header>
+      <h1>SE7VEN_11</h1>
+    </header>
+    <div id="subheader">
+      <br />
+      <h2>MyPage</h2>
+    </div>
+    <div class="information">
+      <h1>사장님 정보</h1>
+      <div>
+        <strong>이 름&nbsp&nbsp&nbsp</strong>
+        <input disabled placeholder="김만득" />
+      </div>
+      <div>
+        <strong>닉네임&nbsp</strong>
+        <input disabled placeholder="영희는 내꼬얌" />
+      </div>
+      <div>
+        <strong>이메일&nbsp</strong>
+        <input disabled placeholder="example@example.com" />
+      </div>
+      <div>
+        <strong>포인트&nbsp</strong>
+        <input disabled placeholder="1,000,000 P" /><button>내역조회</button>
+      </div>
+      <div>
+        <strong>찜정보&nbsp</strong>
+        <input disabled placeholder="세븐일레븐 강남점" /><button
+          onclick="openModal()"
+        >
+          매장관리
+        </button>
+      </div>
+      <!-- 모달창 -->
+      <div class="modal" id="modal">
+        <div class="modal-content">
+          <!-- 모달창 내용 -->
+          <h2>메뉴 등록</h2>
+          <div>
+            <strong>상품이름&nbsp</strong>
+            <input
+              placeholder="상품명을 입력해주세요."
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = '상품명을 입력해주세요.'"
+            />
+          </div>
+          <div>
+            <strong>가격&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong>
+            <input
+              placeholder="가격을 입력해주세요."
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = '가격을 입력해주세요.'"
+            />
+          </div>
+          <div>
+            <strong>카테고리&nbsp</strong>
+            <input
+              placeholder="카테고리를 입력해주세요."
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = '카테고리를 입력해주세요.'"
+            /><button>선택</button>
+          </div>
+          <div>
+            <strong>이미지&nbsp&nbsp&nbsp&nbsp</strong>
+            <input
+              placeholder="상품 이미지를 넣어주세요."
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = '상품 이미지를 넣어주세요.'"
+            /><button>등록</button>
+          </div>
+          <button onclick="closeModal()" class="closeBtn">메뉴 등록</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // JavaScript 함수를 사용하여 모달창 열기/닫기 처리
+  function openModal() {
+    var modal = document.getElementById("modal");
+    modal.style.display = "block";
+  }
+
+  function closeModal() {
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";
+  }
+</script>
+
+<style>
+  /* 기본 헤더 css */
+  header {
+    background-color: #006547;
+    display: flex;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: -0.2rem;
+    margin-left: 30px;
+    color: #ff8a00;
+  }
+  /* 기본 헤더 css */
+
+  #subheader {
+    background: url("../img/세븐일레븐일러스트.png") no-repeat,
+      linear-gradient(40deg, #ff8a00, #fff);
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 95%;
+  }
+
+  #subheader h2 {
+    margin: 0;
+    margin-left: 30px;
+    letter-spacing: -0.2rem;
+    font-size: 2rem;
+    color: #fff;
+  }
+
+  .information {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .information h1 {
+    margin-left: 15px;
+  }
+
+  .information strong {
+    font-size: 15px;
+  }
+
+  .information div {
+    margin-top: 30px;
+  }
+
+  .information input {
+    width: 300px;
+    text-align: center;
+    height: 30px;
+    background-color: #fff;
+    border: none;
+  }
+
+  .information input::placeholder {
+    color: #000;
+    font-weight: bold;
+  }
+
+  .information button {
+    background-color: #ff8a00;
+    margin-left: 10px;
+    position: absolute;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    height: 35px;
+    width: 100px;
+  }
+
+  body {
+    background-color: #fafafa;
+  }
+  /* 모달css */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-content h2 {
+    border: none;
+    color: #fff;
+    background-color: #006547;
+    text-align: center;
+    padding: 25px 0;
+  }
+
+  .modal-content {
+    background-color: #fafafa;
+    margin: 0 auto;
+    width: 400px;
+    height: 500px;
+  }
+
+  .modal-content input {
+    width: 150px;
+  }
+
+  .modal-content input::placeholder {
+    color: gray;
+    font-weight: lighter;
+  }
+
+  .modal-content button {
+    width: 50px;
+  }
+
+  .modal-content .closeBtn {
+    background-color: #000;
+    width: 150px;
+    margin-top: 100px;
+    background-color: #ff8a00;
+  }
+</style>
