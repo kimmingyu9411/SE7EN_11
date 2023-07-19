@@ -58,7 +58,7 @@ class UserController {
   };
 
   deleteUser = async (req, res, next) => {
-    const { userId, isOwner } = req.locals.payload;
+    const { userId } = req.params;
 
     await this.userService.userDelete(userId);
 
