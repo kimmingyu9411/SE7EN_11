@@ -2,7 +2,14 @@ const User = require("../database/model/user");
 const jwt = require("jsonwebtoken");
 
 class UserRepository {
-  async createUser(email, password, nickname, address, isOwner, name) {
+  async createUser(
+    email,
+    password,
+    name,
+    nickname,
+    address,
+    isOwner
+  ) {
     try {
       // 이미 존재하는 이메일인지 확인
       const existingUser = await User.findOne({ where: { email } });
@@ -18,19 +25,20 @@ class UserRepository {
         email,
         name,
         password,
+        name,
         nickname,
         address,
         isOwner,
       });
 
-      // // 회원 가입 성공한 경우, 포인트 지급
-      // if (isOwner) {
-      //   // 사장님은 0 포인트 지급
-      //   await user.update({ points: 0 });
-      // } else {
-      //   // 일반 회원은 100만 포인트로 지급
-      //   await user.update({ points: 1000000 });
-      // }
+      // 회원 가입 성공한 경우, 포인트 지급
+      if (isOwner) {
+        // 사장님은 0 포인트 지급
+        await user.update({ points: 0 });
+      } else {
+        // 일반 회원은 100만 포인트로 지급
+        await user.update({ points: 1000000 });
+      }
 
       return user.id;
     } catch (error) {

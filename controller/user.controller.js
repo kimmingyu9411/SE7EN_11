@@ -1,4 +1,5 @@
 const UserService = require("../service/userService.js");
+
 class UserController {
   constructor() {
     this.userService = new UserService();
@@ -25,19 +26,19 @@ class UserController {
 
     const user = await this.userService.createUser(
       email,
-      name,
       password,
+      name,
       confirmPassword,
       nickname,
       address,
-      isOwner
+      isOwner,
     );
-    res.status(200).json({ data: user });
+    res.status(200).json({ message : "회원가입이 완료되었습니다." });
   };
 
   loginUser = async (req, res, next) => {
     const { email, password } = req.body;
-    const login = await this.userService.loginUser(email, password);
+    const login = await this.userService.login(email, password);
 
     res.status(200).json({ message: "로그인 성공" });
   };

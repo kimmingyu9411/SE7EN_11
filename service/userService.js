@@ -8,8 +8,8 @@ class UserService {
   //회원 가입
   createUser = async (
     email,
-    name,
     password,
+    name,
     confirmPassword,
     nickname,
     address,
@@ -47,8 +47,8 @@ class UserService {
 
       return await this.userRepository.createUser(
         email,
-        name,
         password,
+        name,
         nickname,
         address,
         isOwner
