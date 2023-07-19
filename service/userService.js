@@ -42,13 +42,21 @@ class UserService {
         throw new Error("닉네임을 기입하지 않았습니다.");
       }
 
+      let point = 0;
+      if (isOwner) {
+        let point = 0;
+      } else {
+        let point = 1000000;
+      }
+
       return await this.userRepository.createUser(
         email,
         password,
         name,
         nickname,
         address,
-        isOwner
+        isOwner,
+        point
       );
     } catch (err) {
       console.log(err);
@@ -57,10 +65,19 @@ class UserService {
 
   //로그인
   login = async (email, password) => {
+    console.log(password)
     try {
-      const user = await this.userRepository.login(email, password);
-      const token = jwt.sign({ userId: user.userId }, "custom-secret-key");
-      return token;
+      const user = await this.userRepository.login(email);
+      console.log(user)
+      if (user && user.dataValues.password == password) {
+        const accToken = auth.getAccessToken(user.dataValues.id);
+        const refToken = auth.getRefreshToken(user.dataValues.id);
+        console.log(accToken, refToken)
+        await user.update({ token: refToken });
+        return {accToken, refToken}
+      } else {
+        return { message: "이메일 혹은 비밀번호가 일치하지 않습니다." };
+      }
     } catch (err) {
       console.log(err);
     }
