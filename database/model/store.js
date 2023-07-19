@@ -12,6 +12,10 @@ const Store = connector.sequelize.define('store',{
         type:DataTypes.STRING,
         allowNull:false
     },
+    address:{
+        type:DataTypes.STRING,
+        allowNull:false
+    }
 
 },{timestamps:true});
 

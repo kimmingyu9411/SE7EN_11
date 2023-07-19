@@ -7,5 +7,4 @@ class ProductRepository{
     updateProduct(){}
     deleteProduct(){}
 }
-
 module.exports= ProductRepository;

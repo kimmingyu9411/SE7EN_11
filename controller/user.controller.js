@@ -4,23 +4,11 @@ class UserController{
     constructor(){
         this.userService = new UserService();
     }
-    getUser = (req, res, next) => {};
+  getUser = (req, res, next) => {};
   profile = async (req, res, next) => {
-    const {userId} = req.locals.payload;
-
-    return await this.userService.profile(userId);
   };
 
   createUser = async (req, res, next) => {
-    const { email, password, confirmPassword, nickname, isOner } = req.body;
-    
-    return await this.userService.createUser(
-      email,
-      password,
-      confirmPassword,
-      nickname,
-      isOner
-    );
   };
 
   loginUser = async (req, res, next) => {

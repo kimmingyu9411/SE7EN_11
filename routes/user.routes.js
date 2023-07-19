@@ -11,9 +11,9 @@ const userController = new UserController();
     DELETE 'users/:userId' 회원 탈퇴
 */
 
-router.post('/')
+router.post('/',userController.createUser);
 
-router.get('/me',auth.verify);
+router.get('/me',auth.verify,userController.getUser);
 
 router.route('/:userId')
 .put(auth.verify)
