@@ -40,7 +40,7 @@ class UserService {
         name,
         password,
         nickname,
-        userAddress,
+        address,
         isOwner
       );
     } catch (err) {
