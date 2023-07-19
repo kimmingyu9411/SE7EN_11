@@ -15,16 +15,6 @@ class UserService {
     address,
     isOwner
   ) => {
-    console.log(
-      "변수 데이터 확인",
-      email,
-      name,
-      password,
-      confirmPassword,
-      nickname,
-      address,
-      isOwner
-    );
     const emailReg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
@@ -65,7 +55,6 @@ class UserService {
 
   //로그인
   login = async (email, password) => {
-    console.log(password)
     try {
       const user = await this.userRepository.login(email);
       console.log(user)
