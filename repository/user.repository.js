@@ -23,6 +23,7 @@ class UserRepository {
       // 존재하지 않는 경우, 새로운 유저 생성
       const user = await User.create({
         email,
+        name,
         password,
         name,
         nickname,
@@ -30,14 +31,14 @@ class UserRepository {
         isOwner,
       });
 
-      // // 회원 가입 성공한 경우, 포인트 지급
-      // if (isOwner) {
-      //   // 사장님은 0 포인트 지급
-      //   await user.update({ points: 0 });
-      // } else {
-      //   // 일반 회원은 100만 포인트로 지급
-      //   await user.update({ points: 1000000 });
-      // }
+      // 회원 가입 성공한 경우, 포인트 지급
+      if (isOwner) {
+        // 사장님은 0 포인트 지급
+        await user.update({ points: 0 });
+      } else {
+        // 일반 회원은 100만 포인트로 지급
+        await user.update({ points: 1000000 });
+      }
 
       return user.id;
     } catch (error) {

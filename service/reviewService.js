@@ -36,7 +36,7 @@ class ReviewService {
   //리뷰 삭제
   deleteReview = async (userId, productId, reviewId) => {
     try {
-      return await this.reviewRepository.deleteReview({
+      return await this.reviewRepository.updateReview({
         userId,
         productId,
         reviewId,

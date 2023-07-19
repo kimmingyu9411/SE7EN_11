@@ -13,12 +13,12 @@ const storeController = new StoreController();
 */
 
 router.route('/')
-.get()
-.post(auth.verify)
+.get(storeController.getAllStore)
+.post(auth.verify,storeController.createStore)
 
 router.route('/:storeId')
-.get()
-.put(auth.verify)
-.delete(auth.verify)
+.get(storeController.getOneStore)
+.put(auth.verify,storeController.updateStore)
+.delete(auth.verify,storeController.deleteStore)
 
 module.exports = router;

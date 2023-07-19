@@ -15,6 +15,16 @@ class UserService {
     address,
     isOwner
   ) => {
+    console.log(
+      "변수 데이터 확인",
+      email,
+      name,
+      password,
+      confirmPassword,
+      nickname,
+      address,
+      isOwner
+    );
     const emailReg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
@@ -30,9 +40,6 @@ class UserService {
       }
       if (!nickname) {
         throw new Error("닉네임을 기입하지 않았습니다.");
-      }
-      if (!address) {
-        throw new Error("주소를 기입하지 않았습니다.");
       }
 
       return await this.userRepository.createUser(
