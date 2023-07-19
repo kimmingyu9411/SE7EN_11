@@ -1,4 +1,5 @@
 const UserRepository = require("../repository/user.repository.js");
+const bcrypt = require("bcrypt");
 const auth = require("../middleware/auth.js");
 
 class UserService {
@@ -39,6 +40,10 @@ class UserService {
         let point = 1000000;
       }
 
+      const hashPassword = await bcrypt.hash(password, 5);
+
+      password = hashPassword;
+
       return await this.userRepository.createUser(
         email,
         password,
@@ -57,13 +62,16 @@ class UserService {
   login = async (email, password) => {
     try {
       const user = await this.userRepository.login(email);
-      console.log(user)
-      if (user && user.dataValues.password == password) {
+      const passwordMatch = await bcrypt.compare(
+        password,
+        user.dataValues.password
+      );
+      if (user && passwordMatch) {
         const accToken = auth.getAccessToken(user.dataValues.id);
         const refToken = auth.getRefreshToken(user.dataValues.id);
-        console.log(accToken, refToken)
+        console.log(accToken, refToken);
         await user.update({ token: refToken });
-        return {accToken, refToken}
+        return { accToken, refToken };
       } else {
         return { message: "이메일 혹은 비밀번호가 일치하지 않습니다." };
       }
@@ -82,13 +90,40 @@ class UserService {
   };
 
   //프로필 업데이트
-  userUpdate = async (userId, name, nickname, address) => {
-    return await this.userRepository.userUpdate(
-      userId,
-      name,
-      nickname,
-      address
-    );
+  userUpdate = async (
+    name,
+    address,
+    nickname,
+    password,
+    newPassword,
+    newComfirm,
+    user
+  ) => {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      throw new Error("비밀번호가 일치하지 않습니다.");
+    }
+    if (newPassword) {
+      if (newPassword !== newComfirm) {
+        throw new Error("새로운 비밀번호가 일치하지 않습니다.");
+      }
+      const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+      if (!passwordReg.test(newPassword)) {
+        throw new Error("새로운 비밀번호의 형식이 일치하지 않습니다.");
+      }
+    }
+    const hashPassword = !newPassword
+      ? newPassword
+      : await bcrypt.hash(newPassword, 5);
+
+    let updateValues = {};
+    if (user) updateValues.id = user.id;
+    if (hashPassword) updateValues.password = hashPassword;
+    if (nickname) updateValues.nickname = nickname;
+    if (name) updateValues.name = name;
+    if (address) updateValues.address = address;
+
+    return await this.userRepository.userUpdate(updateValues);
   };
 
   //회원 탈퇴
