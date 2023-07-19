@@ -6,15 +6,15 @@ class UserService {
     this.userRepository = new UserRepository();
   }
   //회원 가입
-  createUser = async ({
+  createUser = async (
     email,
     name,
     password,
     confirmPassword,
     nickname,
     address,
-    isOwner,
-  }) => {
+    isOwner
+  ) => {
     const emailReg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
@@ -49,9 +49,9 @@ class UserService {
   };
 
   //로그인
-  login = async ({ email, password }) => {
+  login = async (email, password) => {
     try {
-      const user = await this.userRepository.login({ email, password });
+      const user = await this.userRepository.login(email, password);
       const token = jwt.sign({ userId: user.userId }, "custom-secret-key");
       return token;
     } catch (err) {
@@ -60,16 +60,16 @@ class UserService {
   };
 
   //프로필 조회
-  profile = async ({ userId }) => {
-    const userprofile = await this.userRepository.profile(userId);
-    if (!userprofile) {
+  profile = async (userId) => {
+    const userProfile = await this.userRepository.profile(userId);
+    if (!userProfile) {
       throw new Error("해당 유저는 존재하지 않습니다.");
     }
-    return userprofile;
+    return userProfile;
   };
 
   //프로필 업데이트
-  userUpdate = async ({ userId, name, nickname, address }) => {
+  userUpdate = async (userId, name, nickname, address) => {
     return await this.userRepository.userUpdate(
       userId,
       name,
@@ -79,7 +79,7 @@ class UserService {
   };
 
   //회원 탈퇴
-  userDelete = async ({ userId }) => {
+  userDelete = async (userId) => {
     return await this.userRepository.userDelete(userId);
   };
 }
