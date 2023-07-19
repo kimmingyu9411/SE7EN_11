@@ -1,45 +1,68 @@
-const UserService = require('../service/userService.js');
+const UserService = require("../service/userService.js");
 
-class UserController{
-    constructor(){
-        this.userService = new UserService();
-    }
-    getUser = (req, res, next) => {};
+class UserController {
+  constructor() {
+    this.userService = new UserService();
+  }
+
   profile = async (req, res, next) => {
-    const {userId} = req.locals.payload;
+    const { userId } = req.locals.payload;
 
-    return await this.userService.profile(userId);
+    const data = await this.userService.profile(userId);
+
+    res.status(201).json({ data: data });
   };
 
   createUser = async (req, res, next) => {
-    const { email, password, confirmPassword, nickname, isOner } = req.body;
-    
-    return await this.userService.createUser(
+    const {
       email,
+      password,
+      name,
+      confirmPassword,
+      nickname,
+      address,
+      isOwner,
+    } = req.body;
+
+    const user = await this.userService.createUser(
+      email,
+      name,
       password,
       confirmPassword,
       nickname,
-      isOner
+      address,
+      isOwner
     );
+    res.status(200).json({ data: user });
   };
 
   loginUser = async (req, res, next) => {
     const { email, password } = req.body;
+    const login = await this.userService.loginUser(email, password);
 
-    return await this.userService.login(email, password);
+    res.status(200).json({ message: "로그인 성공" });
   };
 
   updateUser = async (req, res, next) => {
-    const { nickname, userAddress } = req.body;
+    const { name, address } = req.body;
     const userId = req.locals.payload;
 
-    return await this.userService.userUpdate(userId, nickname, userAddress);
+    const update = await this.userService.userUpdate(
+      userId,
+      name,
+      nickname,
+      address
+    );
+
+    res.status(200).json({ data: update });
   };
 
   deleteUser = async (req, res, next) => {
-    const { userId, isOner } = req.locals.payload;
+    const { userId } = req.params;
 
-    return await this.userService.userDelete(userId, isOner);
+    await this.userService.userDelete(userId);
+
+    res.status(200).json({ message: "회원 탈퇴가 완료되었습니다." });
   };
 }
 
