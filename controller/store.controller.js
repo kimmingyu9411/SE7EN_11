@@ -39,7 +39,7 @@ class StoreController {
 
   updateStore = async (req, res, next) => {
     const { storeId } = req.params;
-    const {id} = res.locals.user;
+    const { id } = res.locals.user;
     const { name, address } = req.body;
     const update = await this.storeService.updateStore(
       storeId,
@@ -58,12 +58,13 @@ class StoreController {
 
   deleteStore = async (req, res, next) => {
     const storeId = req.params;
-    const { user, isOwner } = res.locals.user;
+    const user = res.locals.user;
+    const { password } = req.body;
 
     const deleteStore = await this.storeService.deleteStore(
       storeId,
       user,
-      isOwner
+      password
     );
     if (deleteStore.status === 400) {
       res.status(400).json({

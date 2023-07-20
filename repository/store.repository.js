@@ -77,12 +77,13 @@ class StoreRepository {
     }
   }
 
-  async deleteStore(storeId) {
+  async deleteStore(storeId, id) {
     try {
-      const store = await Store.findByPk(storeId);
-
+      const store = await Store.findOne({
+        where: { id: storeId.storeId, userId: id },
+      });
+      
       if (!store) {
-        console.error(!store);
         return {
           status: 400,
           errorMessage: "해당 점포를 찾을 수 없습니다.",
@@ -101,5 +102,4 @@ class StoreRepository {
     }
   }
 }
-
 module.exports = StoreRepository;
