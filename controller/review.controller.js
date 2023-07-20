@@ -6,12 +6,11 @@ class ReviewController {
   }
 
   createReview = async (req, res, next) => {
-    const { productId } = req.params;
-    const { userId } = req.locals.user;
+    const productId = req.query.id;
+    const { id } = res.locals.user;
     const { content, star } = req.body;
-
     const createReview = await this.reviewService.createReview(
-      userId,
+      id,
       productId,
       content,
       star
@@ -24,14 +23,13 @@ class ReviewController {
   };
 
   updateReview = async (req, res, next) => {
-    const { productId, reviewId } = req.params;
-    const userId = req.locals.user;
+    const reviewId = req.query.id;
+    const { id } = res.locals.user;
     const { content, star } = req.body;
 
     const updateReview = await this.reviewService.updateReview(
-      userId,
-      productId,
       reviewId,
+      id,
       content,
       star
     );
@@ -42,13 +40,14 @@ class ReviewController {
     }
   };
   deleteReview = async (req, res, next) => {
-    const { productId, reviewId } = req.params;
-    const userId = req.locals.user;
+    const reviewId = req.query.id;
+    const user = res.locals.user;
+    const { password } = req.body;
 
     const deleteReview = await this.reviewService.deleteReview(
-      userId,
-      productId,
-      reviewId
+      reviewId,
+      user,
+      password,
     );
     if (deleteReview.status === 400) {
       res.status(400).json({ message: deleteReview.errorMessage });
