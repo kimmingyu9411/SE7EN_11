@@ -16,7 +16,38 @@
       <div class="findtitle">점포찾으로가기</div>
     </label>
     <div class="sidebar">
-      <button>login</button>
+      <div class="sideBtn">
+        <button>로그인</button><button>회원가입</button>
+      </div>
+      <div class="zonelist">
+        <ul>
+          <li>
+            <div><img src="./img/세븐일레븐일러스트.png" /></div>
+            <a href="#">강남지점</a>
+          </li>
+          <br />
+          <li>
+            <div><img src="./img/세븐일레븐일러스트.png" /></div>
+            <a href="#">부평지점</a>
+          </li>
+          <br />
+          <li>
+            <div><img src="./img/세븐일레븐일러스트.png" /></div>
+            <a href="#">부산지점</a>
+          </li>
+          <br />
+          <li>
+            <div><img src="./img/세븐일레븐일러스트.png" /></div>
+            <a href="#">광주지점</a>
+          </li>
+          <br />
+          <li>
+            <div><img src="./img/세븐일레븐일러스트.png" /></div>
+            <a href="#">마포지점</a>
+          </li>
+          <br />
+        </ul>
+      </div>
     </div>
     <div id="maintitle">
       <div id="subtitle">
@@ -33,3 +64,36 @@
     </div>
   </body>
 </html>
+
+<style>
+  .sideBtn {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .sideBtn button {
+    margin-left: 10px;
+  }
+
+  .zonelist {
+    margin-top: 35px;
+  }
+
+  .zonelist ul li {
+    text-align: center;
+    width: 250px;
+    margin-top: 15px;
+    list-style: none;
+    padding-bottom: 50px;
+    height: 50px;
+  }
+
+  .zonelist ul li a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .zonelist ul li img {
+    width: 80px;
+    height: 50px;
+  }
+</style>

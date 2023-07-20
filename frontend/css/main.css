@@ -96,7 +96,7 @@ body {
 }
 .findtitle {
   color: #fff;
-  background-color: #FF8A00;
+  background-color: #ff8a00;
   text-align: center;
   line-height: 31px;
   cursor: pointer;
@@ -109,7 +109,7 @@ body {
   font-weight: bold;
 }
 .findtitle:hover {
-  background: #FE000B;
+  background: #fe000b;
 }
 /* 화살표 애니메이션 css */
 .blinking {
