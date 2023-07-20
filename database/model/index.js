@@ -27,7 +27,7 @@ Log.belongsToMany(Product,{through:'LogProduct',as:'PurchaseDescription'});
 
 // Review
 Review.belongsTo(User);
-Review.belongsTo(Product);
+Review.belongsTo(Product,{as:'Reviews'});
 // Store
 Store.hasMany(Product);
 

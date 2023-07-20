@@ -1,0 +1,55 @@
+header {
+    background-color: #006547;
+    display: flex;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: -0.2rem;
+    margin-left: 30px;
+    color: #ff8a00;
+  }
+
+  body {
+    background-color: #fafafa;
+  }
+
+  .login {
+    text-align: center;
+    margin-top: 100px;
+    position: relative;
+  }
+
+  .login .loginform {
+    text-align: center;
+  }
+
+  .login .loginform input {
+    width: 500px;
+    height: 35px;
+    outline-style: none;
+    border: solid 0.1px gray;
+  }
+
+  #password {
+    border-left-width: 1;
+    border-right-width: 1;
+    border-top-width: 0;
+    border-bottom-width: 1;
+  }
+
+  #AuthBtn {
+    margin-top: 30px;
+  }
+  #AuthBtn button {
+    margin-left: 20px;
+    width: 350px;
+    height: 35px;
+    background-color: #fe000b;
+    color: #fff;
+    border: solid 0.5px gray;
+    font-size: 15px;
+    letter-spacing: -0.1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }

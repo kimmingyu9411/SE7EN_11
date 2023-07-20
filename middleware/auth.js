@@ -21,7 +21,7 @@ class Auth {
     );
   }
   async verify(req, res, next) {
-    const accessToken = req.cookies.accessToken;
+    const accessToken = req.cookies.Authorization;
         if(accessToken){
           let token = accessToken.split(' ')[1];
 

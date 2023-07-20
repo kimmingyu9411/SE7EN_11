@@ -68,3 +68,77 @@ body {
   font-weight: bold;
 }
 /* maincss */
+
+#menuicon {
+  display: none;
+}
+.label {
+  display: flex;
+  width: 350px;
+  height: 100px;
+  margin: 0 auto;
+}
+#menuicon:checked + label {
+  z-index: 2;
+}
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  right: -300px;
+  z-index: 1;
+  transition: all 0.35s;
+}
+#menuicon:checked + label + div {
+  right: 0;
+}
+.findtitle {
+  color: #fff;
+  background-color: #FF8A00;
+  text-align: center;
+  line-height: 31px;
+  cursor: pointer;
+  margin-left: 30px;
+  margin-top: 35px;
+  width: 200px;
+  height: 30px;
+  font-size: 25px;
+  letter-spacing: -0.1rem;
+  font-weight: bold;
+}
+.findtitle:hover {
+  background: #FE000B;
+}
+/* 화살표 애니메이션 css */
+.blinking {
+  -webkit-animation: blink 0.5s ease-in-out infinite alternate;
+  -moz-animation: blink 0.5s ease-in-out infinite alternate;
+  animation: blink 0.5s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* 화살표 애니메이션 css */

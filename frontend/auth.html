@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/auth.css" />
     <title>AUTH html</title>
   </head>
   <body>
@@ -10,87 +11,28 @@
       <h1>SE7VEN_11</h1>
     </header>
     <div class="login">
-      <form class="loginform">
-        <input
-          type="text"
-          id="email"
-          name="email"
-          placeholder="&nbsp&nbsp이메일 주소 입력(필수)"
-        /><br />
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="&nbsp&nbsp비밀번호 입력(필수)"
-        /><br />
-        <div id="AuthBtn">
-          <button><a href="./singup.html">회원가입</a></button>
-          <button>로그인</button>
-        </div>
-      </form>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        placeholder="&nbsp&nbsp이메일 주소 입력(필수)"
+      /><br />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="&nbsp&nbsp비밀번호 입력(필수)"
+      /><br />
+      <div id="AuthBtn">
+        <button><a href="./singup.html">회원가입</a></button>
+        <button type="button" onclick="login()">로그인</button>
+      </div>
     </div>
   </body>
+  <script type="text/JavaScript" src="./js/auth.js"></script>
+  <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
 </html>
-
-<style>
-  /* 기본 헤더 css */
-  header {
-    background-color: #006547;
-    display: flex;
-  }
-
-  header h1 {
-    font-size: 2rem;
-    letter-spacing: -0.2rem;
-    margin-left: 30px;
-    color: #ff8a00;
-  }
-  /* 기본 헤더 css */
-  body {
-    background-color: #fafafa;
-  }
-  .login {
-    text-align: center;
-    margin-top: 100px;
-    position: relative;
-  }
-
-  .login .loginform {
-    text-align: center;
-  }
-
-  .login .loginform input {
-    width: 500px;
-    height: 35px;
-    outline-style: none;
-    border: solid 0.1px gray;
-  }
-
-  #password {
-    border-left-width: 1;
-    border-right-width: 1;
-    border-top-width: 0;
-    border-bottom-width: 1;
-  }
-
-  #AuthBtn {
-    margin-top: 30px;
-  }
-  #AuthBtn button {
-    margin-left: 20px;
-    width: 100px;
-    height: 30px;
-    background-color: #fe000b;
-    color: #fff;
-    border: solid 0.5px gray;
-    font-size: 15px;
-    letter-spacing: -0.1rem;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  #AuthBtn a {
-    text-decoration: none;
-    color: #fff;
-  }
-</style>
