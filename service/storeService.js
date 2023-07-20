@@ -8,7 +8,7 @@ class StoreService {
   createStore = async (user, name, address) => {
     try {
       if (!user.isOwner) {
-        throw new Error("권한이 없습니다.");
+        return { message: "권한이 없습니다." };
       }
 
       return await this.storeRepository.createStore(user, name, address);
@@ -40,9 +40,9 @@ class StoreService {
   deleteStore = async (storeId, user, password) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+      return { message: "비밀번호가 일치하지 않습니다." };
     }
-    return await this.storeRepository.deleteStore(storeId,user.id);
+    return await this.storeRepository.deleteStore(storeId, user.id);
   };
 }
 module.exports = StoreService;

@@ -64,9 +64,22 @@ class StoreRepository {
 
   async updateStore(storeId, id, updateValues) {
     try {
-      await Store.update(updateValues, {
+      const existingStore = await Store.findOne({ where: {name:updateValues.name} });
+      const store = await Store.update(updateValues, {
         where: { id: storeId, userId: id },
       });
+      if (!store[0]) {
+        return {
+          status: 400,
+          errorMessage: "해당 점포를 찾을 수 없습니다.",
+        };
+      }
+      if (existingStore) {
+        return {
+          status: 400,
+          errorMessage: "이미 사용 중인 점포명입니다.",
+        };
+      }
       return { message: "점포가 업데이트 됐습니다." };
     } catch (error) {
       console.error("점포 이름 업데이트 중 오류:", error);
@@ -82,7 +95,7 @@ class StoreRepository {
       const store = await Store.findOne({
         where: { id: storeId.storeId, userId: id },
       });
-      
+
       if (!store) {
         return {
           status: 400,
@@ -92,7 +105,7 @@ class StoreRepository {
 
       await store.destroy();
 
-      return "점포 삭제가 완료되었습니다.";
+      return { message:"점포 삭제가 완료되었습니다."};
     } catch (error) {
       console.error("점포 삭제 중 오류:", error);
       return {

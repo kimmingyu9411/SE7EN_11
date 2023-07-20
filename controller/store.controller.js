@@ -52,7 +52,7 @@ class StoreController {
         message: update.errorMessage,
       });
     } else {
-      res.status(200).json({ message: "가게 정보 수정에 성공했습니다" });
+      res.status(200).json( update );
     }
   };
 
@@ -71,7 +71,7 @@ class StoreController {
         message: deleteStore.errorMessage,
       });
     } else {
-      res.status(200).json({ message: "가게 삭제가 완료되었습니다." });
+      res.status(200).json(deleteStore );
     }
   };
 }
