@@ -47,7 +47,6 @@ class UserController {
   loginUser = async (req, res, next) => {
     const { email, password } = req.body;
     const token = await this.userService.login(email, password);
-    console.log("token", token);
     if (!token.accToken) {
       res.status(400).json({
         message: token.message,
@@ -55,7 +54,7 @@ class UserController {
     } else {
       res.cookie("accessToken", token.accToken);
       res.cookie("refreshToken", token.refToken);
-      res.status(200).json({ message: "로그인 성공" });
+      res.status(200).json({ message: "로그인 성공",accessToken:token.accToken, refreshToken:token.refToken });
     }
   };
 

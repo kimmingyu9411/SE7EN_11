@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/auth.css" />
+    <title>AUTH html</title>
+  </head>
+  <body>
+    <header>
+      <h1>SE7VEN_11</h1>
+    </header>
+    <div class="login">
+      <input
+        type="text"
+        id="email"
+        name="email"
+        placeholder="&nbsp&nbsp이메일 주소 입력(필수)"
+      /><br />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="&nbsp&nbsp비밀번호 입력(필수)"
+      /><br />
+      <div id="AuthBtn">
+        <button><a href="./singup.html">회원가입</a></button>
+        <button type="button" onclick="login()">로그인</button>
+      </div>
+    </div>
+  </body>
+  <script type="text/JavaScript" src="./js/auth.js"></script>
+  <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
+</html>
