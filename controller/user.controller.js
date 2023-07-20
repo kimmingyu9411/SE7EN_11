@@ -13,6 +13,7 @@ class UserController {
     res.status(201).json({ data: data });
   };
 
+  // 여기 보고 if else 문 작성하기!!
   createUser = async (req, res, next) => {
     const {
       email,
@@ -33,22 +34,35 @@ class UserController {
       address,
       isOwner
     );
-    res.status(200).json({ message: "회원가입이 완료되었습니다." });
+
+    if (user.status === 400) {
+      res.status(400).json({
+        message: user.errorMessage,
+      });
+    } else {
+      res.status(200).json({ message: "회원가입이 완료되었습니다." });
+    }
   };
 
   loginUser = async (req, res, next) => {
-
     const { email, password } = req.body;
     const token = await this.userService.login(email, password);
-    res.cookie("accessToken", token.accToken);
-    res.cookie("refreshToken", token.refToken);
-    res.status(200).json({ message: "로그인 성공" });
+    console.log("token", token);
+    if (!token.accToken) {
+      res.status(400).json({
+        message: token.message,
+      });
+    } else {
+      res.cookie("accessToken", token.accToken);
+      res.cookie("refreshToken", token.refToken);
+      res.status(200).json({ message: "로그인 성공" });
+    }
   };
 
   updateUser = async (req, res, next) => {
-    const { name, address, nickname, password, newPassword, newComfirm } =
+    const { name, address, nickname, password, newPassword, newConfirm } =
       req.body;
-    const user = res.locals.user;
+    const user = req.locals.user;
 
     const update = await this.userService.userUpdate(
       name,
@@ -56,19 +70,29 @@ class UserController {
       nickname,
       password,
       newPassword,
-      newComfirm,
+      newConfirm,
       user
     );
-
-    res.status(200).json({ data: update });
+    if (update.status === 400) {
+      res.status(400).json({
+        message: token.errorMessage,
+      });
+    } else {
+      res.status(200).json({ message: "상점 수정이 완료되었습니다" });
+    }
   };
 
   deleteUser = async (req, res, next) => {
-    const user = res.locals.user;
-    const { password } = req.body;
-    await this.userService.userDelete(user, password);
+    const { userId } = req.params;
 
-    res.status(200).json({ message: "회원 탈퇴가 완료되었습니다." });
+    const deleteUser = await this.userService.userDelete(userId);
+    if (deleteUser.status === 400) {
+      res.status(400).json({
+        message: deleteUser.errorMessage,
+      });
+    } else {
+      res.status(200).json({ message: "회원 탈퇴가 완료되었습니다." });
+    }
   };
 }
 
