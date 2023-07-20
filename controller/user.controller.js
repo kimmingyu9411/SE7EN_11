@@ -40,7 +40,7 @@ class UserController {
         message: user.errorMessage,
       });
     } else {
-      res.status(200).json({ message: "회원가입이 완료되었습니다." });
+      return res.status(200).json(user);
     }
   };
 

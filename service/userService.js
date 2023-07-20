@@ -21,16 +21,16 @@ class UserService {
     const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
     try {
       if (!emailReg.test(email)) {
-        throw new Error("이메일 형식이 일치하지 않습니다.");
+        return { message: "이메일 형식이 일치하지 않습니다." };
       }
       if (password !== confirmPassword) {
-        throw new Error("패스워드가 일치하지 않습니다.");
+        return { message: "패스워드가 일치하지 않습니다." };
       }
       if (!passwordReg.test(password)) {
-        throw new Error("비밀번호 형식이 일치하지 않습니다.");
+        return { message: "비밀번호 형식이 일치하지 않습니다." };
       }
       if (!nickname) {
-        throw new Error("닉네임을 기입하지 않았습니다.");
+        return { message: "닉네임을 기입하지 않았습니다." };
       }
 
       let point;
@@ -80,7 +80,7 @@ class UserService {
   profile = async (id) => {
     const userProfile = await this.userRepository.profile(id);
     if (!userProfile) {
-      throw new Error("해당 유저는 존재하지 않습니다.");
+      return { message: "해당 유저는 존재하지 않습니다." };
     }
     return userProfile;
   };
@@ -97,15 +97,15 @@ class UserService {
   ) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+      return { message: "비밀번호가 일치하지 않습니다." };
     }
     if (newPassword) {
       if (newPassword !== newConfirm) {
-        throw new Error("새로운 비밀번호가 일치하지 않습니다.");
+        return { message: "새로운 비밀번호가 일치하지 않습니다." };
       }
       const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
       if (!passwordReg.test(newPassword)) {
-        throw new Error("새로운 비밀번호의 형식이 일치하지 않습니다.");
+        return { message: "새로운 비밀번호의 형식이 일치하지 않습니다." };
       }
     }
     const hashPassword = !newPassword
@@ -126,7 +126,7 @@ class UserService {
   userDelete = async (user, password) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+      return { message: "비밀번호가 일치하지 않습니다." };
     }
     return await this.userRepository.userDelete(user.id);
   };

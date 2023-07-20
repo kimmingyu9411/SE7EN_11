@@ -14,7 +14,7 @@ class UserRepository {
         };
       }
       // 존재하지 않는 경우, 새로운 유저 생성
-      const user = await User.create({
+       await User.create({
         email,
         name,
         password,
@@ -24,7 +24,7 @@ class UserRepository {
         isOwner,
         point,
       });
-      return user;
+      return {message:"회원가입이 완료되었습니다."};
     } catch (error) {
       console.log(error);
       return {
