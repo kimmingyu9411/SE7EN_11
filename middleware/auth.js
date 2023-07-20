@@ -64,7 +64,8 @@ class Auth {
                 const id = refreshPayload.userId;
                 const user = await User.findByPk(id);
                 if (user && user.dataValues.token == refreshToken) {
-                  const newAccessToken = this.getAccessToken(id);
+                  const newAccessToken = "Bearer " +
+                  this.jwt.sign({ userId:id }, accessSecretKey, { expiresIn: accessExpiresIn })
                   res.cookie("accessToken", newAccessToken, { httpOnly: true });
 
                   req.locals.user = user.dataValues;

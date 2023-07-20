@@ -8,7 +8,7 @@ class StoreService {
   createStore = async (user, name, address) => {
     try {
       if (!user.isOwner) {
-        throw new Error("권한이 없습니다.");
+        return {message:"권한이 없습니다."}
       }
 
       return await this.storeRepository.createStore(
