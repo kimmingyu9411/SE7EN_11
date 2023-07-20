@@ -60,21 +60,18 @@ class ProductRepository {
     }
   }
 
-  async updateProduct(productId, storeId, userId) {
+  async updateProduct(productId, updateValues) {
     try {
-      const [updatedRowsCount, updatedProducts] = await Product.update(
-        { storeId, userId },
-        { where: { id: productId } }
-      );
-
-      if (updatedRowsCount === 0) {
+      const updatedProduct = await Product.update(updateValues, {
+        where: { id: productId },
+      });
+      if (!updatedProduct[0]) {
         return {
           status: 400,
-          errorMessage: "해당 상품을 찾지 못했습니다.",
+          errorMessage: "해당 상품이 존재하지 않습니다.",
         };
       }
-
-      return updatedProducts[0];
+      return { message: "상품정보가 업데이트 되었습니다." };
     } catch (error) {
       console.error("상품 업데이트 중 오류:", error);
       return {
@@ -84,20 +81,20 @@ class ProductRepository {
     }
   }
 
-  async deleteProduct(productId, storeId, userId) {
+  async deleteProduct(productId) {
     try {
-      const deletedRowCount = await Product.destroy({
-        where: { id: productId, storeId, userId },
+      const deletedProduct = await Product.destroy({
+        where: { id: productId },
       });
-
-      if (deletedRowCount === 0) {
+      
+      if (!deletedProduct) {
         return {
           status: 400,
-          errorMessage: "해당 상품을 찾지 못했습니다.",
+          errorMessage: "해당 상품이 존재하지 않습니다.",
         };
       }
 
-      return deletedRowCount;
+      return { message: "해당 상품이 삭제되었습니다." };
     } catch (error) {
       console.error("상품 삭제 중 오류:", error);
       return {
