@@ -83,9 +83,10 @@ class UserController {
   };
 
   deleteUser = async (req, res, next) => {
-    const { userId } = req.params;
+    const user = res.locals.user;
+    const { password } = req.body;
 
-    const deleteUser = await this.userService.userDelete(userId);
+    const deleteUser = await this.userService.userDelete(user, password);
     if (deleteUser.status === 400) {
       res.status(400).json({
         message: deleteUser.errorMessage,
