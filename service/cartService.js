@@ -1,13 +1,16 @@
-const OrderRepository = require('../repository/order.repository.js');
+const CartRepository = require('../repository/cart.repository.js');
 
-class OrderService{
+class CartService{
     constructor(){
-        this.orderRepository = new OrderRepository();
+        this.cartRepository = new CartRepository();
+    }
+    getCart = async (user) => {
+      return await this.cartRepository.findById(user.id);
     }
   //장바구니 상품 추가
-  insertOrder = async ({ productName, price }) => {
+  addProductInCart = async (user, productId) => {
     try {
-      return await this.productRepository.createOrder(productName, price);
+      return await this.cartRepository.addNewProduct(user, productId);
     } catch (err) {
       console.log(err);
     }
@@ -58,5 +61,5 @@ class OrderService{
   };
 }
 
-module.exports=OrderService;
+module.exports=CartService;
 

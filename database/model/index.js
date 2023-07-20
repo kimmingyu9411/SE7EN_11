@@ -16,14 +16,14 @@ User.hasMany(Review);
 // Product
 Product.hasMany(Review);
 Product.belongsTo(Store);
-Product.belongsToMany(Cart,{through:CartProduct, as:'ProductList'});
-Product.belongsToMany(Log,{through:'LogProduct', as:'PurchaseDescription'});
+Product.belongsToMany(Cart,{through:CartProduct });
+Product.belongsToMany(Log,{through:'LogProduct'});
 
 // Cart
-Cart.belongsToMany(Product,{through:CartProduct});
+Cart.belongsToMany(Product,{through:CartProduct,as:'ProductList'});
 
 // Log
-Log.belongsToMany(Product,{through:'LogProduct'});
+Log.belongsToMany(Product,{through:'LogProduct',as:'PurchaseDescription'});
 
 // Review
 Review.belongsTo(User);

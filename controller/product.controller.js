@@ -31,7 +31,8 @@ class ProductController {
   };
 
   createProduct = async (req, res, next) => {
-    const storeId = req.params;
+    const storeId = req.query.id;
+
     const { name, price, category, productImage } = req.body;
 
     const createProduct = await this.productService.createProduct(
@@ -42,7 +43,7 @@ class ProductController {
       storeId
     );
     if (createProduct) {
-      res.status(200).json({ message: "제품 등록이 완료되었습니다." });
+      res.status(200).json({ message: "제품 등록이 완료되었습니다.", createProduct });
     } else {
       res.status(400).json({ message: "제품 등록을 실패했습니다." });
     }

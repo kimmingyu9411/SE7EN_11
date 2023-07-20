@@ -37,6 +37,7 @@ class UserController {
   };
 
   loginUser = async (req, res, next) => {
+
     const { email, password } = req.body;
     const token = await this.userService.login(email, password);
     res.cookie("accessToken", token.accToken);

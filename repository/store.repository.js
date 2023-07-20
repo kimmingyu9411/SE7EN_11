@@ -1,9 +1,11 @@
 const Store = require("../database/model/store");
 
 class StoreRepository {
-  async createStore(name) {
+  async createStore(user,name,address) {
+
     try {
-      const existingStore = await User.findOne({ where: { name } });
+      
+      const existingStore = await Store.findOne({ where: { name } });
 
       if (existingStore) {
         return {
@@ -13,9 +15,11 @@ class StoreRepository {
       }
       const store = await Store.create({
         name,
+        address,
+        userId:user.id
       });
 
-      return store.id;
+      return store;
     } catch (error) {
       console.error("점포 생성 중 오류:", error);
       return {
