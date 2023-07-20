@@ -4,22 +4,18 @@ const { accessExpiresIn, accessSecretKey, refreshExpiresIn, refreshSecretKey } =
   require("../config.js").jwt;
 
 class Auth {
-  constructor() {
-    this.jwt = jwt;
-    this.User = User;
-  }
-
+  static jwt = jwt;
+  static user = User;
   getAccessToken(userId) {
     return (
       "Bearer " +
-      this.jwt.sign({ userId }, accessSecretKey, { expiresIn: accessExpiresIn })
+      Auth.jwt.sign({ userId }, accessSecretKey, { expiresIn: accessExpiresIn })
     );
   }
-
   getRefreshToken(userId) {
     return (
       "Bearer " +
-      this.jwt.sign({ userId }, refreshSecretKey, {
+      Auth.jwt.sign({ userId }, refreshSecretKey, {
         expiresIn: refreshExpiresIn,
       })
     );
@@ -29,16 +25,17 @@ class Auth {
         if(accessToken){
           let token = accessToken.split(' ')[1];
 
-          const accessPayload = jwt.verify(token,accessSecretKey,(err,decoded)=>{
+          const accessPayload = Auth.jwt.verify(token,accessSecretKey,(err,decoded)=>{
               if(err){ // accessToken 이 비정상일 경우
                   return null;
               }else{ // accessToken 이 정상일 경우
                   return decoded;
               }
           });
+          
           if (accessPayload) {
             const id = accessPayload.userId;
-            const user = await User.findByPk(id);
+            const user = await Auth.user.findByPk(id);
             res.locals.user = user.dataValues;
             next();
           } else {
@@ -48,7 +45,7 @@ class Auth {
             if (refreshToken) {
               token = refreshToken.split(" ")[1];
 
-              const refreshPayload = jwt.verify(
+              const refreshPayload = Auth.jwt.verify(
                 token,
                 refreshSecretKey,
                 (err, decoded) => {
@@ -62,10 +59,9 @@ class Auth {
 
               if (refreshPayload) {
                 const id = refreshPayload.userId;
-                const user = await User.findByPk(id);
+                const user = await Auth.user.findByPk(id);
                 if (user && user.dataValues.token == refreshToken) {
-                  const newAccessToken = "Bearer " +
-                  this.jwt.sign({ userId:id }, accessSecretKey, { expiresIn: accessExpiresIn })
+                  const newAccessToken = Auth.getAccessToken(id);
                   res.cookie("accessToken", newAccessToken, { httpOnly: true });
 
                   req.locals.user = user.dataValues;
