@@ -32,7 +32,7 @@ class StoreController {
 
     const create = await this.storeService.createStore(user, name, address);
     if (create.status === 400) {
-      res.status(400).json({ message: getOne.errorMessage });
+      res.status(400).json({ message: create.errorMessage });
     } else {
       res.status(200).json({ message: "가게 생성에 성공했습니다." });
     }

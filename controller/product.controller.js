@@ -12,10 +12,10 @@ class ProductController {
       category,
       storeId
     );
-    if (categoryProduct) {
-      res.status(200).json({ data: categoryProduct });
+    if (categoryProduct.status === 400) {
+      res.status(400).json({ data: categoryProduct.errorMessage });
     } else {
-      res.status(400).json({ message: "카테고리 조회를 실패했습니다." });
+      res.status(200).json({ data: categoryProduct });
     }
   };
 
@@ -23,10 +23,10 @@ class ProductController {
     const productId = req.params;
 
     const detailProduct = await this.productService.getDetailProduct(productId);
-    if (detailProduct) {
-      res.status(200).json({ data: detailProduct });
+    if (detailProduct.status === 400) {
+      res.status(400).json({ data: detailProduct.errorMessage });
     } else {
-      res.status(400).json({ message: "제품 상세조회를 실패했습니다." });
+      res.status(200).json({ data: detailProduct });
     }
   };
 
@@ -42,10 +42,12 @@ class ProductController {
       productImage,
       storeId
     );
-    if (createProduct) {
-      res.status(200).json({ message: "제품 등록이 완료되었습니다.", createProduct });
+    if (createProduct.status === 400) {
+      res.status(400).json({ message: createProduct.errorMessage });
     } else {
-      res.status(400).json({ message: "제품 등록을 실패했습니다." });
+      res
+        .status(200)
+        .json({ message: "제품 등록이 완료되었습니다.", createProduct });
     }
   };
 
@@ -53,7 +55,6 @@ class ProductController {
     const userId = req.locals.user;
     const { storeId, productId } = req.params;
     const { name, price, productImage } = req.body;
-
 
     const updateProduct = await this.productService.updateProduct(
       productId,
@@ -64,10 +65,10 @@ class ProductController {
       category,
       productImage
     );
-    if (updateProduct) {
-      res.status(200).json({ message: "제품 정보 수정을 완료했습니다." });
+    if (updateProduct.status === 400) {
+      res.status(400).json({ message: updateProduct.errorMessage });
     } else {
-      res.status(400).json({ message: "제품 정보 수정을 실패했습니다." });
+      res.status(200).json({ message: "제품 정보 수정을 완료했습니다." });
     }
   };
 
@@ -80,10 +81,10 @@ class ProductController {
       storeId,
       userId
     );
-    if (deleteProduct) {
-      res.status(200).json({ message: "상품이 삭제되었습니다." });
+    if (deleteProduct.status === 400) {
+      res.status(400).json({ message: deleteProduct.errorMessage });
     } else {
-      res.status(400).json({ message: "상품 삭제를 실패했습니다." });
+      res.status(200).json({ message: "상품이 삭제되었습니다." });
     }
   };
 }
