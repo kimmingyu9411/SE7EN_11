@@ -62,7 +62,7 @@ class UserController {
   updateUser = async (req, res, next) => {
     const { name, address, nickname, password, newPassword, newConfirm } =
       req.body;
-    const user = req.locals.user;
+    const user = res.locals.user;
 
     const update = await this.userService.userUpdate(
       name,

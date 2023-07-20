@@ -27,10 +27,10 @@ class StoreController {
   };
 
   createStore = async (req, res, next) => {
-    const userId = req.locals.user;
-    const { isOwner, name, address } = req.body;
+    const user = res.locals.user;
+    const { name, address } = req.body;
 
-    const create = await this.storeService.createStore(userId, isOwner, name);
+    const create = await this.storeService.createStore(user, name, address);
     if (create.status === 400) {
       res.status(400).json({ message: getOne.errorMessage });
     } else {
@@ -40,10 +40,10 @@ class StoreController {
 
   updateStore = async (req, res, next) => {
     const storeId = req.params;
-    const userId = req.locals.user;
+    const user = res.locals.user;
     const { name } = req.body;
 
-    const update = await this.storeService.updateStore(storeId, userId, name);
+    const update = await this.storeService.updateStore(storeId, user, name);
     if (update.status === 400) {
       res.status(400).json({
         message: update.errorMessage,
@@ -55,11 +55,11 @@ class StoreController {
 
   deleteStore = async (req, res, next) => {
     const storeId = req.params;
-    const { userId, isOwner } = req.locals.user;
+    const { user, isOwner } = res.locals.user;
 
     const deleteStore = await this.storeService.deleteStore(
       storeId,
-      userId,
+      user,
       isOwner
     );
     if (deleteStore.status === 400) {
