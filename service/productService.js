@@ -1,4 +1,5 @@
 const ProductRepository = require("../repository/product.repository.js");
+const bcrypt = require("bcrypt");
 
 class ProductService {
   constructor() {
@@ -40,22 +41,32 @@ class ProductService {
   //상품 업데이트
   updateProduct = async (
     productId,
-    storeId,
-    userId,
+    user,
     name,
     price,
     category,
+    password,
     productImage
   ) => {
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return {
+        status: 400,
+        errorMessage: "비밀번호가 일치하지 않습니다.",
+      };
+    }
+
+    let updateValues = {};
+    if (name) updateValues.name = name;
+    if (price) updateValues.price = price;
+    if (category) updateValues.category = category;
+    if (productImage) updateValues.productImage = productImage;
+
     try {
       return await this.productRepository.updateProduct(
         productId,
-        storeId,
-        userId,
-        name,
-        price,
-        category,
-        productImage
+        updateValues
       );
     } catch (err) {
       console.log(err);
@@ -63,12 +74,18 @@ class ProductService {
   };
 
   //상품 삭제
-  deleteProduct = async (productId, storeId, userId) => {
+  deleteProduct = async (productId, user, password) => {
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return {
+        status: 400,
+        errorMessage: "비밀번호가 일치하지 않습니다.",
+      };
+    }
     try {
       return await this.productRepository.deleteProduct(
-        productId,
-        storeId,
-        userId
+        productId
       );
     } catch (err) {
       console.log(err);
