@@ -20,9 +20,9 @@ class ProductService {
   };
 
   //카테고리 별 조회
-  getCategoryProduct = async (category) => {
+  getCategoryProduct = async (category, storeId) => {
     try {
-      return await this.productRepository.getCategoryProduct(category);
+      return await this.productRepository.getCategoryProduct(category, storeId);
     } catch (err) {
       console.log(err);
     }

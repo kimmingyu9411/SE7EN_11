@@ -2,6 +2,7 @@ const Product = require("../database/model/product");
 
 class ProductRepository {
   async createProduct(name, price, category, productImage, storeId) {
+    console.log(storeId);
     try {
       const existingProduct = await Product.findOne({ where: { name } });
 
@@ -28,11 +29,14 @@ class ProductRepository {
     }
   }
 
-  async getCategoryProduct(category) {
+  async getCategoryProduct(category, storeId) {
     try {
       const products = await Product.findAll({
-        where: { category },
+        where: { category, storeId },
       });
+      if (!products[0]) {
+        return { message: "해당 물품이 존재하지 않습니다." };
+      }
       return products;
     } catch (error) {
       console.error("카테고리 별 조회 중 오류:", error);
@@ -45,7 +49,7 @@ class ProductRepository {
 
   async getDetailProduct(productId) {
     try {
-      const product = await Product.findByPk(productId);
+      const product = await Product.findByPk(productId.productId);
       return product;
     } catch (error) {
       console.error("상품 상세 조회 중 오류:", error);
@@ -103,4 +107,4 @@ class ProductRepository {
     }
   }
 }
-module.exports= ProductRepository;
+module.exports = ProductRepository;

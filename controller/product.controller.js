@@ -6,8 +6,8 @@ class ProductController {
   }
   // 상품 조회 storeId 노필요?
   getProductsByCategory = async (req, res, next) => {
-    const { category, storeId } = req.params;
-
+    const category = req.query.category;
+    const storeId = req.query.id;
     const categoryProduct = await this.productService.getCategoryProduct(
       category,
       storeId
