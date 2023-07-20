@@ -26,18 +26,17 @@ class Auth {
   }
   async verify(req, res, next) {
     const accessToken = req.cookies.accessToken;
-
+    
         if(accessToken){
-            let token = accessToken.split(' ')[1];
+          let token = accessToken.split(' ')[1];
 
-            const accessPayload = this.jwt.verify(token,accessSecretKey,(err,decoded)=>{
-                if(err){ // accessToken 이 비정상일 경우
-                    return null;
-                }else{ // accessToken 이 정상일 경우
-                    return decoded;
-                }
-            });
-
+          const accessPayload = jwt.verify(token,accessSecretKey,(err,decoded)=>{
+              if(err){ // accessToken 이 비정상일 경우
+                  return null;
+              }else{ // accessToken 이 정상일 경우
+                  return decoded;
+              }
+          });
       if (accessPayload) {
         const id = accessPayload.userId;
         const user = await User.findByPk(id);
@@ -64,7 +63,7 @@ class Auth {
 
           if (refreshPayload) {
             const id = refreshPayload.userId;
-            const user = await this.User.findByPk(id);
+            const user = await User.findByPk(id);
 
             if (user && user.dataValues.token == refreshToken) {
               const newAccessToken = this.getAccessToken(id);
@@ -75,7 +74,7 @@ class Auth {
                         }else{ // user 가 없거나 DB상의 토큰값이 일치하지 않을때
                             res.status(404).json({
                                 errorMessage:"Token is not valid..😥"
-                            });    
+                            });
                         }
                     }else{ // refreshToken 이 유효하지 않을때
                         res.status(401).json({

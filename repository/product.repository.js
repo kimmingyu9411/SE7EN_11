@@ -3,7 +3,7 @@ const Product = require("../database/model/product");
 class ProductRepository {
   async createProduct(name, price, category, productImage, storeId) {
     try {
-      const existingProduct = await User.findOne({ where: { name } });
+      const existingProduct = await Product.findOne({ where: { name } });
 
       if (existingProduct) {
         return {

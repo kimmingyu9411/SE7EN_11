@@ -1,5 +1,5 @@
 const express = require('express');
-const orderRouter = require('./order.routes.js');
+const cartRouter = require('./cart.routes.js');
 const productRouter = require('./product.routes.js');
 const reviewRouter = require('./review.routes.js');
 const storeRouter = require('./store.routes.js');
@@ -9,8 +9,8 @@ const router = express.Router();
 
 const defaultRouters = [
     {
-        path : '/orders',
-        router : orderRouter
+        path : '/cart',
+        router : cartRouter
     },
     {
         path : '/products',

@@ -15,16 +15,17 @@ class StoreController{
   };
 
   createStore = async (req, res, next) => {
-    const userId = req.locals.payload;
-    const { isOner, storeName, storeAddress, storeImage } = req.body;
+    const user = res.locals.user;
+    const { name, address } = req.body;
 
-    return await this.storeService.createStore(
-      isOner,
-      storeName,
-      storeAddress,
-      storeImage,
-      userId
+    const createdStore = await this.storeService.createStore(
+      user,
+      name,
+      address
     );
+    res.status(201).json({
+      createdStore
+    })
   };
 
   updateStore = async (req, res, next) => {

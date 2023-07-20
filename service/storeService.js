@@ -5,17 +5,17 @@ class StoreService {
     this.storeRepository = new StoreRepository();
   }
   //상점 등록
-  createStore = async (userId, isOwner, name) => {
+  createStore = async (user, name, address) => {
     try {
-      if (!isOwner) {
+      if (!user.isOwner) {
         throw new Error("권한이 없습니다.");
       }
 
-      return await this.storeRepository.createStore({
-        userId,
-        isOwner,
+      return await this.storeRepository.createStore(
+        user,
         name,
-      });
+        address
+      );
     } catch (err) {
       console.log(err);
     }

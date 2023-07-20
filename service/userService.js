@@ -65,7 +65,7 @@ class UserService {
       if (user && passwordMatch) {
         const accToken = auth.getAccessToken(user.dataValues.id);
         const refToken = auth.getRefreshToken(user.dataValues.id);
-        console.log(accToken, refToken);
+
         await user.update({ token: refToken });
         return { accToken, refToken };
       } else {
