@@ -17,7 +17,6 @@ class StoreController {
 
   getOneStore = async (req, res, next) => {
     const storeId = req.params;
-
     const getOne = await this.storeService.getOneStore(storeId);
     if (getOne.status === 400) {
       res.status(400).json({ message: getOne.errorMessage });
@@ -39,11 +38,15 @@ class StoreController {
   };
 
   updateStore = async (req, res, next) => {
-    const storeId = req.params;
-    const user = res.locals.user;
-    const { name } = req.body;
-
-    const update = await this.storeService.updateStore(storeId, user, name);
+    const { storeId } = req.params;
+    const {id} = res.locals.user;
+    const { name, address } = req.body;
+    const update = await this.storeService.updateStore(
+      storeId,
+      id,
+      name,
+      address
+    );
     if (update.status === 400) {
       res.status(400).json({
         message: update.errorMessage,
