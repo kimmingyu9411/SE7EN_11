@@ -34,7 +34,7 @@ class UserService {
       }
 
       let point;
-      isOwner == true ? point = 0 : point = 1000000; 
+      isOwner == true ? (point = 0) : (point = 1000000);
 
       const hashPassword = await bcrypt.hash(password, 5);
 
@@ -92,7 +92,7 @@ class UserService {
     nickname,
     password,
     newPassword,
-    newComfirm,
+    newConfirm,
     user
   ) => {
     const match = await bcrypt.compare(password, user.password);
@@ -100,7 +100,7 @@ class UserService {
       throw new Error("비밀번호가 일치하지 않습니다.");
     }
     if (newPassword) {
-      if (newPassword !== newComfirm) {
+      if (newPassword !== newConfirm) {
         throw new Error("새로운 비밀번호가 일치하지 않습니다.");
       }
       const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
@@ -127,7 +127,7 @@ class UserService {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       throw new Error("비밀번호가 일치하지 않습니다.");
-    } 
+    }
     return await this.userRepository.userDelete(user.id);
   };
 }

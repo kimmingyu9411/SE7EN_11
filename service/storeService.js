@@ -1,5 +1,5 @@
 const StoreRepository = require("../repository/store.repository.js");
-
+const bcrypt = require("bcrypt");
 class StoreService {
   constructor() {
     this.storeRepository = new StoreRepository();
@@ -11,11 +11,7 @@ class StoreService {
         return {message:"권한이 없습니다."}
       }
 
-      return await this.storeRepository.createStore(
-        user,
-        name,
-        address
-      );
+      return await this.storeRepository.createStore(user, name, address);
     } catch (err) {
       console.log(err);
     }
@@ -28,17 +24,25 @@ class StoreService {
 
   //특정 지점 검색
   getOneStore = async (storeId) => {
-    return await this.storeRepository.getOneStore(storeId);
+    return await this.storeRepository.getOneStore(storeId.storeId);
   };
 
   //상점 정보 업데이트
-  updatedStore = async (storeId, userId, name) => {
-    return await this.storeRepository.updatedStore(storeId, userId, name);
+  updateStore = async (storeId, id, name, address) => {
+    let updateValues = {};
+    if (name) updateValues.name = name;
+    if (address) updateValues.address = address;
+
+    return await this.storeRepository.updateStore(storeId, id, updateValues);
   };
 
   //상점 정보 삭제
-  deleteStore = async (storeId, userId, isOwner) => {
-    return await this.storeRepository.deleteStore(storeId, userId, isOwner);
+  deleteStore = async (storeId, user, password) => {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      throw new Error("비밀번호가 일치하지 않습니다.");
+    }
+    return await this.storeRepository.deleteStore(storeId,user.id);
   };
 }
 module.exports = StoreService;
