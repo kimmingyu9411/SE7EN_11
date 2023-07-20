@@ -17,7 +17,12 @@ router.get('/:productId',productController.getDetailProduct)
 router.route('/')
 .get(productController.getProductsByCategory)
 .post(auth.verify,productController.createProduct)
+// .put(auth.verify,productController.updateProduct)
+// .delete(auth.verify,productController.deleteProduct)
+
+router.route('/:productId')
 .put(auth.verify,productController.updateProduct)
+.get(productController.getDetailProduct)
 .delete(auth.verify,productController.deleteProduct)
 
 module.exports = router;
