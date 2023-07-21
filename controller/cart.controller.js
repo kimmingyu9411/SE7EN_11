@@ -23,7 +23,8 @@ class CartController {
   insertProductToCart = async (req, res, next) => {
     const user = res.locals.user;
     const productId = req.query.id;
-    const result = await this.cartService.addProductInCart(user,productId);
+    const quantity = req.body.quantity;
+    const result = await this.cartService.addProductInCart(user,productId,quantity);
 
     if(result.isSuccessful){
       res.status(200).json({
@@ -36,13 +37,38 @@ class CartController {
     }
   };
 
-  updateOrder = async (req, res, next) => {
-    const payload = res.locals.payload;
+  updateCart = async (req, res, next) => {
+    const user = res.locals.user;
+    const quantity = req.body.quantity;
+    const productId = req.query.id;
+    const result = await this.cartService.updateProductInCart(user,productId,quantity);
+
+    if(result.isSuccessful){
+      res.status(200).json({
+        message:"success.."
+      })
+    }else{
+      res.status(400).json({
+        message:"failed.."
+      })
+    }
   };
 
-  deleteOrder = async (req, res, next) => {
-    const payload = res.locals.payload;
-    const productId = req.params;
+  deleteCart = async (req, res, next) => {
+    const { isOrdered, removeList } = req.body;
+    const user = res.locals.user;
+
+    const result = await this.cartService.deleteProductsInCart(user, removeList, isOrdered);
+
+    if(result.isSuccessful){
+      res.status(200).json({
+        message:"success.."
+      })
+    }else{
+      res.status(400).json({
+        message:"failed.."
+      })
+    }
   };
 }
 

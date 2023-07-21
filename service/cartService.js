@@ -8,30 +8,30 @@ class CartService{
       return await this.cartRepository.findById(user.id);
     }
   //장바구니 상품 추가
-  addProductInCart = async (user, productId) => {
+  addProductInCart = async (user, productId, quantity) => {
     try {
-      return await this.cartRepository.addNewProduct(user, productId);
+      return await this.cartRepository.addNewProduct(user, productId, quantity);
     } catch (err) {
       console.log(err);
     }
   };
 
   //장바구니 상품 수정
-  updateOrder = async ({ productCount }) => {
+  updateProductInCart = async (user, productId, quantity) => {
     try {
-      return await this.productRepository.updateOrder(productCount);
+      return await this.cartRepository.updateProductInCart(user, productId, quantity);
     } catch (err) {
       console.log(err);
     }
   };
 
   //장바구니 상품 삭제
-  deleteOrder = async ({ userId, orderId, productId }) => {
+  deleteProductsInCart = async ( user, removeList, isOrdered ) => {
     try {
-      return await this.productRepository.deleteOrder(
-        userId,
-        orderId,
-        productId
+      return await this.cartRepository.deleteProductsInCart(
+        user,
+        removeList,
+        isOrdered
       );
     } catch (err) {
       console.log(err);

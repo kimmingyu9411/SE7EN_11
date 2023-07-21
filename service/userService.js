@@ -1,6 +1,6 @@
 const UserRepository = require("../repository/user.repository.js");
 const bcrypt = require("bcrypt");
-const auth = require("../middleware/auth.js");
+const {Auth} = require("../middleware/auth.js");
 
 class UserService {
   constructor() {
@@ -21,16 +21,22 @@ class UserService {
     const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
     try {
       if (!emailReg.test(email)) {
-        return { message: "이메일 형식이 일치하지 않습니다." };
+        return {
+          status: 400,
+          errorMessage: "이메일 형식이 일치하지 않습니다.",
+        };
       }
       if (password !== confirmPassword) {
-        return { message: "패스워드가 일치하지 않습니다." };
+        return { status: 400, errorMessage: "패스워드가 일치하지 않습니다." };
       }
       if (!passwordReg.test(password)) {
-        return { message: "비밀번호 형식이 일치하지 않습니다." };
+        return {
+          status: 400,
+          errorMessage: "비밀번호 형식이 일치하지 않습니다.",
+        };
       }
       if (!nickname) {
-        return { message: "닉네임을 기입하지 않았습니다." };
+        return { status: 400, errorMessage: "닉네임을 기입하지 않았습니다." };
       }
 
       let point;
@@ -50,7 +56,10 @@ class UserService {
         point
       );
     } catch (err) {
-      console.log(err);
+      return {
+        status: 400,
+        errorMessage: "회원가입 도중 에러가 발생했습니다.",
+      };
     }
   };
 
@@ -63,8 +72,8 @@ class UserService {
         user.dataValues.password
       );
       if (user && passwordMatch) {
-        const accToken = auth.getAccessToken(user.dataValues.id);
-        const refToken = auth.getRefreshToken(user.dataValues.id);
+        const accToken = Auth.getAccessToken(user.dataValues.id);
+        const refToken = Auth.getRefreshToken(user.dataValues.id);
 
         await user.update({ token: refToken });
         return { accToken, refToken };
