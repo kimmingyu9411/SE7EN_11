@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../database/model/user.js");
+const Store = require('../database/model/store.js');
 const { accessExpiresIn, accessSecretKey, refreshExpiresIn, refreshSecretKey } =
   require("../config.js").jwt;
 
@@ -37,6 +38,13 @@ class Auth {
           if (accessPayload) {
             const id = accessPayload.userId;
             const user = await Auth.user.findByPk(id);
+            if(user.isOwner){
+              const store = await user.getStore();
+              res.locals.user = user.dataValues;
+              res.locals.store = store;
+              next();
+              return;
+            }
             res.locals.user = user.dataValues;
             next();
           } else {
@@ -65,6 +73,13 @@ class Auth {
                   const newAccessToken = Auth.getAccessToken(id);
                   res.cookie("accessToken", newAccessToken, { httpOnly: true });
 
+                  if(user.isOwner){
+                    const store = await user.getStore();
+                    res.locals.user = user.dataValues;
+                    res.locals.store = store;
+                    next();
+                    return;
+                  }
                   res.locals.user = user.dataValues;
                   next();
                 }else{ // user 가 없거나 DB상의 토큰값이 일치하지 않을때

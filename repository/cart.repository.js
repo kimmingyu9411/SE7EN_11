@@ -3,7 +3,6 @@ const Product = require('../database/model/product.js');
 const Log = require('../database/model/log.js');
 const sq = require('../database/db.js').sequelize;
 
-
 class CartRepository {
   async findById(id) {
     const cart = await Cart.findOne({
@@ -72,7 +71,6 @@ class CartRepository {
       );
 
       const productList = cart.dataValues.ProductList;
-      console.log('list =>',productList);
 
       let beforeQuantity;
       productList.forEach(v=>{
@@ -92,6 +90,7 @@ class CartRepository {
     }
   }
   async deleteProductsInCart(user, removeList, isOrdered){
+    const t = await sq.transaction(); // 트랜잭션 생성
     try {
     const cart = await Cart.findOne(
         {
@@ -101,23 +100,30 @@ class CartRepository {
           include:{
             model:Product,
             as:'ProductList',
-            attributes:['id','name','price']
+            attributes:['id','name','price','storeId'],
           }
         }
       );
       const productList = cart.dataValues.ProductList;
 
       if(isOrdered){ // true => 주문하기 실행 상태. 전체 리셋 후, 로그로 내역 이동
-          const transaction = await sq.transaction();
-          const createdLog = await Log.create({userId:user.id,totalPrice:cart.get('totalPrice')});
+
+          const createdLog = await Log.create({
+            userId:user.id,
+            totalPrice:cart.get('totalPrice'),
+            storeId:productList[0].dataValues.storeId
+          },
+            {
+              transaction:t
+            });
         
           productList.forEach(async (p)=>{
-            createdLog.addPurchaseDescription(await Product.findByPk(p.dataValues.id));
+            createdLog.addPurchaseDescription(await Product.findByPk(p.dataValues.id,{transaction:t}));
           });
   
-          await cart.destroy();
-          await Cart.create({userId:user.id});
-          await transaction.commit();
+          await cart.destroy({transaction:t});
+          await Cart.create({userId:user.id},{transaction:t});
+          await t.commit();
           return {isSuccessful:true};
       }else{  // false => 주문하기 비실행 상태. removeList에 들어있는 상품만 삭제
           removeList.forEach(async(p)=>{
@@ -127,7 +133,7 @@ class CartRepository {
       }
     } catch (e) {
       console.error(e);
-      await transaction.rollback();
+      await t.rollback();
       return {isSuccessful:false};
     }
   }

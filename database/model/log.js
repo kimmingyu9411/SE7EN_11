@@ -12,6 +12,15 @@ const Log = connector.sequelize.define('log',{
         type : DataTypes.INTEGER,
         allowNull:false
     },
+    storeId:{
+        type : DataTypes.INTEGER,
+        allowNull:true
+    },
+    isFinished:{
+        type : DataTypes.BOOLEAN,
+        allowNull:false,
+        defaultValue:false
+    }
 },
 {
     createdAt:true,

@@ -1,7 +1,11 @@
+const Product = require("../database/model/product");
 const Store = require("../database/model/store");
+const User = require("../database/model/user");
+const sq = require('../database/db.js').sequelize;
 
 class StoreRepository {
   async createStore(user, name, address) {
+    const t = await sq.transaction();
     try {
       const existingStore = await Store.findOne({ where: { name } });
 
@@ -15,11 +19,17 @@ class StoreRepository {
         name,
         address,
         userId: user.id,
-      });
+      },{transaction:t});
+      
+      const owner = await User.findByPk(user.id,{transaction:t});
+
+      await owner.setStore(store,{transaction:t});
+      await t.commit();
 
       return store;
     } catch (error) {
       console.error("점포 생성 중 오류:", error);
+      await t.rollback();
       return {
         status: 400,
         errorMessage: "점포 생성 중 오류가 발생했습니다.",
@@ -29,7 +39,13 @@ class StoreRepository {
 
   async getOneStore(storeId) {
     try {
-      const store = await Store.findByPk(storeId);
+      const store = await Store.findByPk(storeId,{
+        include:{
+          model:Product,
+          as:'ProductList',
+          attributes:['name','category','price']
+        }
+      });
 
       if (!store) {
         console.error(!store);

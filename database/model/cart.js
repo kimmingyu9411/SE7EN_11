@@ -24,6 +24,6 @@ const Cart = connector.sequelize.define('cart',{
             }
         }
     }
-},{timestamps:false});
+},{timestamps:false,hooks:{afterDestroy:function(){}}});
 
 module.exports = Cart;

@@ -74,7 +74,7 @@ class UserService {
       if (user && passwordMatch) {
         const accToken = Auth.getAccessToken(user.dataValues.id);
         const refToken = Auth.getRefreshToken(user.dataValues.id);
-
+        
         await user.update({ token: refToken });
         return { accToken, refToken };
       } else {

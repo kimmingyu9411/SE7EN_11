@@ -4,6 +4,7 @@ const productRouter = require('./product.routes.js');
 const reviewRouter = require('./review.routes.js');
 const storeRouter = require('./store.routes.js');
 const userRouter = require('./user.routes.js');
+const logRouter = require('./log.routes.js');
 
 const router = express.Router();
 
@@ -27,6 +28,10 @@ const defaultRouters = [
     {
         path : '/users',
         router : userRouter
+    },
+    {
+        path : '/logs',
+        router : logRouter
     }
 ];
 
