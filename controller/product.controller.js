@@ -21,7 +21,7 @@ class ProductController {
   };
 
   getDetailProduct = async (req, res, next) => {
-    const productId = req.params;
+    const productId = req.params.productId;
 
     const detailProduct = await this.productService.getDetailProduct(productId);
     if (detailProduct.status === 400) {
