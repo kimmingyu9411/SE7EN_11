@@ -11,7 +11,7 @@
       <h1>SE7VEN_11</h1>
     </header>
     <div class="login">
-      <form class="loginform">
+      <div class="loginform">
         <input
           type="text"
           id="email"
@@ -26,26 +26,41 @@
         /><br />
         <input
           type="password"
-          id="password"
-          name="passwordConfirm"
+          id="confirmPassword"
+          name="confirmPassword"
           placeholder="&nbsp&nbsp비밀번호 확인(필수)"
         /><br />
         <input
           type="text"
-          id="password"
+          id="address"
           name="address"
           placeholder="&nbsp&nbsp사용자 주소(필수)"
         /><br />
         <input
           type="text"
-          id="password"
+          id="name"
+          name="name"
+          placeholder="&nbsp&nbsp사용자 이름(필수)"
+        /><br />
+        <input
+          type="text"
+          id="nickname"
           name="nickname"
           placeholder="&nbsp&nbsp닉네임(필수)"
         /><br />
+        <label for="isOwnerCheck">
+          점주<input type="checkbox" id="isOwner">
+        </label>
         <div id="AuthBtn">
-          <button>회원가입</button>
+          <button onclick=signup()>회원가입</a></button>
         </div>
-      </form>
+      </div>
     </div>
   </body>
+  <script type="text/JavaScript" src="./js/signup.js"></script>
+  <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
 </html>
