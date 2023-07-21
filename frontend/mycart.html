@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css//mycart.css" />
+    <title>MYCART html</title>
+  </head>
+  <body>
+    <header>
+      <h1>SE7VEN_11</h1>
+    </header>
+    <div class="product">
+      <div class="productcategory">
+        <h2>아이스크림</h2>
+      </div>
+      <div class="productinfo">
+        <img src="./img/빙과류.png" alt="" />
+        <h3>짱구 아이스크림</h3>
+        <p class="price">판매가격 : 3,000원</p>
+        <p class="num_price">수량</p>
+        <input type="number" class="productnum" oninput="updateOrderTotal()" />
+      </div>
+
+      <div class="productcategory">
+        <h2>과자</h2>
+      </div>
+      <div class="productinfo">
+        <img src="./img/과자.png" alt="" />
+        <h3>짱구 아이스크림</h3>
+        <p class="price">판매가격 : 3,000원</p>
+        <p class="num_price">수량</p>
+        <input type="number" class="productnum" oninput="updateOrderTotal()" />
+      </div>
+      <div class="productcategory">
+        <h2>샌드위치</h2>
+        <div class="productinfo">
+          <img src="./img/샌드위치.png" alt="" />
+          <h3>짱구 아이스크림</h3>
+          <p class="price">판매가격: 3,000원</p>
+          <p class="num_price">수량</p>
+          <input
+            type="number"
+            class="productnum"
+            oninput="updateOrderTotal()"
+          />
+        </div>
+      </div>
+
+      <!-- 등록 버튼 추가 -->
+      <button class="dlBtn" onclick="applyNumber()">등록</button>
+
+      <div class="totalprice">
+        <div class="totalPtitle">
+          <h3>총 주문금액</h3>
+          <span id="totalPrice">0 원</span>
+        </div>
+      </div>
+
+      <div class="totalproduct">
+        <h3>총 등록된 상품 갯수</h3>
+        <p id="totalProductCount">0 개</p>
+      </div>
+    </div>
+
+    <script>
+      let productData = [
+        { name: "짱구 아이스크림", price: 3000, quantity: 0 },
+        { name: "짱구 과자", price: 3000, quantity: 0 },
+        { name: "짱구 샌드위치", price: 3000, quantity: 0 },
+      ];
+
+      function applyNumber() {
+        const productInfoElements = document.querySelectorAll(".productinfo");
+        productInfoElements.forEach((productInfoElement) => {
+          const inputElement = productInfoElement.querySelector(".productnum");
+          const inputValue = +inputElement.value;
+
+          if (isNaN(inputValue) || inputValue < 1 || inputValue > 50) {
+            alert("1에서 50 사이의 상품를 입력해주세요.");
+            return;
+          }
+
+          const index = Array.from(
+            document.querySelectorAll(".productinfo")
+          ).indexOf(productInfoElement);
+          productData[index].quantity = inputValue;
+        });
+
+        const totalProductCountElement =
+          document.getElementById("totalProductCount");
+        totalProductCountElement.innerText = `총 등록된 상품 갯수: ${productData.reduce(
+          (acc, product) => acc + (product.quantity || 0),
+          0
+        )} 개`;
+
+        updateOrderTotal();
+      }
+
+      function updateOrderTotal() {
+        let totalPrice = 0;
+
+        productData.forEach((product) => {
+          totalPrice += product.price * product.quantity;
+        });
+
+        const totalPriceElement = document.getElementById("totalPrice");
+        totalPriceElement.innerText = `${totalPrice} 원`;
+      }
+    </script>
+  </body>
+</html>
