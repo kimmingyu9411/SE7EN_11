@@ -10,9 +10,9 @@ const getAllstores = () => {
     datas.data.forEach((store) => {
       const temp = document.createElement("ul");
       const storeAddress = store.address;
-      temp.innerHTML = `<li>
-                      <div><img src="./img/세븐일레븐일러스트.png" /></div>
-                      <a href="#">${storeAddress}</a>
+      temp.innerHTML = `<li class="storeAddress" onclick ="location.href='zone.html?id=${store.id}'">
+                      <div><img src="./img/세븐일레븐일러스트.png"/></div>
+                      <a>${storeAddress}</a>
                       </li>`;
       document.querySelector(".zonelist").append(temp);
     });
