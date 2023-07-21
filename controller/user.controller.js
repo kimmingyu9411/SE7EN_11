@@ -52,7 +52,7 @@ class UserController {
         message: token.message,
       });
     } else {
-      res.cookie("accessToken", token.accToken);
+      res.cookie("Authorization", token.accToken);
       res.cookie("refreshToken", token.refToken);
       res.status(200).json({ message: "로그인 성공",accessToken:token.accToken, refreshToken:token.refToken });
     }
