@@ -1,0 +1,83 @@
+header {
+  background-color: #006547;
+  display: flex;
+}
+
+header h1 {
+  font-size: 2rem;
+  letter-spacing: -0.2rem;
+  margin-left: 30px;
+  color: #ff8a00;
+}
+
+.product .productinfo {
+  display: flex;
+  flex-wrap: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #a9a9a9;
+}
+
+.productcategory h2 {
+  margin-left: 100px;
+}
+
+.productinfo img {
+  width: 100px;
+  margin-bottom: 30px;
+  border: 1px solid #000;
+}
+
+.productinfo h3 {
+  margin-top: 13px;
+}
+
+.productinfo h3,
+p {
+  margin-left: 150px;
+  text-align: center;
+  padding-top: 15px;
+}
+
+#productnum {
+  width: 50px;
+  height: 30px;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+#dlBtn {
+  width: 100px;
+  height: 30px;
+  margin-left: 130px;
+  margin-top: 23px;
+}
+
+.totalprice {
+  background: #006547;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: row nowrap;
+}
+
+.totalPtitle {
+  display: flex;
+  flex-wrap: row nowrap;
+}
+.totalPtitle span {
+  margin-left: 100px;
+  padding-top: 21px;
+  font-size: 35px;
+}
+
+#totalBtn {
+  display: flexbox;
+  margin-left: 30px;
+  height: 30px;
+  width: 80px;
+}

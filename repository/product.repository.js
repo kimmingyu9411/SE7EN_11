@@ -64,7 +64,7 @@ class ProductRepository {
 
   async getDetailProduct(productId) {
     try {
-      const product = await Product.findByPk(productId.productId);
+      const product = await Product.findByPk(productId);
       return product;
     } catch (error) {
       console.error("상품 상세 조회 중 오류:", error);
@@ -101,7 +101,7 @@ class ProductRepository {
       const deletedProduct = await Product.destroy({
         where: { id: productId },
       });
-      
+
       if (!deletedProduct) {
         return {
           status: 400,

@@ -1,15 +1,17 @@
-const {DataTypes} = require('sequelize');
-const connector = require('../db.js');
+const { DataTypes } = require("sequelize");
+const connector = require("../db.js");
 
-const Cart = connector.sequelize.define('cart',{
-    id:{
-        type : DataTypes.INTEGER,
-        primaryKey:true,
-        autoIncrement:true,
-        allowNull:false
+const Cart = connector.sequelize.define(
+  "cart",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
     totalPrice:{
-        type : DataTypes.VIRTUAL,
+        type : DataTypes.VIRTUAL, 
         get(){
             const products = this.ProductList;
             if(products.length==0){
@@ -24,6 +26,6 @@ const Cart = connector.sequelize.define('cart',{
             }
         }
     }
-},{timestamps:false,hooks:{afterDestroy:function(){}}});
+},{timestamps:false});
 
 module.exports = Cart;

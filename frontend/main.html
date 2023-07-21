@@ -13,11 +13,12 @@
     <input type="checkbox" id="menuicon" />
     <label for="menuicon" class="label">
       <img src="./img/화살표.png" class="blinking" />
-      <div class="findtitle">점포찾으로가기</div>
+      <div class="findtitle" onclick="getAllstores()">점포찾으로가기</div>
     </label>
     <div class="sidebar">
       <div class="sideBtn">
-        <button>로그인</button><button>회원가입</button>
+        <button><a href="./auth.html">로그인</a></button
+        ><button><a href="./singup.html">회원가입</a></button>
       </div>
       <div class="zonelist">
         <ul>
@@ -63,6 +64,12 @@
       <h1>SE7VEN_11</h1>
     </div>
   </body>
+  <script type="text/JavaScript" src="./js/main.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"
+  ></script>
 </html>
 
 <style>

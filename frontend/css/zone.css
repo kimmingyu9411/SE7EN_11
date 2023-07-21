@@ -83,6 +83,11 @@ body {
 .products .product img {
   width: 180px;
   height: 150px;
+  margin-left: 300px;
+}
+.products .productimg li{
+  color: #000;
+  margin-left: 1000px;
 }
 
 /* zonecss */
