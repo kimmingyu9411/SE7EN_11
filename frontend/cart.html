@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CART html</title>
+  </head>
+  <body>
+    <header>
+      <h1>SE7VEN_11</h1>
+    </header>
+    <main id="cart_wrap">
+      <div class="left">
+        <img src="./img/과자.png" alt="img" />
+      </div>
+      <div class="right">
+        <div class="top">
+          <h1>짱구 쌀과자</h1>
+          <p>과자</p>
+          <dl>
+            <dt>판매가격</dt>
+            <dd class="price">1,000 원</dd>
+          </dl>
+          <div class="number">
+            <p class="ordername">짱구 쌀과자</p>
+            <div class="ordernumber">
+              <input type="number" name="num" id="num" />
+              <span class="num_price">1,000 원</span>
+            </div>
+          </div>
+          <div class="totalprice">
+            <p>총 상품 금액</p>
+            <p class="result_price">1,000 원</p>
+          </div>
+        </div>
+        <div class="bottom">
+          <button type="button" id="orderBtn">주문하기</button>
+          <button type="button" id="cartBtn">장바구니</button>
+        </div>
+      </div>
+    </main>
+
+    <review>
+      <div class="reviewbox">
+        <h2>상품리뷰를 등록해주세요.</h2>
+        <input
+          type="password"
+          name="password"
+          placeholder="비밀번호를 입력해주세요."
+        />
+        <textarea
+          name="review"
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="상품리뷰를 등록해주세요."
+        ></textarea>
+        <button type="submit">등록</button>
+      </div>
+    </review>
+  </body>
+</html>
+
+<style>
+  header {
+    background-color: #006547;
+    display: flex;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: -0.2rem;
+    margin-left: 30px;
+    color: #ff8a00;
+  }
+  #cart_wrap {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+  }
+  #cart_wrap .left {
+    width: 500px;
+  }
+  #cart_wrap .left img {
+    width: 80%;
+    margin-top: 50px;
+  }
+  #cart_wrap .right {
+    width: calc(100% - 550px);
+  }
+  #cart_wrap .right .top {
+  }
+  #cart_wrap .right .top h1 {
+    font-size: 1.2rem;
+    padding: 20px 0;
+  }
+  #cart_wrap .right .top h1 + p {
+    color: #aaa;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 10px;
+  }
+  #cart_wrap .right .top dl {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  #cart_wrap .right .top dl dt {
+    width: 30%;
+    padding: 10px 0;
+  }
+  #cart_wrap .right .top dl dd {
+    width: 70%;
+    padding: 10px 0;
+  }
+  #cart_wrap .right .top dl dd.price {
+    font-weight: 700;
+  }
+  #cart_wrap .right .top .number {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+  }
+  #cart_wrap .right .top .number .ordername {
+  }
+  #cart_wrap .right .top .number .ordernumber {
+  }
+  #cart_wrap .right .top .number .ordernumber input[name="num"] {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
+  }
+  #cart_wrap .right .top .number .ordernumber .num_price {
+  }
+  #cart_wrap .right .top .totalprice {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+  #cart_wrap .right .top .number .totalprice p {
+  }
+  #cart_wrap .right .top .totalprice .result_price {
+    color: #cc0202;
+    font-size: 1.2rem;
+  }
+  #cart_wrap .right .bottom {
+    text-align: right;
+    padding: 20px 0;
+  }
+  #cart_wrap .right .bottom button {
+    padding: 15px 0;
+  }
+  #cart_wrap .right .bottom #orderBtn {
+    background: #cc0202;
+    color: #fff;
+    width: 150px;
+  }
+  #cart_wrap .right .bottom #cartBtn {
+    background: #a9a9a9;
+    color: #fff;
+    width: 120px;
+  }
+
+  .reviewbox {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 50%);
+  }
+
+  .reviewbox h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .reviewbox input {
+    width: 50%;
+    height: 50%;
+    padding: 0 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #86b0b6;
+  }
+
+  .reviewbox input:focus {
+    border: 1px solid #000;
+    outline: 0;
+  }
+
+  .reviewbox textarea {
+    width: 100%;
+    height: 150px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #86b0b6;
+    resize: none;
+  }
+
+  .reviewbox textarea:focus {
+    border: 1px solid #000;
+    outline: 0;
+  }
+
+  .reviewbox button {
+    border: 0;
+    padding: 10px 30px;
+    background: #86b0b6;
+    font-size: 18px;
+    border-radius: 5px;
+    color: #fff;
+  }
+  .reviewbox button:hover {
+    background-color: #718a8e;
+  }
+</style>
