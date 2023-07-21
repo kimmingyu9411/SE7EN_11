@@ -14,7 +14,7 @@ class UserRepository {
         };
       }
       // 존재하지 않는 경우, 새로운 유저 생성
-       await User.create({
+      await User.create({
         email,
         name,
         password,
@@ -24,7 +24,10 @@ class UserRepository {
         isOwner,
         point,
       });
-      return {message:"회원가입이 완료되었습니다."};
+      return {
+        status: 200,
+        message: "회원가입이 완료되었습니다.",
+      };
     } catch (error) {
       console.log(error);
       return {
@@ -35,7 +38,7 @@ class UserRepository {
   }
 
   // 로그인
-  async login( email ) {
+  async login(email) {
     try {
       const user = await User.findOne({
         where: { email },
@@ -66,13 +69,10 @@ class UserRepository {
   // 프로필 업데이트
   async userUpdate(updateValues) {
     try {
-      await User.update(
-        updateValues,
-        {
-            where: { id: updateValues.id }
-        }
-    );
-      return {message:"프로필이 업데이트 됐습니다."};
+      await User.update(updateValues, {
+        where: { id: updateValues.id },
+      });
+      return { message: "프로필이 업데이트 됐습니다." };
     } catch (error) {
       console.log(error);
       return {

@@ -36,11 +36,9 @@ class UserController {
     );
 
     if (user.status === 400) {
-      res.status(400).json({
-        message: user.errorMessage,
-      });
+      res.status(400).json({ errorMessage: user.errorMessage });
     } else {
-      return res.status(200).json(user);
+      return res.status(200).json({ message: user.message });
     }
   };
 
@@ -54,7 +52,11 @@ class UserController {
     } else {
       res.cookie("accessToken", token.accToken);
       res.cookie("refreshToken", token.refToken);
-      res.status(200).json({ message: "로그인 성공",accessToken:token.accToken, refreshToken:token.refToken });
+      res.status(200).json({
+        message: "로그인 성공",
+        accessToken: token.accToken,
+        refreshToken: token.refToken,
+      });
     }
   };
 

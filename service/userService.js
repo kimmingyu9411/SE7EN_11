@@ -21,16 +21,22 @@ class UserService {
     const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
     try {
       if (!emailReg.test(email)) {
-        return { message: "이메일 형식이 일치하지 않습니다." };
+        return {
+          status: 400,
+          errorMessage: "이메일 형식이 일치하지 않습니다.",
+        };
       }
       if (password !== confirmPassword) {
-        return { message: "패스워드가 일치하지 않습니다." };
+        return { status: 400, errorMessage: "패스워드가 일치하지 않습니다." };
       }
       if (!passwordReg.test(password)) {
-        return { message: "비밀번호 형식이 일치하지 않습니다." };
+        return {
+          status: 400,
+          errorMessage: "비밀번호 형식이 일치하지 않습니다.",
+        };
       }
       if (!nickname) {
-        return { message: "닉네임을 기입하지 않았습니다." };
+        return { status: 400, errorMessage: "닉네임을 기입하지 않았습니다." };
       }
 
       let point;
@@ -50,7 +56,10 @@ class UserService {
         point
       );
     } catch (err) {
-      console.log(err);
+      return {
+        status: 400,
+        errorMessage: "회원가입 도중 에러가 발생했습니다.",
+      };
     }
   };
 
