@@ -6,13 +6,13 @@ const { accessExpiresIn, accessSecretKey, refreshExpiresIn, refreshSecretKey } =
 class Auth {
   static jwt = jwt;
   static user = User;
-  getAccessToken(userId) {
+  static getAccessToken(userId) {
     return (
       "Bearer " +
       Auth.jwt.sign({ userId }, accessSecretKey, { expiresIn: accessExpiresIn })
     );
   }
-  getRefreshToken(userId) {
+  static getRefreshToken(userId) {
     return (
       "Bearer " +
       Auth.jwt.sign({ userId }, refreshSecretKey, {
@@ -22,6 +22,7 @@ class Auth {
   }
   async verify(req, res, next) {
     const accessToken = req.cookies.Authorization;
+
         if(accessToken){
           let token = accessToken.split(' ')[1];
 
@@ -64,7 +65,7 @@ class Auth {
                   const newAccessToken = Auth.getAccessToken(id);
                   res.cookie("accessToken", newAccessToken, { httpOnly: true });
 
-                  req.locals.user = user.dataValues;
+                  res.locals.user = user.dataValues;
                   next();
                 }else{ // user 가 없거나 DB상의 토큰값이 일치하지 않을때
                   res.status(404).json({
@@ -91,6 +92,6 @@ class Auth {
       }
     }
 
-const auth = new Auth();
+    const auth = new Auth();
 
-module.exports = auth;
+module.exports = {Auth, auth};

@@ -1,4 +1,5 @@
 const User = require("../database/model/user");
+const Cart = require('../database/model/cart');
 const jwt = require("jsonwebtoken");
 
 class UserRepository {
@@ -14,7 +15,7 @@ class UserRepository {
         };
       }
       // 존재하지 않는 경우, 새로운 유저 생성
-      await User.create({
+       const createdUser = await User.create({
         email,
         name,
         password,
@@ -24,10 +25,10 @@ class UserRepository {
         isOwner,
         point,
       });
-      return {
-        status: 200,
-        message: "회원가입이 완료되었습니다.",
-      };
+      // 유저 생성과 동시에 Cart 테이블 생성
+      await Cart.create({userId:createdUser.get('id')});
+
+      return {message:"회원가입이 완료되었습니다."};
     } catch (error) {
       console.log(error);
       return {

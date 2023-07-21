@@ -10,7 +10,7 @@ const CartProduct = require('./cartProduct.js');
 // User
 User.hasOne(Store);
 User.hasOne(Cart);
-User.hasMany(Log);
+User.hasMany(Log,{as:'purchasedDescription'});
 User.hasMany(Review);
 
 // Product

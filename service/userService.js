@@ -1,6 +1,6 @@
 const UserRepository = require("../repository/user.repository.js");
 const bcrypt = require("bcrypt");
-const auth = require("../middleware/auth.js");
+const {Auth} = require("../middleware/auth.js");
 
 class UserService {
   constructor() {
@@ -72,8 +72,8 @@ class UserService {
         user.dataValues.password
       );
       if (user && passwordMatch) {
-        const accToken = auth.getAccessToken(user.dataValues.id);
-        const refToken = auth.getRefreshToken(user.dataValues.id);
+        const accToken = Auth.getAccessToken(user.dataValues.id);
+        const refToken = Auth.getRefreshToken(user.dataValues.id);
 
         await user.update({ token: refToken });
         return { accToken, refToken };
