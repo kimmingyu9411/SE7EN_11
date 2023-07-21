@@ -1,6 +1,7 @@
 const User = require("../database/model/user");
 const Cart = require('../database/model/cart');
 const jwt = require("jsonwebtoken");
+const Store = require("../database/model/store");
 
 class UserRepository {
   async createUser(email, password, name, nickname, address, isOwner, point) {
@@ -57,7 +58,8 @@ class UserRepository {
   // 프로필 조회
   async profile(id) {
     try {
-      return await User.findByPk(id);
+      const user = await User.findByPk(id,{include:{model:Store}});
+      return user;
     } catch (error) {
       console.log(error);
       return {

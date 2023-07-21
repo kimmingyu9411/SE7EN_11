@@ -16,7 +16,7 @@ User.hasMany(Review);
 // Product
 Product.hasMany(Review);
 Product.belongsTo(Store);
-Product.belongsToMany(Cart,{through:CartProduct });
+Product.belongsToMany(Cart,{through:CartProduct});
 Product.belongsToMany(Log,{through:'LogProduct'});
 
 // Cart
@@ -29,6 +29,7 @@ Log.belongsToMany(Product,{through:'LogProduct',as:'PurchaseDescription'});
 Review.belongsTo(User);
 Review.belongsTo(Product,{as:'Reviews'});
 // Store
-Store.hasMany(Product);
+Store.hasMany(Product,{as:'ProductList',foreignKeyConstraint:false});
+Store.belongsTo(User);
 
 module.exports = [Log, Product, Review, Store, User, Cart, CartProduct];

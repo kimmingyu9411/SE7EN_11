@@ -19,7 +19,7 @@ const Store = connector.sequelize.define(
         allowNull:false
     }
   },
-  { timestamps: true }
+  { timestamps: false }
 );
 
 

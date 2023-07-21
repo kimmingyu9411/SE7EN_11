@@ -40,7 +40,11 @@ const User = connector.sequelize.define('user',{
     token:{
         type : DataTypes.STRING,
         allowNull:true
-    }
+    },
+    // myStoreId:{
+    //     type : DataTypes.NUMBER,
+    //     allowNull:true
+    // }
 },{timestamps:true});
 
 module.exports = User;

@@ -4,7 +4,12 @@ const logController = new LogController();
 const { auth } = require('../middleware/auth.js');
 
 /*
-    http://www.naver.com/users/3?group=seven
+    GET '/logs'
+
 */
 
-router.route()
+router.route('/')
+.get(auth.verify,logController.getLogs)
+// .post(auth.verify,logController);
+
+module.exports = router;

@@ -1,13 +1,3 @@
-// import Review from '../database/model/review.js';
-
-// class ReviewRepository{
-//     createReview(){}
-//     updateReview(){}
-//     deleteReview(){}
-// }
-
-// module.exports = ReviewRepository;
-
 const Review = require("../database/model/review"); // Review 모델을 불러옵니다.
 
 class ReviewRepository {
