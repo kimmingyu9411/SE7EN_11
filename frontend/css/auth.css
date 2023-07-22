@@ -1,60 +1,61 @@
 /* 기본 헤더 css */
 header {
-    background-color: #006547;
-    display: flex;
-  }
+  background-color: #006547;
+  display: flex;
+}
 
-  header h1 {
-    font-size: 2rem;
-    letter-spacing: -0.2rem;
-    margin-left: 30px;
-    color: #ff8a00;
-  }
-  /* 기본 헤더 css */
-  body {
-    background-color: #fafafa;
-  }
-  .login {
-    text-align: center;
-    margin-top: 100px;
-    position: relative;
-  }
+header h1 {
+  font-size: 2rem;
+  letter-spacing: -0.2rem;
+  margin-left: 30px;
+  color: #ff8a00;
+  cursor: pointer;
+}
+/* 기본 헤더 css */
+body {
+  background-color: #fafafa;
+}
+.login {
+  text-align: center;
+  margin-top: 100px;
+  position: relative;
+}
 
-  .login  {
-    text-align: center;
-  }
+.login {
+  text-align: center;
+}
 
-  .login input {
-    width: 500px;
-    height: 35px;
-    outline-style: none;
-    border: solid 0.1px gray;
-  }
+.login input {
+  width: 500px;
+  height: 35px;
+  outline-style: none;
+  border: solid 0.1px gray;
+}
 
-  #password {
-    border-left-width: 1;
-    border-right-width: 1;
-    border-top-width: 0;
-    border-bottom-width: 1;
-  }
+#password {
+  border-left-width: 1;
+  border-right-width: 1;
+  border-top-width: 0;
+  border-bottom-width: 1;
+}
 
-  #AuthBtn {
-    margin-top: 30px;
-  }
-  #AuthBtn button {
-    margin-left: 20px;
-    width: 100px;
-    height: 30px;
-    background-color: #fe000b;
-    color: #fff;
-    border: solid 0.5px gray;
-    font-size: 15px;
-    letter-spacing: -0.1rem;
-    font-weight: bold;
-    cursor: pointer;
-  }
+#AuthBtn {
+  margin-top: 30px;
+}
+#AuthBtn button {
+  margin-left: 20px;
+  width: 100px;
+  height: 30px;
+  background-color: #fe000b;
+  color: #fff;
+  border: solid 0.5px gray;
+  font-size: 15px;
+  letter-spacing: -0.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  #AuthBtn a {
-    text-decoration: none;
-    color: #fff;
-  }
+#AuthBtn a {
+  text-decoration: none;
+  color: #fff;
+}

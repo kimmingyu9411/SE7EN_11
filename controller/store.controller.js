@@ -52,7 +52,7 @@ class StoreController {
         message: update.errorMessage,
       });
     } else {
-      res.status(200).json( update );
+      res.status(200).json(update);
     }
   };
 
@@ -71,7 +71,7 @@ class StoreController {
         message: deleteStore.errorMessage,
       });
     } else {
-      res.status(200).json(deleteStore );
+      res.status(200).json(deleteStore);
     }
   };
 }

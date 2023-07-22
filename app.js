@@ -14,7 +14,12 @@ class App {
   setup() {
     this.app.use(
       cors({
-        origin: "*",
+        origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: "Content-Type, Authorization, cookies",
+        origin: true,
+        credentials: true,
       })
     );
     this.app.use(cookie());
