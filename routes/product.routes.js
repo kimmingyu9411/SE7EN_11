@@ -1,9 +1,7 @@
-const router = require('express').Router();
-const {auth} = require('../middleware/auth.js');
-const ProductController = require('../controller/product.controller.js');
+const router = require("express").Router();
+const { auth } = require("../middleware/auth.js");
+const ProductController = require("../controller/product.controller.js");
 const productController = new ProductController();
-
-
 
 /*
 
@@ -15,17 +13,19 @@ await fetch('http:localhost:8080/products`${category}`)
     DELETE '/products/:productId' 상점 메뉴 삭제
 */
 
-router.get('/:productId',productController.getDetailProduct)
+router.get("/:productId", productController.getDetailProduct);
 
-router.route('/')
-.get(productController.getProductsByCategory)
-.post(auth.verify,productController.createProduct)
+router
+  .route("/")
+  .get(productController.getProductsByCategory)
+  .post(auth.verify, productController.createProduct);
 // .put(auth.verify,productController.updateProduct)
 // .delete(auth.verify,productController.deleteProduct)
 
-router.route('/:productId')
-.put(auth.verify,productController.updateProduct)
-.get(productController.getDetailProduct)
-.delete(auth.verify,productController.deleteProduct)
+router
+  .route("/:productId")
+  .get(productController.getDetailProduct)
+  .put(auth.verify, productController.updateProduct)
+  .delete(auth.verify, productController.deleteProduct);
 
 module.exports = router;

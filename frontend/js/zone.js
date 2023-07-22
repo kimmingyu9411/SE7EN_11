@@ -2,8 +2,8 @@ const urlParams = new URL(location.href).searchParams;
 const storeId = urlParams.get("id");
 
 function zoneCategory() {
-    const temp = document.createElement("ul");
-    temp.innerHTML = `
+  const temp = document.createElement("ul");
+  temp.innerHTML = `
     <li class="product">
       <div id="delivery">
       <div class="deliveryimg">
@@ -113,7 +113,6 @@ function zoneCategory() {
     </div>
     </li>
   `;
-    document.querySelector(".products").append(temp);
-  };
-  zoneCategory()
-
+  document.querySelector(".products").append(temp);
+}
+zoneCategory();
