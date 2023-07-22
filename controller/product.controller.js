@@ -24,7 +24,7 @@ class ProductController {
     const productId = req.params.productId;
 
     const detailProduct = await this.productService.getDetailProduct(productId);
-    
+
     if (detailProduct.status === 400) {
       res.status(400).json({ data: detailProduct.errorMessage });
     } else {

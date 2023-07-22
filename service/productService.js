@@ -84,9 +84,7 @@ class ProductService {
       };
     }
     try {
-      return await this.productRepository.deleteProduct(
-        productId
-      );
+      return await this.productRepository.deleteProduct(productId);
     } catch (err) {
       console.log(err);
     }
