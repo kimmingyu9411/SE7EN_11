@@ -4,6 +4,7 @@ class CartController {
   constructor() {
     this.cartService = new CartService();
   }
+  
   getCart = async (req, res, next) => {
     const user = res.locals.user;
     try {

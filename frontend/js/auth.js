@@ -1,10 +1,6 @@
 const url = new URLSearchParams(document.location.href);
 const url2 = new URL(document.location.href);
 
-console.log(url.get('id'));
-console.log(url2.searchParams);
-
-
 async function login(){
     const jsonObj = {};
     jsonObj.email = $('#email').val();
