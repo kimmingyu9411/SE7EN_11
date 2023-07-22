@@ -8,6 +8,7 @@ header h1 {
   letter-spacing: -0.2rem;
   margin-left: 30px;
   color: #ff8a00;
+  cursor: pointer;
 }
 
 .product .productinfo {
