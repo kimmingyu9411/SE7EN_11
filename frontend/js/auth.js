@@ -15,12 +15,12 @@ async function login(){
     };
 
     const {message, accessToken, refreshToken } = await fetch('http://localhost:8080/users/login',options).then(d=>d.json());
-    
     document.cookie=
         `Authorization=${accessToken};`;
-    
     document.cookie=
         `refreshToken=${refreshToken}`;
-    
     alert(message);
+    if(accessToken&&refreshToken){
+        location.href="./main.html"
+    }
 }

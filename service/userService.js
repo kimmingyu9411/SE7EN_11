@@ -1,6 +1,6 @@
 const UserRepository = require("../repository/user.repository.js");
 const bcrypt = require("bcrypt");
-const {Auth} = require("../middleware/auth.js");
+const { Auth } = require("../middleware/auth.js");
 
 class UserService {
   constructor() {
@@ -67,6 +67,9 @@ class UserService {
   login = async (email, password) => {
     try {
       const user = await this.userRepository.login(email);
+      if (!user) {
+        return { message: "이메일 혹은 비밀번호가 일치하지 않습니다." };
+      }
       const passwordMatch = await bcrypt.compare(
         password,
         user.dataValues.password
@@ -74,9 +77,9 @@ class UserService {
       if (user && passwordMatch) {
         const accToken = Auth.getAccessToken(user.dataValues.id);
         const refToken = Auth.getRefreshToken(user.dataValues.id);
-        
+
         await user.update({ token: refToken });
-        return { accToken, refToken };
+        return { accToken: accToken, refToken: refToken };
       } else {
         return { message: "이메일 혹은 비밀번호가 일치하지 않습니다." };
       }
@@ -104,6 +107,7 @@ class UserService {
     newConfirm,
     user
   ) => {
+    console.log(name, address, nickname, password, newPassword, newConfirm);
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       return { message: "비밀번호가 일치하지 않습니다." };
