@@ -94,9 +94,10 @@ const storeCreate = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      if (res.message) {
-        alert(res.message);
+      if (!res.Message) {
+        alert(res.errorMessage);
+      }else{
+        alert(res.Message);
         location.href = "./main.html";
       }
     })
