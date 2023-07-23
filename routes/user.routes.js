@@ -13,6 +13,7 @@ const userController = new UserController();
 
 router.post('/signup',userController.createUser)
 router.post('/login',userController.loginUser)
+router.post('/logout',userController.logoutUser)
 
 router.get('/me',auth.verify,userController.profile);
 

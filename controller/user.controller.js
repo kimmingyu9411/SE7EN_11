@@ -50,13 +50,22 @@ class UserController {
         message: token.message,
       });
     } else {
-      res.cookie("Authorization", token.accToken);
-      res.cookie("refreshToken", token.refToken);
       res.status(200).json({
         message: "로그인 성공",
         accessToken: token.accToken,
         refreshToken: token.refToken,
       });
+    }
+  };
+
+  logoutUser = async (req, res, next) => {
+    try {
+      res.clearCookie("Authorization");
+      res
+        .clearCookie("refreshToken")
+        .json({ message: "로그아웃 성공하였습니다." });
+    } catch (err) {
+      return res.status(400).json({ errorMessage: "로그아웃 실패하였습니다." });
     }
   };
 

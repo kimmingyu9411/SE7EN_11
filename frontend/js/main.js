@@ -43,15 +43,29 @@ const trnasBtn = async () => {
         //사장님 버튼
         const ownerNickname = res.data.nickname;
         const btnName = document.createElement("div");
-        btnName.innerHTML = `<button><a href="./information.html">${ownerNickname}</a></button>`
+        btnName.innerHTML = `<button><a href="./information.html">${ownerNickname}</a></button>
+                             <button onclick ='logout()'>로그아웃</button>`
         document.querySelector(".sideBtn").appendChild(btnName);
       } else {
         //일반유저 버튼
         const userNickname = res.data.nickname;
         const btnName = document.createElement("div");
-        btnName.innerHTML = `<button><a href="./information.html">${userNickname}</a></button>`
+        btnName.innerHTML = `<button><a href="./information.html">${userNickname}</a></button>
+                             <button onclick ='logout()'>로그아웃</button>`
         document.querySelector(".sideBtn").appendChild(btnName);
       }
     });
 };
+const logout = async () => {
+  await fetch("http://localhost:8080/users/logout", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {console.log(res)})
+    location.href="./main.html"
+}
 trnasBtn();
