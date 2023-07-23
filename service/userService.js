@@ -72,7 +72,7 @@ class UserService {
       }
       const passwordMatch = await bcrypt.compare(
         password,
-        user.dataValues.password
+        user.password
       );
       if (user && passwordMatch) {
         const accToken = Auth.getAccessToken(user.dataValues.id);

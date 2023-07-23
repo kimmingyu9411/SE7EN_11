@@ -6,9 +6,13 @@ async function login(){
     jsonObj.email = $('#email').val();
     jsonObj.password = $('#password').val();
     
+    // const cookies = document.cookie.split('; ');
+
     const options = {
         headers:{
             "Content-Type":"application/json",
+            // "Authorization":cookies[0].split('=')[1],
+            // "refreshToken":cookies[1].split('=')[1]
         },
         method:'POST',
         body:JSON.stringify(jsonObj)
@@ -24,3 +28,22 @@ async function login(){
         location.href="./main.html"
     }
 }
+
+async function chk (){
+    console.log('hi');
+    const cookies = document.cookie.split('; ');
+    console.log(cookies);
+    console.log(window.localStorage.getItem('Authorization'));
+    const option2 = {
+    method: "GET",
+    header: {
+        "Content-Type": "application/json",
+        Authoriation:window.localStorage.getItem('Authorization'),
+        RefreshToken:window.localStorage.getItem('RefreshToken')
+    },
+    };
+  const getCategory =  await fetch('http://localhost:8080/cart',option2)
+  .then((response) => response.json());
+  console.log(getCategory);
+};
+chk();

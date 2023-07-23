@@ -6,10 +6,11 @@ class ReviewService {
     this.reviewRepository = new ReviewRepository();
   }
   //리뷰 작성
-  createReview = async (id, productId, content, star) => {
+  createReview = async (id, nickname, productId, content, star) => {
     try {
       return await this.reviewRepository.createReview(
-        id, // <= 키 값으로 user테이블에 들어가서 nickname 가져오기
+        id,
+        nickname,
         productId,
         content,
         star

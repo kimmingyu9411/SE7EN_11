@@ -33,6 +33,10 @@ const config = {
   server: {
     port: getValue("PORT", 8080),
   },
+  mail: {
+    id: getValue("MAIL_ID","jyh1211@kakao.com"),
+    pw: getValue("MAIL_PASSWORD","")
+  }
 };
 
 module.exports = config;

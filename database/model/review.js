@@ -8,6 +8,10 @@ const Review = connector.sequelize.define('review',{
         allowNull:false,
         autoIncrement:true
     },
+    nickname:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
     star:{
         type:DataTypes.INTEGER,
         allowNull:false

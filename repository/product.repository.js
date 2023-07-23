@@ -1,4 +1,5 @@
 const Product = require("../database/model/product");
+const Review = require("../database/model/review");
 const Store = require("../database/model/store");
 const sequelize = require("../database/db.js").sequelize;
 
@@ -68,7 +69,13 @@ class ProductRepository {
 
   async getDetailProduct(productId) {
     try {
-      const product = await Product.findByPk(productId);
+      const product = await Product.findByPk(productId,{
+        include:{
+          model:Review,
+          as:'Reviews'
+        }
+      });
+
       return product;
     } catch (error) {
       console.error("상품 상세 조회 중 오류:", error);

@@ -1,17 +1,26 @@
+const Product = require("../database/model/product");
 const Review = require("../database/model/review"); // Review 모델을 불러옵니다.
+const sq = require('../database/db.js').sequelize;
 
 class ReviewRepository {
-  async createReview(id, productId, content, star) {
+  async createReview(id, nickname, productId, content, star) {
+    const t = await sq.transaction();
     try {
       const review = await Review.create({
         userId: id,
+        nickname,
         productId,
         content,
         star,
-      });
+      },{transaction:t});
+      
+      const product = await Product.findByPk(productId,{transaction:t});
+      await product.addReviews(review,{transaction:t});
+      await t.commit();
       return review;
     } catch (error) {
       console.error("리뷰 생성 중 오류:", error);
+      await t.rollback();
       return {
         status: 400,
         errorMessage: "리뷰 생성 중 오류가 발생했습니다.",

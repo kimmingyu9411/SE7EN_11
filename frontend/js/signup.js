@@ -72,3 +72,42 @@ document.getElementById("confirmBtn").addEventListener("click", function () {
       console.error("Error:", error);
     });
 });
+
+// 이메일 인증
+async function verifyEmail() {
+  const email = $('#email').val();
+
+  if (!email) return alert('이메일이 입력되지 않았습니다.');
+
+  const obj = {
+    email
+  };
+
+  const fetchedData = await fetch('http://localhost:3030/users/mail', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  }).then((d) => {
+    return d.json();
+  });
+
+  const verifyNum = fetchedData.verifyNum;
+
+  while (true) {
+    const inputVerifyNum = $('#authCodeInput').val();
+    if (inputVerifyNum == null) {
+      break;
+    } else {
+      if (verifyNum == inputVerifyNum) {
+        alert('인증되었습니다.');
+        document.getElementById('verifyEmailBtn').disabled = true;
+        document.getElementById('email').disabled = true;
+        break;
+      } else {
+        alert('인증번호가 틀립니다.');
+      }
+    }
+  }
+}
