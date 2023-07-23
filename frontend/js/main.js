@@ -45,7 +45,7 @@ const trnasBtn = async () => {
           const ownerNickname = res.data.nickname;
           const btnName = document.createElement("div");
           btnName.innerHTML = `<button><a href="./information.html">${ownerNickname}</a></button>
-                             <button onclick ='openStoerModal()'>스토어 생성</button>
+                             <button id="crBtn" onclick ='openStoerModal()'>스토어 생성</button>
                              <button onclick ='logout()'>로그아웃</button>`;
           document.querySelector(".sideBtn").appendChild(btnName);
         } else {
@@ -96,7 +96,7 @@ const storeCreate = async () => {
     .then((res) => {
       if (!res.Message) {
         alert(res.errorMessage);
-      }else{
+      } else {
         alert(res.Message);
         location.href = "./main.html";
       }

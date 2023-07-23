@@ -21,7 +21,7 @@
         ><button><a href="./singup.html">회원가입</a></button>
       </div>
       <div class="zonelist">
-        <ul>
+        <!-- <ul>
           <li>
             <div><img src="./img/세븐일레븐일러스트.png" /></div>
             <a href="#">강남지점</a>
@@ -47,7 +47,7 @@
             <a href="#">마포지점</a>
           </li>
           <br />
-        </ul>
+        </ul> -->
       </div>
     </div>
     <div id="maintitle">
@@ -66,29 +66,30 @@
     <div class="modal" id="stoerModal">
       <div class="modal-content">
         <!-- 모달창 내용 -->
-        <h2>메뉴 등록</h2>
-        <div>
-          <strong>가게이름&nbsp</strong>
-          <input id="name"
-            placeholder="가게명을 입력해주세요."
+        <h2>점포 등록</h2>
+        <div class="crst1">
+          <strong>점포이름</strong>
+          <input
+            id="name"
+            placeholder="점포명을 입력해주세요."
             onfocus="this.placeholder = ''"
-            onblur="this.placeholder = '상품명을 입력해주세요.'"
+            onblur="this.placeholder = '점포명을 입력해주세요.'"
           />
         </div>
-        <div>
-          <strong>가게주소&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong>
-          <input id="address"
+        <div class="crst2">
+          <strong>점포주소</strong>
+          <input
+            id="address"
             placeholder="주소를 입력해주세요."
             onfocus="this.placeholder = ''"
             onblur="this.placeholder = '주소를 입력해주세요.'"
           />
         </div>
-        <div>
-          <button onclick="storeCreate()" class="closeBtn">정보 수정</button>
-        </div>
-        <div>
-          <button onclick="closeStoerModal()" class="closeBtn2">닫기</button>
-        </div>
+
+        <button onclick="storeCreate()">점포 등록</button>
+
+        <button onclick="closeStoerModal()">닫기</button>
+      </div>
     </div>
   </body>
   <script type="text/JavaScript" src="./js/main.js"></script>
@@ -98,15 +99,15 @@
     crossorigin="anonymous"
   ></script>
   <script>
-  function openStoerModal() {
-    var stoerModal = document.getElementById("stoerModal");
-    stoerModal.style.display = "block";
-  }
-  function closeStoerModal() {
-    var stoerModal = document.getElementById("stoerModal");
-    stoerModal.style.display = "none";
-  }
-</script>
+    function openStoerModal() {
+      var stoerModal = document.getElementById("stoerModal");
+      stoerModal.style.display = "block";
+    }
+    function closeStoerModal() {
+      var stoerModal = document.getElementById("stoerModal");
+      stoerModal.style.display = "none";
+    }
+  </script>
 </html>
 
 <style>
@@ -127,6 +128,12 @@
     text-decoration: none;
     font-weight: 600;
     transition: 0.25s;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .sideBtn button:hover {
+    background: #fe000b;
   }
 
   .sideBtn button a {
@@ -155,5 +162,32 @@
   .zonelist ul li img {
     width: 80px;
     height: 50px;
+  }
+
+  .modal-content {
+    text-align: center;
+    height: 300px;
+  }
+  .crst1 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .modal-content button {
+    position: relative;
+    left: 50px;
+    float: left;
+    margin-top: 50px;
+    margin-left: 20px;
+    border: none;
+    background: #ff8a00;
+    cursor: pointer;
+    color: #fff;
+    padding-bottom: 10px;
+    width: 120px;
+  }
+
+  .modal-content button:hover {
+    background: #ff7f00;
   }
 </style>
