@@ -49,9 +49,11 @@ class StoreController {
       password
     );
     if (update.status === 400) {
-      res.status(400).json({errorMessage:update.errorMessage});
+      res.status(400).json({
+        errorMessage: update.errorMessage,
+      });
     } else {
-      res.status(200).json({Message:update.Message});
+      res.status(200).json({ message: update.message });
     }
   };
 
@@ -67,10 +69,10 @@ class StoreController {
     );
     if (deleteStore.status === 400) {
       res.status(400).json({
-        message: deleteStore.errorMessage,
+        errorMessage: deleteStore.errorMessage,
       });
     } else {
-      res.status(200).json(deleteStore);
+      res.status(200).json({message:deleteStore.message});
     }
   };
 }

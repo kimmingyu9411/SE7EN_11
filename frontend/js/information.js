@@ -9,14 +9,22 @@ const getUserinfo = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
+      console.log(res);
       $(".information").empty();
       if (res.data.isOwner) {
+        if(!res.data.store){
+          const ownerinfo = document.createElement("div");
+          ownerinfo.innerHTML=`<h1>스토어를 먼저 생성해주세요</h1>`
+          return document.querySelector(".information").appendChild(ownerinfo);
+        }
+        const storeId = res.data.store.id;
         const ownerId = res.data.id;
         const ownerNickname = res.data.nickname;
         const ownerName = res.data.name;
         const ownerEmail = res.data.email;
         const ownerPoint = res.data.point;
         const ownerStoreName = res.data.store.name;
+        const ownerStoreAddress = res.data.store.address;
         const ownerAddress = res.data.address;
         const ownerinfo = document.createElement("div");
         ownerinfo.innerHTML = `<h1>사장님 정보</h1>
@@ -52,19 +60,20 @@ const getUserinfo = async () => {
                                         <div class="modal-content">
                                                         <!-- 모달창 내용 -->
                                         <h2>매장 정보</h2>
+                                        <li class="storeId" id="storeId">${storeId}</li>
                                     <div>
                                         <strong>가게이름&nbsp</strong>
                                         <input id="name"
-                                        placeholder="가게이름을 입력해주세요"
+                                        placeholder="${ownerStoreName}"
                                         onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = '가게이름을 입력해주세요'"/>
+                                        onblur="this.placeholder = '${ownerStoreName}'"/>
                                     </div>
                                     <div>
                                         <strong>가게주소&nbsp</strong>
                                         <input id="address"
-                                        placeholder="가게주소를 입력해주세요"
+                                        placeholder="${ownerStoreAddress}"
                                         onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = '가게 주소을 입력해주세요'"/>
+                                        onblur="this.placeholder = '${ownerStoreAddress}'"/>
                                     </div>
                                     <div>
                                         <strong>비밀번호&nbsp</strong>
@@ -74,13 +83,13 @@ const getUserinfo = async () => {
                                         onblur="this.placeholder = '비밀번호를 입력해주세요.'"/>
                                     </div>
                                     <div>
-                                    <button onclick="updateOserinfo()" class="closeBtn">정보 수정</button>
+                                    <button onclick="updateStoreInfo()" class="closeBtn">정보 수정</button>
                                     </div>
                                     <div>
-                                    <button onclick="closeOwnerModal()" class="closeBtn2">닫기</button>
+                                    <button onclick="closeStoerModal()" class="closeBtn2">닫기</button>
                                     </div>
                                     <div>
-                                    <button onclick="deleteUserinfo()" class="closeBtn3">매장 삭제</button>
+                                    <button onclick="deleteStore()" class="closeBtn3">매장 삭제</button>
                                     </div>
                                     </div>
                                                     <!-- 유저모달창 -->
@@ -283,16 +292,72 @@ const deleteUserinfo = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res)
+      console.log(res);
       if (res.errorMessage) {
         alert(res.errorMessage);
-      }else{
+      } else {
         alert(res.Message);
-        location.href="./main.html"
+        location.href = "./main.html";
       }
     })
     .catch((err) => {
       console.error("프로필 삭제 중 에러 발생");
     });
-    
+};
+
+const updateStoreInfo = async () => {
+  const storeId = document.getElementById("storeId").innerText;
+  const req = {
+    name: document.getElementById("name").value,
+    address: document.getElementById("address").value,
+    password: document.getElementById("password").value,
+  };
+  await fetch(`http://localhost:8080/stores/${storeId}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      } else {
+        alert(res.message);
+        location.href = "./information.html";
+      }
+    })
+    .catch((err) => {
+      console.error("프로필 수정 중 에러 발생");
+    });
+};
+const deleteStore = async () => {
+  const storeId = document.getElementById("storeId").innerText;
+  const req = {
+    password: document.getElementById("password").value,
+  };
+  await fetch(`http://localhost:8080/stores/${storeId}`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      } else {
+        alert(res.message);
+        location.href = "./main.html";
+      }
+    })
+    .catch((err) => {
+      console.error("매장 삭제 중 에러 발생");
+    });
 };
