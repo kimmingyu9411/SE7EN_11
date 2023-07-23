@@ -90,3 +90,4 @@ zoneCategory();
 const nameData = storeId;
 
 document.querySelector(".storename").textContent = nameData;
+document.querySelector(".storename").style.color = "#fff";
