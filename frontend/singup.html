@@ -17,7 +17,7 @@
           id="email"
           name="email"
           placeholder="&nbsp&nbsp이메일 주소 입력(필수)"
-        /><button id="openModalBtn">인증</button>
+        /><button id="openModalBtn" type="button" onclick="modalOpen()">인증</button>
         <div id="myModal" class="modal">
           <div class="modal-content">
             <h2>이메일 인증</h2>
@@ -26,8 +26,8 @@
               id="authCodeInput"
               placeholder="인증코드를 기입해주세요."
             />
-            <button class="confirmBtn">확인</button>
-            <button class="close">닫기</button>
+            <button class="confirmBtn" type="button" onclick="confirmVerifyNumber()">확인</button>
+            <button class="close" type="button" onclick="modalClose()">닫기</button>
           </div>
         </div>
         <br />

@@ -112,11 +112,11 @@ class UserController {
 
   mail = (req, res, next)=>{
     const {email} = req.body;
-    
-    const verifuNum = mailsender.sendKakaoMail(email);
+    console.log(email);
+    const verifyNum = mailsender.sendKakaoMail(email);
 
     res.status(200).json({
-      verifuNum
+      verifyNum
     });
   }
 }
