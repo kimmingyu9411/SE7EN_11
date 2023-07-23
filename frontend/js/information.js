@@ -92,6 +92,7 @@ const getUserinfo = async () => {
                                     <button onclick="deleteStore()" class="closeBtn3">매장 삭제</button>
                                     </div>
                                     </div>
+                                    </div>
                                                     <!-- 유저모달창 -->
                                                     <div class="modal2" id="ownerModal">
                                                         <div class="modal-content">
@@ -150,6 +151,27 @@ const getUserinfo = async () => {
                                                     </div>
                                                         </div>
                                                     </div>
+                                                    <!-- 상품생성 임시 데이터 -->
+                                                    <div>
+                                                     <p id="productName">바밤바</p>
+                                                     <p id="productCategory">빙과류</p>
+                                                     <p id="productPrice">1000</p>
+                                                     <p id="productImg">바밤바 이미지</p>
+                                                     inputproductName
+                                                     <input id="inputproductName"/>
+                                                     inputproductCategory
+                                                     <input id="inputproductCategory"/>
+                                                     inputproductPrice
+                                                     <input id="inputproductPrice"/>
+                                                     inputproductImg
+                                                     <input id="inputproductImg"/>
+                                                     inputpassword
+                                                     <input id="inputpassword"/>
+                                                     <button onclick="createProduct()" class="closeBtn">메뉴 등록</button>
+                                                     <button onclick="updateProduct()" class="closeBtn">메뉴 수정</button>
+                                                     <button onclick="deleteProduct()" class="closeBtn">메뉴 삭제</button>
+                                                     </div>
+                                                      <!-- 상품생성 임시 데이터 -->
                                                     `;
         document.querySelector(".information").appendChild(ownerinfo);
       } else {
