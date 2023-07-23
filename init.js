@@ -1,5 +1,5 @@
-const App = require('./app.js');
-const models = require('./database/model/index.js');
+const App = require("./app.js");
+const models = require("./database/model/index.js");
 
 const app = new App();
 

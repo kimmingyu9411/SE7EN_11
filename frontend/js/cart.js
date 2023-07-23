@@ -1,6 +1,7 @@
 (function () {
   const urlParams = new URL(location.href).searchParams;
   const productid = urlParams.get("id");
+  console.log("productId", productid);
 
   // 상품 정보를 서버로부터 가져오는 함수
   async function getProduct(productId) {

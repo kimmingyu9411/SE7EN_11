@@ -69,11 +69,11 @@ class ProductRepository {
 
   async getDetailProduct(productId) {
     try {
-      const product = await Product.findByPk(productId,{
-        include:{
-          model:Review,
-          as:'Reviews'
-        }
+      const product = await Product.findByPk(productId, {
+        include: {
+          model: Review,
+          as: "Reviews",
+        },
       });
 
       return product;
