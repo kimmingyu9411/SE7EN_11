@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MYORDER html</title>
+  </head>
+  <body>
+    <header>
+      <h1 onclick="location.href='main.html'">SE7VEN_11</h1>
+    </header>
+
+    <div class="order">
+      <div class="ordertitle">
+        <h2>장바구니</h2>
+      </div>
+      <div class="orderproduct">
+        <img src="./img/빵.png" />
+        <ul>
+          <li>상품이름</li>
+          <li>상품가격</li>
+          <li>상품수량</li>
+        </ul>
+      </div>
+      <div class="orderprice">
+        <p>총 상품금액</p>
+      </div>
+      <button id="orderBtn">구매</button>
+      <button id="reviewBtn">리뷰 남기기</button>
+    </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>주문 확인</h2>
+        <p>부개동</p>
+        <button id="confirmOrderBtn">주문 확인</button>
+      </div>
+    </div>
+
+    <div id="reviewModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>리뷰 남기기</h2>
+        <input type="text" placeholder="제목을 입력해주세요." />
+        <textarea
+          name="review"
+          id="reviewText"
+          cols="30"
+          rows="10"
+          placeholder="리뷰 내용을 작성해주세요."
+        ></textarea>
+        <button id="submitReviewBtn">작성 완료</button>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  header {
+    background-color: #006547;
+    display: flex;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: -0.2rem;
+    margin-left: 30px;
+    color: #ff8a00;
+    cursor: pointer;
+  }
+
+  .ordertitle {
+    background: yellow;
+    width: 800px;
+    text-align: center;
+  }
+
+  .orderproduct img {
+    width: 180px;
+  }
+
+  .orderproduct {
+    display: flex;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+</style>
+<script type="text/JavaScript" src="./js/order.js"></script>
