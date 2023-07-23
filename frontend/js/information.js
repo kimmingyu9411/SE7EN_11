@@ -12,9 +12,9 @@ const getUserinfo = async () => {
       console.log(res);
       $(".information").empty();
       if (res.data.isOwner) {
-        if(!res.data.store){
+        if (!res.data.store) {
           const ownerinfo = document.createElement("div");
-          ownerinfo.innerHTML=`<h1>스토어를 먼저 생성해주세요</h1>`
+          ownerinfo.innerHTML = `<h1>스토어를 먼저 생성해주세요</h1>`;
           return document.querySelector(".information").appendChild(ownerinfo);
         }
         const storeId = res.data.store.id;
@@ -359,5 +359,101 @@ const deleteStore = async () => {
     })
     .catch((err) => {
       console.error("매장 삭제 중 에러 발생");
+    });
+};
+
+const createProduct = async () => {
+  const name = document.getElementById("productName").innerText,
+    price = document.getElementById("productPrice").innerText,
+    category = document.getElementById("productCategory").innerText,
+    productImage = document.getElementById("productImg").innerText,
+    storeId = 3;
+  const req = {
+    name,
+    price,
+    category,
+    productImage,
+  };
+  await fetch(`http://localhost:8080/products?id=${storeId}`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      } else {
+        alert(res.message);
+      }
+    })
+    .catch((err) => {
+      console.error("상품등록 중 에러 발생");
+    });
+};
+const updateProduct = async () => {
+  const name = document.getElementById("inputproductName").value,
+    price = document.getElementById("inputproductPrice").value,
+    category = document.getElementById("inputproductCategory").value,
+    productImage = document.getElementById("inputproductImg").value,
+    password = document.getElementById("inputpassword").value,
+    productId = 2;
+  const req = {
+    name,
+    price,
+    category,
+    productImage,
+    password,
+  };
+  await fetch(`http://localhost:8080/products/${productId}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      } else {
+        alert(res.message);
+      }
+    })
+    .catch((err) => {
+      console.error("상품수정 중 에러 발생");
+    });
+};
+const deleteProduct = async () => {
+  const password = document.getElementById("inputpassword").value,
+    productId = 4;
+  const req = {
+    password,
+  };
+  await fetch(`http://localhost:8080/products/${productId}`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      } else {
+        alert(res.message);
+      }
+    })
+    .catch((err) => {
+      console.error("상품삭제 중 에러 발생");
     });
 };

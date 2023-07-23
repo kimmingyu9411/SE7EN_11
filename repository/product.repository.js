@@ -37,7 +37,10 @@ class ProductRepository {
       });
 
       await t.commit();
-      return product;
+      return {
+        status: 200,
+        message: "제품이 등록되었습니다.",
+      };
     } catch (error) {
       await t.rollback();
       console.error("상품 등록 중 오류:", error);
@@ -76,7 +79,8 @@ class ProductRepository {
         },
       });
 
-      return product;
+      return {status:200,
+          data:product};
     } catch (error) {
       console.error("상품 상세 조회 중 오류:", error);
       return {
@@ -120,7 +124,8 @@ class ProductRepository {
         };
       }
 
-      return { message: "해당 상품이 삭제되었습니다." };
+      return { status: 200,
+        message: "해당 상품이 삭제되었습니다." };
     } catch (error) {
       console.error("상품 삭제 중 오류:", error);
       return {
