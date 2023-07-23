@@ -53,7 +53,7 @@ const getUserinfo = async () => {
                                         </button>
                                     </div>
                                     <div>
-                                    <button onclick="openStoreModal()">정보수정/삭제</button>
+                                    <button onclick="openOwnerModal()">정보수정/삭제</button>
                                     </div>
                                         <!-- 매장모달창 -->
                                     <div class="modal" id="stoerModal">
@@ -93,7 +93,7 @@ const getUserinfo = async () => {
                                     </div>
                                     </div>
                                                     <!-- 유저모달창 -->
-                                                    <div class="modal" id="ownerModal">
+                                                    <div class="modal2" id="ownerModal">
                                                         <div class="modal-content">
                                                                         <!-- 모달창 내용 -->
                                                         <h2>정보 수정/삭제</h2>

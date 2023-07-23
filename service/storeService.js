@@ -7,6 +7,9 @@ class StoreService {
   //상점 등록
   createStore = async (user, name, address) => {
     try {
+      if (!name && !address) {
+        return { status: 400, errorMessage: "가게이름과 주소를 기입해야합니다." };
+      }
       return await this.storeRepository.createStore(user, name, address);
     } catch (err) {
       console.log(err);
