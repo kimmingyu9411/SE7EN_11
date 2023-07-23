@@ -7,13 +7,6 @@ class StoreService {
   //상점 등록
   createStore = async (user, name, address) => {
     try {
-      if (!user.isOwner) {
-        return {
-          status: 400,
-          errorMessage: "비밀번호 형식이 일치하지 않습니다.",
-        };
-      }
-
       return await this.storeRepository.createStore(user, name, address);
     } catch (err) {
       console.log(err);
@@ -31,12 +24,16 @@ class StoreService {
   };
 
   //상점 정보 업데이트
-  updateStore = async (storeId, id, name, address) => {
+  updateStore = async (storeId, user, name, address, password) => {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return { message: "비밀번호가 일치하지 않습니다." };
+    }
     let updateValues = {};
     if (name) updateValues.name = name;
     if (address) updateValues.address = address;
 
-    return await this.storeRepository.updateStore(storeId, id, updateValues);
+    return await this.storeRepository.updateStore(storeId, user.id, updateValues);
   };
 
   //상점 정보 삭제

@@ -39,20 +39,19 @@ class StoreController {
 
   updateStore = async (req, res, next) => {
     const { storeId } = req.params;
-    const { id } = res.locals.user;
-    const { name, address } = req.body;
+    const user = res.locals.user;
+    const { name, address, password } = req.body;
     const update = await this.storeService.updateStore(
       storeId,
-      id,
+      user,
       name,
-      address
+      address,
+      password
     );
     if (update.status === 400) {
-      res.status(400).json({
-        message: update.errorMessage,
-      });
+      res.status(400).json({errorMessage:update.errorMessage});
     } else {
-      res.status(200).json(update);
+      res.status(200).json({Message:update.Message});
     }
   };
 

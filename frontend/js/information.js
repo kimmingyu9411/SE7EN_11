@@ -41,49 +41,47 @@ const getUserinfo = async () => {
                                         <strong>찜정보&nbsp</strong>
                                         <input disabled placeholder="${ownerStoreName}" />
                                         <button onclick="openStoerModal()">
-                                        매장관리
+                                        매장수정/삭제
                                         </button>
                                     </div>
                                     <div>
-                                    <button onclick="openOwnerModal()">정보수정/삭제</button>
+                                    <button onclick="openStoreModal()">정보수정/삭제</button>
                                     </div>
                                         <!-- 매장모달창 -->
                                     <div class="modal" id="stoerModal">
                                         <div class="modal-content">
                                                         <!-- 모달창 내용 -->
-                                        <h2>메뉴 등록</h2>
+                                        <h2>매장 정보</h2>
                                     <div>
-                                        <strong>상품이름&nbsp</strong>
-                                        <input
-                                        placeholder="상품명을 입력해주세요."
+                                        <strong>가게이름&nbsp</strong>
+                                        <input id="name"
+                                        placeholder="가게이름을 입력해주세요"
                                         onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = '상품명을 입력해주세요.'"/>
+                                        onblur="this.placeholder = '가게이름을 입력해주세요'"/>
                                     </div>
                                     <div>
-                                        <strong>가격&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong>
-                                        <input
-                                        placeholder="가격을 입력해주세요."
+                                        <strong>가게주소&nbsp</strong>
+                                        <input id="address"
+                                        placeholder="가게주소를 입력해주세요"
                                         onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = '가격을 입력해주세요.'"/>
+                                        onblur="this.placeholder = '가게 주소을 입력해주세요'"/>
                                     </div>
                                     <div>
-                                        <strong>카테고리&nbsp</strong>
-                                    <input
-                                        placeholder="카테고리를 입력해주세요."
+                                        <strong>비밀번호&nbsp</strong>
+                                    <input id="password"
+                                        placeholder="비밀번호를 입력해주세요."
                                         onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = '카테고리를 입력해주세요.'"/>
-                                       <button>선택</button>
+                                        onblur="this.placeholder = '비밀번호를 입력해주세요.'"/>
                                     </div>
                                     <div>
-                                        <strong>이미지&nbsp&nbsp&nbsp&nbsp</strong>
-                                        <input
-                                        placeholder="상품 이미지를 넣어주세요."
-                                        onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = '상품 이미지를 넣어주세요.'"/>
-                                        <button>등록</button>
+                                    <button onclick="updateOserinfo()" class="closeBtn">정보 수정</button>
                                     </div>
-                                        <button onclick="closeStoerModal()" class="closeBtn">메뉴 등록</button>
-                                        </div>
+                                    <div>
+                                    <button onclick="closeOwnerModal()" class="closeBtn2">닫기</button>
+                                    </div>
+                                    <div>
+                                    <button onclick="deleteUserinfo()" class="closeBtn3">매장 삭제</button>
+                                    </div>
                                     </div>
                                                     <!-- 유저모달창 -->
                                                     <div class="modal" id="ownerModal">
