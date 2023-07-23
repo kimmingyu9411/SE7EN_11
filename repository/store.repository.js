@@ -39,7 +39,10 @@ class StoreRepository {
       await owner.setStore(store, { transaction: t });
       await t.commit();
 
-      return store;
+      return{
+        status: 200,
+        Message: "점포가 등록되었습니다.",
+      };
     } catch (error) {
       console.error("점포 생성 중 오류:", error);
       await t.rollback();

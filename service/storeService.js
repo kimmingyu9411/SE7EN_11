@@ -8,7 +8,10 @@ class StoreService {
   createStore = async (user, name, address) => {
     try {
       if (!user.isOwner) {
-        return { message: "권한이 없습니다." };
+        return {
+          status: 400,
+          errorMessage: "비밀번호 형식이 일치하지 않습니다.",
+        };
       }
 
       return await this.storeRepository.createStore(user, name, address);

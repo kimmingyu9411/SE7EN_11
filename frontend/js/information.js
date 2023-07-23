@@ -285,11 +285,16 @@ const deleteUserinfo = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      if (res.message) {
-        alert(res.message.message);
+      console.log(res)
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      }else{
+        alert(res.Message);
+        location.href="./main.html"
       }
     })
     .catch((err) => {
       console.error("프로필 삭제 중 에러 발생");
     });
+    
 };
