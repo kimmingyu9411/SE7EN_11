@@ -4,8 +4,8 @@ const email = document.querySelector("#email"),
   address = document.querySelector("#address"),
   nickname = document.querySelector("#nickname"),
   namechk = document.querySelector("#name");
-
 function signup() {
+  let isOwner = document.getElementById("isOwner").checked;
   const req = {
     email: email.value,
     password: password.value,
@@ -13,7 +13,7 @@ function signup() {
     address: address.value,
     nickname: nickname.value,
     name: namechk.value,
-    isOwner: isOwner.value,
+    isOwner: isOwner,
   };
   fetch("http://localhost:8080/users/signup", {
     method: "POST",

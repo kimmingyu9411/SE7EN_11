@@ -139,7 +139,10 @@ class UserService {
   userDelete = async (user, password) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return { message: "비밀번호가 일치하지 않습니다." };
+      return {
+        status: 400,
+        errorMessage: "현재 비밀번호가 일치하지 않습니다.",
+      };
     }
     return await this.userRepository.userDelete(user.id);
   };
