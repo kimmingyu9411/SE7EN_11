@@ -1,3 +1,5 @@
+const productId = new URL(location.href).searchParams.get('id');
+
 const createReview = fetch(`http://localhost:8080/reviews?id=${productId}`, {
   method: "POST",
   headers: {
