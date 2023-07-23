@@ -80,7 +80,7 @@ class ProductRepository {
       });
 
       return {status:200,
-          data:product};
+          product};
     } catch (error) {
       console.error("상품 상세 조회 중 오류:", error);
       return {

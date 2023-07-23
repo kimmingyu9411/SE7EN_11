@@ -63,21 +63,21 @@ const getUserinfo = async () => {
                                         <li class="storeId" id="storeId">${storeId}</li>
                                     <div>
                                         <strong>가게이름&nbsp</strong>
-                                        <input id="name"
+                                        <input id="storeName"
                                         placeholder="${ownerStoreName}"
                                         onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = '${ownerStoreName}'"/>
                                     </div>
                                     <div>
                                         <strong>가게주소&nbsp</strong>
-                                        <input id="address"
+                                        <input id="storeAddress"
                                         placeholder="${ownerStoreAddress}"
                                         onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = '${ownerStoreAddress}'"/>
                                     </div>
                                     <div>
                                         <strong>비밀번호&nbsp</strong>
-                                    <input id="password"
+                                    <input id="storePassword"
                                         placeholder="비밀번호를 입력해주세요."
                                         onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = '비밀번호를 입력해주세요.'"/>
@@ -121,7 +121,7 @@ const getUserinfo = async () => {
                                                     </div>
                                                     <div>
                                                         <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
-                                                        <input id="password"
+                                                        <input id="userPassword"
                                                         placeholder="현재 비밀번호를 입력하세요(필수)"
                                                         onfocus="this.placeholder = ''"
                                                         onblur="this.placeholder = '현재 비밀번호를 입력하세요(필수)'"/>
@@ -141,7 +141,7 @@ const getUserinfo = async () => {
                                                         onblur="this.placeholder = '새 비밀번호 확인란'"/>
                                                     </div>
                                                     <div>
-                                                        <button onclick="updateOserinfo()" class="closeBtn">정보 수정</button>
+                                                        <button onclick="updateUserinfo()" class="closeBtn">정보 수정</button>
                                                     </div>
                                                     <div>
                                                         <button onclick="closeOwnerModal()" class="closeBtn2">닫기</button>
@@ -153,25 +153,55 @@ const getUserinfo = async () => {
                                                     </div>
                                                     <!-- 상품생성 임시 데이터 -->
                                                     <div>
-                                                     <p id="productName">바밤바</p>
-                                                     <p id="productCategory">빙과류</p>
-                                                     <p id="productPrice">1000</p>
-                                                     <p id="productImg">바밤바 이미지</p>
-                                                     inputproductName
-                                                     <input id="inputproductName"/>
-                                                     inputproductCategory
-                                                     <input id="inputproductCategory"/>
-                                                     inputproductPrice
-                                                     <input id="inputproductPrice"/>
-                                                     inputproductImg
-                                                     <input id="inputproductImg"/>
-                                                     inputpassword
-                                                     <input id="inputpassword"/>
-                                                     <button onclick="createProduct()" class="closeBtn">메뉴 등록</button>
-                                                     <button onclick="updateProduct()" class="closeBtn">메뉴 수정</button>
-                                                     <button onclick="deleteProduct()" class="closeBtn">메뉴 삭제</button>
-                                                     </div>
+                                                     
                                                       <!-- 상품생성 임시 데이터 -->
+
+                                                      <div id="input_product">
+                                                      <h2>메뉴 등록</h2>
+                                                      <div>
+                                                        <strong>상품이름&nbsp</strong>
+                                                        <input
+                                                          placeholder="상품명을 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '상품명을 입력해주세요.'"
+                                                        />
+                                                      </div>
+                                                      <div>
+                                                        <strong>가격&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong>
+                                                        <input
+                                                          placeholder="가격을 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '가격을 입력해주세요.'"
+                                                        />
+                                                      </div>
+                                                      <div>
+                                                        <strong>카테고리&nbsp</strong>
+                                                        <input
+                                                          placeholder="카테고리를 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '카테고리를 입력해주세요.'"
+                                                        /><button>선택</button>
+                                                      </div>
+                                                      <div>
+                                                        <strong>이미지&nbsp&nbsp&nbsp&nbsp</strong>
+                                                        <input
+                                                          placeholder="상품 이미지를 넣어주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '상품 이미지를 넣어주세요.'"
+                                                        /><button>등록</button>
+                                                       </div>
+                                                       <div>
+                                                        <strong>비밀번호&nbsp</strong>
+                                                        <input
+                                                          placeholder="비밀번호를 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '비밀번호를 입력해주세요.'"
+                                                        />
+                                                       </div>
+                                                      <button onclick="closeModal()" id="InproBtn" class="closeBtn">메뉴 등록</button>
+                                                    </div>
+        </div>
+      </div>
                                                     `;
         document.querySelector(".information").appendChild(ownerinfo);
       } else {
@@ -186,11 +216,11 @@ const getUserinfo = async () => {
                                 <li class="userId" id="userId">${userId}</li>
                                 <div>
                                 <strong>이 름&nbsp&nbsp&nbsp</strong>
-                                <input disabled placeholder="${userNickname}" />
+                                <input disabled placeholder="${userName}" />
                                 </div>
                                     <div>
                                         <strong>닉네임&nbsp</strong>
-                                        <input disabled placeholder="${userName}" />
+                                        <input disabled placeholder="${userNickname}" />
                                     </div>
                                     <div>
                                         <strong>이메일&nbsp</strong>
@@ -231,7 +261,7 @@ const getUserinfo = async () => {
                                                     </div>
                                                     <div>
                                                         <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
-                                                        <input id="password"
+                                                        <input id="userPassword"
                                                         placeholder="현재 비밀번호를 입력하세요(필수)"
                                                         onfocus="this.placeholder = ''"
                                                         onblur="this.placeholder = '현재 비밀번호를 입력하세요(필수)'"/>
@@ -275,7 +305,7 @@ const updateUserinfo = async () => {
     name: document.getElementById("name").value,
     address: document.getElementById("address").value,
     nickname: document.getElementById("nickname").value,
-    password: document.getElementById("password").value,
+    password: document.getElementById("userPassword").value,
     newPassword: document.getElementById("newPassword").value,
     newConfirm: document.getElementById("newConfirm").value,
   };
@@ -292,6 +322,7 @@ const updateUserinfo = async () => {
       console.log(res);
       if (res.message) {
         alert(res.message.message);
+        window.location.reload();
       }
     })
     .catch((err) => {
@@ -302,7 +333,7 @@ const updateUserinfo = async () => {
 const deleteUserinfo = async () => {
   const userId = document.getElementById("userId").innerText;
   const req = {
-    password: document.getElementById("password").value,
+    password: document.getElementById("userPassword").value,
   };
   await fetch(`http://localhost:8080/users/${userId}`, {
     method: "DELETE",
@@ -319,7 +350,7 @@ const deleteUserinfo = async () => {
         alert(res.errorMessage);
       } else {
         alert(res.Message);
-        location.href = "./main.html";
+        window.location.reload();
       }
     })
     .catch((err) => {
@@ -330,9 +361,9 @@ const deleteUserinfo = async () => {
 const updateStoreInfo = async () => {
   const storeId = document.getElementById("storeId").innerText;
   const req = {
-    name: document.getElementById("name").value,
-    address: document.getElementById("address").value,
-    password: document.getElementById("password").value,
+    name: document.getElementById("storeName").value,
+    address: document.getElementById("storeAddress").value,
+    password: document.getElementById("storePassword").value,
   };
   await fetch(`http://localhost:8080/stores/${storeId}`, {
     method: "PUT",
@@ -349,7 +380,7 @@ const updateStoreInfo = async () => {
         alert(res.errorMessage);
       } else {
         alert(res.message);
-        location.href = "./information.html";
+        window.location.reload();
       }
     })
     .catch((err) => {
@@ -359,7 +390,7 @@ const updateStoreInfo = async () => {
 const deleteStore = async () => {
   const storeId = document.getElementById("storeId").innerText;
   const req = {
-    password: document.getElementById("password").value,
+    password: document.getElementById("storePassword").value,
   };
   await fetch(`http://localhost:8080/stores/${storeId}`, {
     method: "DELETE",
@@ -376,7 +407,7 @@ const deleteStore = async () => {
         alert(res.errorMessage);
       } else {
         alert(res.message);
-        location.href = "./main.html";
+        window.location.reload();
       }
     })
     .catch((err) => {

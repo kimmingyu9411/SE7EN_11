@@ -28,7 +28,7 @@ class ProductController {
     if (detailProduct.status === 400) {
       res.status(400).json({ data: detailProduct.errorMessage });
     } else {
-      res.status(200).json({ data: detailProduct });
+      res.status(200).json({ data: detailProduct.product });
     }
   };
 
