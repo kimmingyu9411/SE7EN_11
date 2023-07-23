@@ -31,8 +31,9 @@ header h1 {
 }
 
 .information {
-  text-align: center;
+  /* text-align: center; */
   margin-top: 40px;
+  margin-left: 280px;
 }
 
 .information h1 {
@@ -98,6 +99,7 @@ body {
   margin: 0 auto;
   width: 400px;
   height: 650px;
+  text-align: center;
 }
 
 .modal-content input {
@@ -159,4 +161,15 @@ body {
 }
 .storeId {
   display: none;
+}
+
+#input_product {
+  text-align: center;
+  margin-top: 50px;
+  position: relative;
+  margin-left: 500px;
+  bottom: 380px;
+}
+#InproBtn {
+  margin-top: 55px;
 }
