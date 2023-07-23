@@ -17,7 +17,20 @@
           id="email"
           name="email"
           placeholder="&nbsp&nbsp이메일 주소 입력(필수)"
-        /><br />
+        /><button id="openModalBtn">인증</button>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <h2>이메일 인증</h2>
+            <input
+              type="text"
+              id="authCodeInput"
+              placeholder="인증코드를 기입해주세요."
+            />
+            <button class="confirmBtn">확인</button>
+            <button class="close">닫기</button>
+          </div>
+        </div>
+        <br />
         <input
           type="password"
           id="password"
@@ -49,18 +62,39 @@
           placeholder="&nbsp&nbsp닉네임(필수)"
         /><br />
         <label for="isOwnerCheck">
-          점주<input type="checkbox" id="isOwner">
+          점주<input type="checkbox" id="isOwner" />
         </label>
         <div id="AuthBtn">
-          <button onclick=signup()>회원가입</a></button>
+          <button onclick="signup()">회원가입</button>
         </div>
       </div>
     </div>
   </body>
   <script type="text/JavaScript" src="./js/signup.js"></script>
   <script
-      src="https://code.jquery.com/jquery-3.7.0.js"
-      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-      crossorigin="anonymous"
-    ></script>
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"
+  ></script>
 </html>
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+  }
+</style>
