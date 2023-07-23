@@ -65,6 +65,34 @@ const mailsender = {
 
     return verifyNum;
   },
+  sendNaverMail(toReceiver){
+    const transporter = nodemailer.createTransport({
+      service:'naver',
+      port: 587,
+      host: 'smtp.naver.com',
+      secure: false,
+      requireTLS: true,
+      auth:{
+        user:config.id,
+        pass:config.pw
+      }
+    });
+
+    const verifyNum = Math.ceil(Math.random() * 1000000);
+
+    transporter.sendMail({
+      from: config.id,
+      to: toReceiver,
+      subject: 'SE7EN 가입 인증 메일',
+      text: `
+            안녕하세요 !
+            SE7EN을 찾아주신 고객님께 감사의 말씀 올립니다.
+            가입을 위한 인증번호 👉 ${verifyNum} 을 입력해주세요.
+            집앞까지 편한 배달 즐겨보세요!`,
+    });
+
+    return verifyNum;
+  }
 };
 
 module.exports = mailsender;
