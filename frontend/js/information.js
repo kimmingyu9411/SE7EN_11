@@ -158,9 +158,10 @@ const getUserinfo = async () => {
 
                                                       <div id="input_product">
                                                       <h2>메뉴 등록</h2>
+                                                      <div class="productStoreId" id="productStoreId">${storeId}</div>
                                                       <div>
                                                         <strong>상품이름&nbsp</strong>
-                                                        <input
+                                                        <input id="productName"
                                                           placeholder="상품명을 입력해주세요."
                                                           onfocus="this.placeholder = ''"
                                                           onblur="this.placeholder = '상품명을 입력해주세요.'"
@@ -168,37 +169,46 @@ const getUserinfo = async () => {
                                                       </div>
                                                       <div>
                                                         <strong>가격&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong>
-                                                        <input
+                                                        <input id="productPrice"
                                                           placeholder="가격을 입력해주세요."
                                                           onfocus="this.placeholder = ''"
                                                           onblur="this.placeholder = '가격을 입력해주세요.'"
                                                         />
                                                       </div>
-                                                      <div>
+                                                      <div>      
                                                         <strong>카테고리&nbsp</strong>
-                                                        <input
-                                                          placeholder="카테고리를 입력해주세요."
-                                                          onfocus="this.placeholder = ''"
-                                                          onblur="this.placeholder = '카테고리를 입력해주세요.'"
-                                                        /><button>선택</button>
+                                                        <select id="productCategory">
+                                                        <option >과자</option>
+                                                        <option >음료</option>
+                                                        <option >생필품</option>
+                                                        <option >도시락</option>
+                                                        <option >의약품</option>
+                                                        <option >라면</option>
+                                                        <option >샌드위치</option>
+                                                        <option >빵</option>
+                                                        <option >빙과류</option>
+                                                        <option >주류</option>
+                                                        <option >냉동식품</option>
+                                                        <option >시그니처</option>
+                                                        </select>
                                                       </div>
                                                       <div>
                                                         <strong>이미지&nbsp&nbsp&nbsp&nbsp</strong>
-                                                        <input
+                                                        <input id="productImg"
                                                           placeholder="상품 이미지를 넣어주세요."
                                                           onfocus="this.placeholder = ''"
                                                           onblur="this.placeholder = '상품 이미지를 넣어주세요.'"
-                                                        /><button>등록</button>
+                                                        />
                                                        </div>
                                                        <div>
                                                         <strong>비밀번호&nbsp</strong>
-                                                        <input
+                                                        <input id="productPassword"
                                                           placeholder="비밀번호를 입력해주세요."
                                                           onfocus="this.placeholder = ''"
                                                           onblur="this.placeholder = '비밀번호를 입력해주세요.'"
                                                         />
                                                        </div>
-                                                      <button onclick="closeModal()" id="InproBtn" class="closeBtn">메뉴 등록</button>
+                                                      <button onclick="createProduct()" id="InproBtn" class="closeBtn">메뉴 등록</button>
                                                     </div>
         </div>
       </div>
@@ -416,11 +426,12 @@ const deleteStore = async () => {
 };
 
 const createProduct = async () => {
-  const name = document.getElementById("productName").innerText,
-    price = document.getElementById("productPrice").innerText,
-    category = document.getElementById("productCategory").innerText,
-    productImage = document.getElementById("productImg").innerText,
-    storeId = 3;
+  const name = document.getElementById("productName").value,
+    price = document.getElementById("productPrice").value,
+    category = document.getElementById("productCategory").value,
+    productImage = document.getElementById("productImg").value,
+    storeId = document.getElementById("productStoreId").innerText;
+  console.log(name, price, category, productImage,storeId);
   const req = {
     name,
     price,
@@ -446,67 +457,5 @@ const createProduct = async () => {
     })
     .catch((err) => {
       console.error("상품등록 중 에러 발생");
-    });
-};
-const updateProduct = async () => {
-  const name = document.getElementById("inputproductName").value,
-    price = document.getElementById("inputproductPrice").value,
-    category = document.getElementById("inputproductCategory").value,
-    productImage = document.getElementById("inputproductImg").value,
-    password = document.getElementById("inputpassword").value,
-    productId = 2;
-  const req = {
-    name,
-    price,
-    category,
-    productImage,
-    password,
-  };
-  await fetch(`http://localhost:8080/products/${productId}`, {
-    method: "PUT",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(req),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res);
-      if (res.errorMessage) {
-        alert(res.errorMessage);
-      } else {
-        alert(res.message);
-      }
-    })
-    .catch((err) => {
-      console.error("상품수정 중 에러 발생");
-    });
-};
-const deleteProduct = async () => {
-  const password = document.getElementById("inputpassword").value,
-    productId = 4;
-  const req = {
-    password,
-  };
-  await fetch(`http://localhost:8080/products/${productId}`, {
-    method: "DELETE",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(req),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res);
-      if (res.errorMessage) {
-        alert(res.errorMessage);
-      } else {
-        alert(res.message);
-      }
-    })
-    .catch((err) => {
-      console.error("상품삭제 중 에러 발생");
     });
 };
