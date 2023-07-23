@@ -39,59 +39,68 @@ function signup() {
 }
 
 // 모달 창 열기
-function modalOpen(){
-  const email = $('#email').val();
-  
-  if (!email){
-    return alert('이메일이 입력되지 않았습니다.');
-  }else{
-    document.getElementById("openModalBtn").addEventListener("click", function () {
-      document.getElementById("myModal").style.display = "block";
-    });
-  
+function modalOpen() {
+  const email = $("#email").val();
+
+  if (!email) {
+    return alert("이메일이 입력되지 않았습니다.");
+  } else {
+    document
+      .getElementById("openModalBtn")
+      .addEventListener("click", function () {
+        document.getElementById("myModal").style.display = "block";
+      });
+
     verifyEmail(email);
   }
 }
 
 // 모달 창 닫기
-function modalClose(){
+function modalClose() {
   document
-  .getElementsByClassName("close")[0]
-  .addEventListener("click", function () {
-    document.getElementById("myModal").style.display = "none";
-  });
+    .getElementsByClassName("close")[0]
+    .addEventListener("click", function () {
+      document.getElementById("myModal").style.display = "none";
+    });
 }
 
 // 이메일 인증
 async function verifyEmail(email) {
-
   const obj = {
-    email
+    email,
   };
 
-  const fetchedData = await fetch('http://localhost:8080/users/mail', {
-    method: 'POST',
+  const fetchedData = await fetch("http://localhost:8080/users/mail", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(obj),
   }).then((d) => {
     return d.json();
   });
-  
-  verifyNum = fetchedData.verifyNum;
 
+  verifyNum = fetchedData.verifyNum;
 }
 
-function confirmVerifyNumber(){
-  const inputVerifyNum = $('#authCodeInput').val();
+function confirmVerifyNumber() {
+  const inputVerifyNum = $("#authCodeInput").val();
 
   if (verifyNum == inputVerifyNum) {
-    alert('인증되었습니다.');
-    document.getElementById('openModalBtn').disabled = true;
-    document.getElementById('email').disabled = true;
+    alert("인증되었습니다.");
+    document.getElementById("openModalBtn").disabled = true;
+    document.getElementById("email").disabled = true;
     return modalClose();
   } else {
-    alert('인증번호가 틀립니다.');
+    alert("인증번호가 틀립니다.");
   }
+}
+
+function modalOpenUserType() {
+  document.getElementById("userTypeModal").style.display = "block";
+}
+
+// 모달 창 닫기 - 점주 여부 선택 모달
+function modalCloseUserType() {
+  document.getElementById("userTypeModal").style.display = "none";
 }

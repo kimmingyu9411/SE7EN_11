@@ -201,3 +201,15 @@ body {
   }
 }
 /* 화살표 애니메이션 css */
+
+#crBtn {
+  display: flex;
+  text-align: center;
+  position: absolute;
+  transform: translate(78%, 1400%);
+  cursor: pointer;
+}
+
+#crBtn:hover {
+  background-color: #006547;
+}

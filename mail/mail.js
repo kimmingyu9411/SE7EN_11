@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer');
-const config = require('../config.js').mail;
+const nodemailer = require("nodemailer");
+const config = require("../config.js").mail;
 
 const mailsender = {
   sendKakaoMail: function (toReceiver) {
@@ -11,9 +11,9 @@ const mailsender = {
     //     }
     // })
     const transporter = nodemailer.createTransport({
-      service: 'kakao',
+      service: "kakao",
       port: 465, // secure false 일경우 587 포트
-      host: 'smtp.kakao.com',
+      host: "smtp.kakao.com",
       secure: true,
       requireTLS: true,
       auth: {
@@ -27,7 +27,7 @@ const mailsender = {
     transporter.sendMail({
       from: config.id,
       to: toReceiver,
-      subject: 'SE7EN 가입 인증 메일',
+      subject: "SE7EN 가입 인증 메일",
       text: `
             안녕하세요 !
             SE7EN을 찾아주신 고객님께 감사의 말씀 올립니다.
@@ -39,9 +39,9 @@ const mailsender = {
   },
   sendGmail: function (toReceiver) {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       port: 587,
-      host: 'smtp.gmail.com',
+      host: "smtp.gmail.com",
       secure: false,
       requireTLS: true,
       auth: {
@@ -55,7 +55,7 @@ const mailsender = {
     transporter.sendMail({
       from: config.id,
       to: toReceiver,
-      subject: '맛집 3만리 가입 인증 메일',
+      subject: "맛집 3만리 가입 인증 메일",
       text: `
             안녕하세요 !
             밋집 3만리를 찾아주신 고객님께 감사의 말씀 올립니다.
