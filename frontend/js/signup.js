@@ -90,7 +90,7 @@ function confirmVerifyNumber() {
     alert("인증되었습니다.");
     document.getElementById("openModalBtn").disabled = true;
     document.getElementById("email").disabled = true;
-    return modalClose();
+    modalClose();
   } else {
     alert("인증번호가 틀립니다.");
   }
