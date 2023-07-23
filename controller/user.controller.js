@@ -62,6 +62,17 @@ class UserController {
     }
   };
 
+  logoutUser = async (req, res, next) => {
+    try {
+      res.clearCookie("Authorization");
+      res
+        .clearCookie("refreshToken")
+        .json({ message: "로그아웃 성공하였습니다." });
+    } catch (err) {
+      return res.status(400).json({ errorMessage: "로그아웃 실패하였습니다." });
+    }
+  };
+
   updateUser = async (req, res, next) => {
     const { name, address, nickname, password, newPassword, newConfirm } =
       req.body;
