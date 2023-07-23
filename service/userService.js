@@ -148,6 +148,10 @@ class UserService {
     }
     return await this.userRepository.userDelete(user.id);
   };
+
+  mail = async (email) => {
+    return await this.userRepository.mail(email);
+  }
 }
 
 module.exports = UserService;

@@ -101,6 +101,28 @@ class UserRepository {
       };
     }
   }
+
+  async mail(email){
+    try {
+      const user = await User.findOne({where:{email}});
+      if(user){
+        return {
+          isSuccessful:false,
+          message:'이미 존재하는 메일입니다.'
+        };  
+      }else{
+        return {
+          isSuccessful:true,
+        };
+      }
+    } catch (e) {
+      console.error(e);
+      return {
+        isSuccessful:false,
+        message:'이메일 전송에 실패하였습니다. 다시 시도해주세요.'
+      };
+    }
+  }
 }
 
 module.exports = UserRepository;

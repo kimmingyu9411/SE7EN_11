@@ -110,14 +110,24 @@ class UserController {
     }
   };
 
-  mail = (req, res, next)=>{
+  mail = async (req, res, next)=>{
     const {email} = req.body;
-    console.log(email);
-    const verifyNum = mailsender.sendKakaoMail(email);
+    
+    const result = await this.userService.mail(email);
 
-    res.status(200).json({
-      verifyNum
-    });
+    if(result.isSuccessful){
+      const verifyNum = mailsender.sendNaverMail(email);
+
+      res.status(200).json({
+        verifyNum
+      });
+    }else{
+      res.status(400).json({
+        ErrorMessage:result.message
+      });
+    }
+
+    
   }
 }
 
