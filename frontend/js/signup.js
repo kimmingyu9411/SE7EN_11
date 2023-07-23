@@ -79,8 +79,12 @@ async function verifyEmail(email) {
   }).then((d) => {
     return d.json();
   });
-
-  verifyNum = fetchedData.verifyNum;
+  
+  if(fetchedData.ErrorMessage){
+    alert(fetchedData.ErrorMessage);
+  }else{
+    verifyNum = fetchedData.verifyNum;
+  }
 }
 
 function confirmVerifyNumber() {
