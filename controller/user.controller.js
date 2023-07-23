@@ -102,21 +102,21 @@ class UserController {
 
     const deleteUser = await this.userService.userDelete(user, password);
     if (deleteUser.status === 400) {
-      res.status(400).json({
-        message: deleteUser.errorMessage,
-      });
+      return res.status(400).json(deleteUser);
     } else {
-      res.status(200).json({ message: "회원 탈퇴가 완료되었습니다." });
+      res.clearCookie("Authorization");
+      res.clearCookie("refreshToken");
+      return res.status(200).json(deleteUser);
     }
   };
 
   mail = (req, res, next)=>{
     const {email} = req.body;
-    
-    const verifuNum = mailsender.sendKakaoMail(email);
+    console.log(email);
+    const verifyNum = mailsender.sendKakaoMail(email);
 
     res.status(200).json({
-      verifuNum
+      verifyNum
     });
   }
 }

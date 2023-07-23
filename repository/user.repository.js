@@ -1,5 +1,5 @@
 const User = require("../database/model/user");
-const Cart = require('../database/model/cart');
+const Cart = require("../database/model/cart");
 const jwt = require("jsonwebtoken");
 const Store = require("../database/model/store");
 
@@ -16,7 +16,7 @@ class UserRepository {
         };
       }
       // 존재하지 않는 경우, 새로운 유저 생성
-       const createdUser = await User.create({
+      const createdUser = await User.create({
         email,
         name,
         password,
@@ -27,9 +27,9 @@ class UserRepository {
         point,
       });
       // 유저 생성과 동시에 Cart 테이블 생성
-      await Cart.create({userId:createdUser.get('id')});
+      await Cart.create({ userId: createdUser.get("id") });
 
-      return {message:"회원가입이 완료되었습니다."};
+      return { message: "회원가입이 완료되었습니다." };
     } catch (error) {
       console.log(error);
       return {
@@ -41,16 +41,16 @@ class UserRepository {
 
   // 로그인
   async login(email) {
-      const user = await User.findOne({
-        where: { email },
-      });
-      return user;
+    const user = await User.findOne({
+      where: { email },
+    });
+    return user;
   }
 
   // 프로필 조회
   async profile(id) {
     try {
-      const user = await User.findByPk(id,{include:{model:Store}});
+      const user = await User.findByPk(id, { include: { model: Store } });
       return user;
     } catch (error) {
       console.log(error);
@@ -82,11 +82,19 @@ class UserRepository {
     try {
       const user = await User.findByPk(id);
 
-      await user.destroy();
-
-      return "회원 탈퇴가 완료되었습니다.";
+      const deleteuser=await user.destroy();
+      if (deleteuser) {
+        return {
+          status: 200,
+          Message: "회원 탈퇴가 되었습니다.",
+        };
+      } else {
+        return {
+          status: 400,
+          errorMessage: "현재 비밀번호가 일치하지 않습니다.",
+        };
+      }
     } catch (error) {
-      console.log(error);
       return {
         status: 400,
         errorMessage: "회원 탈퇴 중 오류가 발생했습니다.",
