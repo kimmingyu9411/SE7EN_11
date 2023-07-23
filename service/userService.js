@@ -69,12 +69,13 @@ class UserService {
       const user = await this.userRepository.login(email);
       const passwordMatch = await bcrypt.compare(
         password,
-        user.dataValues.password
+        user.password
       );
       if (user && passwordMatch) {
         const accToken = Auth.getAccessToken(user.dataValues.id);
         const refToken = Auth.getRefreshToken(user.dataValues.id);
-        
+        console.log(accToken);
+        console.log(refToken);
         await user.update({ token: refToken });
         return { accToken, refToken };
       } else {

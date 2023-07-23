@@ -23,7 +23,8 @@ class Auth {
   }
   async verify(req, res, next) {
     const accessToken = req.cookies.Authorization;
-
+    
+    console.log(accessToken);
         if(accessToken){
           let token = accessToken.split(' ')[1];
 
@@ -49,7 +50,7 @@ class Auth {
             next();
           } else {
             // accessToken이 유효하지 않을경우
-            const refreshToken = req.cookies.refreshToken;
+            const refreshToken = req.header('RefreshToken');
 
             if (refreshToken) {
               token = refreshToken.split(" ")[1];
@@ -99,7 +100,8 @@ class Auth {
             }
           }
         } else {
-          // refreshToken 이 유효하지 않을때
+          // refreshToken 이 유효하지 않을때 <잡았다 요뇸>
+          res.cookie('test','cookie fuck!!',{httpOnly:true});
           res.status(401).json({
             errorMessage: "validate to fail..😥 Please re-login again.",
           });
