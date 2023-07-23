@@ -18,3 +18,40 @@ const getAllstores = () => {
     });
   });
 };
+
+const cookies = document.cookie.split(";");
+const option = {
+  method: "GET",
+  header: {
+    "Content-Type": "application/json",
+    Authorization: cookies[0].split("=")[1],
+    refreshToken: cookies[1].split("=")[1],
+  },
+};
+const trnasBtn = async () => {
+  await fetch("http://localhost:8080/users/me", {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      $(".sideBtn").empty();
+      if (res.data.isOwner) {
+        //사장님 버튼
+        const ownerNickname = res.data.nickname;
+        const btnName = document.createElement("div");
+        btnName.innerHTML = `<button><a href="./information.html">${ownerNickname}</a></button>`
+        document.querySelector(".sideBtn").appendChild(btnName);
+      } else {
+        //일반유저 버튼
+        const userNickname = res.data.nickname;
+        const btnName = document.createElement("div");
+        btnName.innerHTML = `<button><a href="./information.html">${userNickname}</a></button>`
+        document.querySelector(".sideBtn").appendChild(btnName);
+      }
+    });
+};
+trnasBtn();

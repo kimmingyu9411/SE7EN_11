@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const {auth} = require('../middleware/auth.js');
-const StoreController = require('../controller/store.controller.js');
+const router = require("express").Router();
+const { auth } = require("../middleware/auth.js");
+const StoreController = require("../controller/store.controller.js");
 const storeController = new StoreController();
 
 /*
@@ -11,13 +11,15 @@ const storeController = new StoreController();
     DELETE '/stores/:storeId' 상점 삭제
 */
 
-router.route('/')
-.get(storeController.getAllStore)
-.post(auth.verify,storeController.createStore)
+router
+  .route("/")
+  .get(storeController.getAllStore)
+  .post(auth.verify, storeController.createStore);
 
-router.route('/:storeId')
-.get(storeController.getOneStore)
-.put(auth.verify,storeController.updateStore)
-.delete(auth.verify,storeController.deleteStore)
+router
+  .route("/:storeId")
+  .get(storeController.getOneStore)
+  .put(auth.verify, storeController.updateStore)
+  .delete(auth.verify, storeController.deleteStore);
 
 module.exports = router;

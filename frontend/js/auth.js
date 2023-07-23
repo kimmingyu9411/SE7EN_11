@@ -1,19 +1,6 @@
 const url = new URLSearchParams(document.location.href);
 const url2 = new URL(document.location.href);
 
-const auth = window.localStorage.getItem('Authorization');
-const ref = window.localStorage.getItem('RefreshToken');
-
-const option={
-    method:'GET',
-    header:{
-        "Content-Type":"application/json",
-        Authorization:auth,
-        RefreshToken:ref,
-        credentials:'include'
-    }
-};
-console.log('option =>',option);
 async function login(){
     const jsonObj = {};
     jsonObj.email = $('#email').val();
@@ -32,18 +19,14 @@ async function login(){
     };
 
     const {message, accessToken, refreshToken } = await fetch('http://localhost:8080/users/login',options).then(d=>d.json());
-    console.log(refreshToken);
-    // localstorage
-    window.localStorage.setItem('Authorization',accessToken);
-    window.localStorage.setItem('RefreshToken',refreshToken);
-
     document.cookie=
-        `Authorization=${accessToken}; path=/;`;
-    
+        `Authorization=${accessToken};`;
     document.cookie=
-        `refreshToken=${refreshToken}; path=/;`;
-    
+        `refreshToken=${refreshToken}`;
     alert(message);
+    if(accessToken&&refreshToken){
+        location.href="./main.html"
+    }
 }
 
 async function chk (){

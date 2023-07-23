@@ -1,6 +1,6 @@
 const Product = require("../database/model/product");
 const Store = require("../database/model/store");
-const sequelize = require('../database/db.js').sequelize;
+const sequelize = require("../database/db.js").sequelize;
 
 class ProductRepository {
   async createProduct(name, price, category, productImage, storeId) {
@@ -14,22 +14,25 @@ class ProductRepository {
           errorMessage: "이미 사용 중인 상품명입니다.",
         };
       }
-      const product = await Product.create({
-        name,
-        price,
-        category,
-        productImage,
-        storeId,
-      },{
-        transaction:t
+      const product = await Product.create(
+        {
+          name,
+          price,
+          category,
+          productImage,
+          storeId,
+        },
+        {
+          transaction: t,
+        }
+      );
+
+      const store = await Store.findByPk(storeId, {
+        transaction: t,
       });
-      
-      const store = await Store.findByPk(storeId,{
-        transaction:t
-      });
-      
-      await store.addProductList(product,{
-        transaction:t
+
+      await store.addProductList(product, {
+        transaction: t,
       });
 
       await t.commit();
@@ -49,6 +52,7 @@ class ProductRepository {
       const products = await Product.findAll({
         where: { category, storeId },
       });
+
       if (!products[0]) {
         return { message: "해당 물품이 존재하지 않습니다." };
       }

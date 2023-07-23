@@ -10,6 +10,17 @@ header h1 {
   letter-spacing: -0.2rem;
   margin-left: 30px;
   color: #ff8a00;
+  cursor: pointer;
+}
+
+header h2 {
+  margin-left: 530px;
+}
+
+header p {
+  color: #ff8a00;
+  margin-top: 30px;
+  margin-left: 10px;
 }
 
 .nav ul {
@@ -55,8 +66,8 @@ body {
   background-color: #fafafa;
 }
 
-.products ul {
-  font-size: 0;
+.products li {
+  font-size: 0px;
   margin-left: 30px;
 }
 
@@ -83,9 +94,8 @@ body {
 .products .product img {
   width: 180px;
   height: 150px;
-  margin-left: 300px;
 }
-.products .productimg li{
+.products .productimg li {
   color: #000;
   margin-left: 1000px;
 }

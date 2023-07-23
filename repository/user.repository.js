@@ -41,18 +41,10 @@ class UserRepository {
 
   // 로그인
   async login(email) {
-    try {
       const user = await User.findOne({
         where: { email },
       });
       return user;
-    } catch (error) {
-      console.log(error);
-      return {
-        status: 400,
-        errorMessage: "로그인 중 오류가 발생했습니다.",
-      };
-    }
   }
 
   // 프로필 조회

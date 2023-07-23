@@ -8,7 +8,7 @@
   </head>
   <body>
     <header>
-      <h1>SE7VEN_11</h1>
+      <h1 onclick="location.href='main.html'">SE7VEN_11</h1>
     </header>
     <div id="subheader">
       <br />
@@ -83,16 +83,28 @@
     </div>
   </body>
 </html>
-
+<script type="text/JavaScript" src="./js/information.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"
+  ></script>
 <script>
   // JavaScript 함수를 사용하여 모달창 열기/닫기 처리
-  function openModal() {
-    var modal = document.getElementById("modal");
-    modal.style.display = "block";
+  function openstoerModal() {
+    var stoerModal = document.getElementById("stoerModal");
+    stoerModal.style.display = "block";
   }
-
-  function closeModal() {
-    var modal = document.getElementById("modal");
-    modal.style.display = "none";
+  function openownerModal(){
+    var stoerModal = document.getElementById("ownerModal");
+    ownerModal.style.display = "block";
+  }
+  function closestoerModal() {
+    var stoerModal = document.getElementById("stoerModal");
+    stoerModal.style.display = "none";
+  }
+  function closeownerModal(){
+    var stoerModal = document.getElementById("ownerModal");
+    ownerModal.style.display = "none";
   }
 </script>
