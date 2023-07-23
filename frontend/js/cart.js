@@ -61,7 +61,7 @@
   let totalAmount = 0;
 
   // 수량 변경에 따라 총 상품 금액을 업데이트하는 함수
-  function updateTotalPrice() {
+  function UpdateTotalPrice() {
     const numInput = document.getElementById("num");
     const productPrice = parseFloat(
       document
@@ -81,17 +81,14 @@
   // 등록하기 버튼 클릭 시 주문 처리 함수
   const updateTotalPrice = async () => {
     await fetch(`http://localhost:8080/users/${userId}`, {
-    method: "PUT",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(req),
-  })
-    .then((res) => res.json())
-  }
-  
-  
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(req),
+    }).then((res) => res.json());
+  };
 
   // 초기에 getProduct 함수 호출
   getProduct(productid);
