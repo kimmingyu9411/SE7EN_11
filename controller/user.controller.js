@@ -1,3 +1,4 @@
+const mailsender = require("../mail/mail.js");
 const UserService = require("../service/userService.js");
 
 class UserController {
@@ -97,6 +98,16 @@ class UserController {
       res.status(200).json({ message: "회원 탈퇴가 완료되었습니다." });
     }
   };
+
+  mail = (req, res, next)=>{
+    const {email} = req.body;
+    
+    const verifuNum = mailsender.sendKakaoMail(email);
+
+    res.status(200).json({
+      verifuNum
+    });
+  }
 }
 
 module.exports = UserController;

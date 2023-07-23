@@ -14,7 +14,7 @@ User.hasMany(Log,{as:'purchasedDescription'});
 User.hasMany(Review);
 
 // Product
-Product.hasMany(Review);
+Product.hasMany(Review,{as:'Reviews',foreignKeyConstraint:false});
 Product.belongsTo(Store);
 Product.belongsToMany(Cart,{through:CartProduct});
 Product.belongsToMany(Log,{through:'LogProduct'});
@@ -27,7 +27,8 @@ Log.belongsToMany(Product,{through:'LogProduct',as:'PurchaseDescription'});
 
 // Review
 Review.belongsTo(User);
-Review.belongsTo(Product,{as:'Reviews'});
+Review.belongsTo(Product);
+
 // Store
 Store.hasMany(Product,{as:'ProductList',foreignKeyConstraint:false});
 Store.belongsTo(User);

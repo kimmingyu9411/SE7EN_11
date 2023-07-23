@@ -13,8 +13,6 @@ await fetch('http:localhost:8080/products`${category}`)
     DELETE '/products/:productId' 상점 메뉴 삭제
 */
 
-router.get("/:productId", productController.getDetailProduct);
-
 router
   .route("/")
   .get(productController.getProductsByCategory)
