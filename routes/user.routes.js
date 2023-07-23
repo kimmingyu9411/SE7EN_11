@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const {auth} = require('../middleware/auth.js');
-const UserController = require('../controller/user.controller.js');
+const router = require("express").Router();
+const { auth } = require("../middleware/auth.js");
+const UserController = require("../controller/user.controller.js");
 const userController = new UserController();
 
 /*
@@ -11,15 +11,16 @@ const userController = new UserController();
     DELETE 'users/:userId' 회원 탈퇴
 */
 
-router.post('/signup',userController.createUser)
-router.post('/login',userController.loginUser)
-router.post('/logout',userController.logoutUser)
-router.post('/mail',userController.mail);
+router.post("/signup", userController.createUser);
+router.post("/login", userController.loginUser);
+router.post("/logout", userController.logoutUser);
+router.post("/mail", userController.mail);
 
-router.get('/me',auth.verify,userController.profile);
+router.get("/me", auth.verify, userController.profile);
 
-router.route('/:userId')
-.put(auth.verify,userController.updateUser)
-.delete(auth.verify,userController.deleteUser)
+router
+  .route("/:userId")
+  .put(auth.verify, userController.updateUser)
+  .delete(auth.verify, userController.deleteUser);
 
 module.exports = router;

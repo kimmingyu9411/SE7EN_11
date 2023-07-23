@@ -17,7 +17,10 @@
           id="email"
           name="email"
           placeholder="&nbsp&nbsp이메일 주소 입력(필수)"
-        /><button id="openModalBtn" type="button" onclick="modalOpen()">인증</button>
+        />
+        <button id="openModalBtn" type="button" onclick="modalOpen()">
+          인증
+        </button>
         <div id="myModal" class="modal">
           <div class="modal-content">
             <h2>이메일 인증</h2>
@@ -26,8 +29,16 @@
               id="authCodeInput"
               placeholder="인증코드를 기입해주세요."
             />
-            <button class="confirmBtn" type="button" onclick="confirmVerifyNumber()">확인</button>
-            <button class="close" type="button" onclick="modalClose()">닫기</button>
+            <button
+              class="confirmBtn"
+              type="button"
+              onclick="confirmVerifyNumber()"
+            >
+              확인
+            </button>
+            <button class="close" type="button" onclick="modalClose()">
+              닫기
+            </button>
           </div>
         </div>
         <br />
@@ -61,21 +72,28 @@
           name="nickname"
           placeholder="&nbsp&nbsp닉네임(필수)"
         /><br />
-        <label for="isOwnerCheck">
-          점주<input type="checkbox" id="isOwner" />
-        </label>
+        <button id="checkuser" type="button" onclick="modalOpenUserType()">
+          사업자등록
+        </button>
+        <div id="userTypeModal" class="modal">
+          <div class="modal-content">
+            <h2>점주 여부 선택</h2>
+            <label for="isOwner">
+              점주<input type="checkbox" id="isOwner" />
+            </label>
+            <button class="close" type="button" onclick="modalCloseUserType()">
+              닫기
+            </button>
+          </div>
+        </div>
         <div id="AuthBtn">
           <button onclick="signup()">회원가입</button>
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script type="text/JavaScript" src="./js/signup.js"></script>
   </body>
-  <script type="text/JavaScript" src="./js/signup.js"></script>
-  <script
-    src="https://code.jquery.com/jquery-3.7.0.js"
-    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-    crossorigin="anonymous"
-  ></script>
 </html>
 
 <style>

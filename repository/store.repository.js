@@ -39,7 +39,7 @@ class StoreRepository {
       await owner.setStore(store, { transaction: t });
       await t.commit();
 
-      return{
+      return {
         status: 200,
         Message: "점포가 등록되었습니다.",
       };
@@ -114,9 +114,8 @@ class StoreRepository {
           errorMessage: "이미 사용 중인 점포명입니다.",
         };
       }
-      return { message: "점포가 업데이트 됐습니다." };
+      return { status: 200, message: "점포가 업데이트 됐습니다." };
     } catch (error) {
-      console.error("점포 이름 업데이트 중 오류:", error);
       return {
         status: 400,
         errorMessage: "점포 업데이트 중 오류가 발생했습니다.",
