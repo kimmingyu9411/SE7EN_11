@@ -77,7 +77,7 @@ const getUserinfo = async () => {
                                     </div>
                                     <div>
                                         <strong>비밀번호&nbsp</strong>
-                                    <input id="password"
+                                    <input id="storePassword"
                                         placeholder="비밀번호를 입력해주세요."
                                         onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = '비밀번호를 입력해주세요.'"/>
@@ -121,7 +121,7 @@ const getUserinfo = async () => {
                                                     </div>
                                                     <div>
                                                         <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
-                                                        <input id="password"
+                                                        <input id="userPassword"
                                                         placeholder="현재 비밀번호를 입력하세요(필수)"
                                                         onfocus="this.placeholder = ''"
                                                         onblur="this.placeholder = '현재 비밀번호를 입력하세요(필수)'"/>
@@ -141,7 +141,7 @@ const getUserinfo = async () => {
                                                         onblur="this.placeholder = '새 비밀번호 확인란'"/>
                                                     </div>
                                                     <div>
-                                                        <button onclick="updateOserinfo()" class="closeBtn">정보 수정</button>
+                                                        <button onclick="updateUserinfo()" class="closeBtn">정보 수정</button>
                                                     </div>
                                                     <div>
                                                         <button onclick="closeOwnerModal()" class="closeBtn2">닫기</button>
@@ -231,7 +231,7 @@ const getUserinfo = async () => {
                                                     </div>
                                                     <div>
                                                         <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
-                                                        <input id="password"
+                                                        <input id="userPassword"
                                                         placeholder="현재 비밀번호를 입력하세요(필수)"
                                                         onfocus="this.placeholder = ''"
                                                         onblur="this.placeholder = '현재 비밀번호를 입력하세요(필수)'"/>
@@ -275,7 +275,7 @@ const updateUserinfo = async () => {
     name: document.getElementById("name").value,
     address: document.getElementById("address").value,
     nickname: document.getElementById("nickname").value,
-    password: document.getElementById("password").value,
+    password: document.getElementById("userPassword").value,
     newPassword: document.getElementById("newPassword").value,
     newConfirm: document.getElementById("newConfirm").value,
   };
@@ -302,7 +302,7 @@ const updateUserinfo = async () => {
 const deleteUserinfo = async () => {
   const userId = document.getElementById("userId").innerText;
   const req = {
-    password: document.getElementById("password").value,
+    password: document.getElementById("userPassword").value,
   };
   await fetch(`http://localhost:8080/users/${userId}`, {
     method: "DELETE",
@@ -332,7 +332,7 @@ const updateStoreInfo = async () => {
   const req = {
     name: document.getElementById("name").value,
     address: document.getElementById("address").value,
-    password: document.getElementById("password").value,
+    password: document.getElementById("storePassword").value,
   };
   await fetch(`http://localhost:8080/stores/${storeId}`, {
     method: "PUT",
@@ -359,7 +359,7 @@ const updateStoreInfo = async () => {
 const deleteStore = async () => {
   const storeId = document.getElementById("storeId").innerText;
   const req = {
-    password: document.getElementById("password").value,
+    password: document.getElementById("storePassword").value,
   };
   await fetch(`http://localhost:8080/stores/${storeId}`, {
     method: "DELETE",

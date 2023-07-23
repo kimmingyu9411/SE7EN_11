@@ -64,7 +64,7 @@ class UserRepository {
   // 프로필 업데이트
   async userUpdate(updateValues) {
     try {
-      await User.update(updateValues, {
+        await User.update(updateValues, {
         where: { id: updateValues.id },
       });
       return { message: "프로필이 업데이트 됐습니다." };
@@ -82,7 +82,7 @@ class UserRepository {
     try {
       const user = await User.findByPk(id);
 
-      const deleteuser=await user.destroy();
+      const deleteuser = await user.destroy();
       if (deleteuser) {
         return {
           status: 200,
