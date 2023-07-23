@@ -79,11 +79,19 @@
   }
 
   // 등록하기 버튼 클릭 시 주문 처리 함수
-  function placeOrder() {
-    // 여기에 주문 처리 로직을 추가
-    // 주문 정보를 서버에 전송하는 코드 등을 작성
-    alert("등록이 완료되었습니다!");
+  const updateTotalPrice = async () => {
+    await fetch(`http://localhost:8080/users/${userId}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
   }
+  
+  
 
   // 초기에 getProduct 함수 호출
   getProduct(productid);

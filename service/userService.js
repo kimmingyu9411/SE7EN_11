@@ -137,6 +137,8 @@ class UserService {
 
   //회원 탈퇴
   userDelete = async (user, password) => {
+    console.log(password)
+    console.log(user.password)
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       return {
