@@ -141,9 +141,6 @@ const getUserinfo = async () => {
                                                     <div>
                                                     <button onclick="deleteUserinfo()" class="closeBtn3">회원 탈퇴</button>
                                                     </div>
-                                                    <div>
-                                                        <button onclick="window.location.reload()" class="closeBtn3">닫기</button>
-                                                    </div>
                                                         </div>
                                                     </div>
                                                     `;
