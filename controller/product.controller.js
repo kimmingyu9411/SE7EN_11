@@ -88,7 +88,7 @@ class ProductController {
     );
 
     if (deleteProduct.status === 400) {
-      res.status(400).json({ message: deleteProduct.errorMessage });
+      res.status(400).json({ errorMessage: deleteProduct.errorMessage });
     } else {
       res.status(200).json({ message: deleteProduct.message });
     }

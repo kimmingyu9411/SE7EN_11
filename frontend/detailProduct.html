@@ -11,6 +11,8 @@
       <h1 onclick="location.href='main.html'">SE7VEN_11</h1>
     </header>
     <main id="cart_wrap"></main>
+    <div class="productBtn">
+    </div>
 
     <review>
       <div class="reviewbox">
@@ -30,8 +32,82 @@
         <!-- 리뷰 목록이 여기에 동적으로 추가될 예정 -->
       </div>
     </review>
+    <!-- 유저모달창 -->
+    <div class="productModal" id="productModal">
+      <div class="productModal-content">
+                      <!-- 모달창 내용 -->
+      <h2>정보 수정/삭제</h2>
+  <div>
+      <strong>상품이름&nbsp&nbsp&nbsp&nbsp</strong>
+      <input id="editProductName"
+      placeholder="상품이름"
+      onfocus="this.placeholder = ''"
+      onblur="this.placeholder = '상품이름'"/>
+  </div>
+  <div>
+      <strong>상품이미지&nbsp</strong>
+      <input id="editProductImg"
+      placeholder="상품이미지"
+      onfocus="this.placeholder = ''"
+      onblur="this.placeholder = '상품주소'"/>
+  </div>
+  <div>
+      <strong>상품가격&nbsp&nbsp&nbsp&nbsp</strong>
+  <input id="editProductPrice"
+      placeholder="상품가격"
+      onfocus="this.placeholder = ''"
+      onblur="this.placeholder = '상품가격'"/>
+  </div>
+  <div>
+      <strong>카테고리&nbsp&nbsp&nbsp&nbsp</strong>
+      <select id="editProductCategory">
+        <option >과자</option>
+        <option >음료</option>
+        <option >생필품</option>
+        <option >도시락</option>
+        <option >의약품</option>
+        <option >라면</option>
+        <option >샌드위치</option>
+        <option >빵</option>
+        <option >빙과류</option>
+        <option >주류</option>
+        <option >냉동식품</option>
+        <option >시그니처</option>
+        </select>
+  </div>
+  <div>
+      <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
+      <input id="editProductPassword"
+      placeholder="비밀번호"
+      onfocus="this.placeholder = ''"
+      onblur="this.placeholder = '비밀번호'"/>
+  </div>
+  <div class="btnBox">
+  <div>
+      <button onclick="updateProduct()" class="closeBtn">제품 수정</button>
+  </div>
+  <div>
+      <button onclick="deleteProduct()" class="closeBtn2">제품 삭제</button>
+  </div>
+  <div>
+  <button onclick="closeProductModal()" class="closeBtn3">닫기</button>
+  </div>
+  </div>
+      </div>
+  </div>
   </body>
 </html>
+<script>
+  function openProductModal() {
+    var productModal = document.getElementById("productModal");
+    productModal.style.display = "block";
+  }
+  function closeProductModal() {
+    var productModal = document.getElementById("productModal");
+    productModal.style.display = "none";
+  }
+
+</script>
 
 <script type="text/JavaScript" src="./js/cart.js"></script>
 <script type="text/JavaScript" src="./js/review.js"></script>
@@ -191,4 +267,17 @@
   .reviewbox button:hover {
     background-color: #718a8e;
   }
+  .productModal{
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+.btnBox{
+  margin-top: 15px;
+  display: flex;
+}
 </style>

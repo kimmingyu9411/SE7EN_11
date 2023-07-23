@@ -1,7 +1,6 @@
 (function () {
   const urlParams = new URL(location.href).searchParams;
   const productid = urlParams.get("id");
-  console.log("productId", productid);
 
   // 상품 정보를 서버로부터 가져오는 함수
   async function getProduct(productId) {
@@ -79,8 +78,51 @@
   }
 
   // 등록하기 버튼 클릭 시 주문 처리 함수
-  const updateTotalPrice = async () => {
-    await fetch(`http://localhost:8080/users/${userId}`, {
+
+  //사장님 버튼 생성
+  const showBtn = async () => {
+    await fetch("http://localhost:8080/users/me", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        $(".productBtn").empty();
+        if (res.data.isOwner) {
+          const btnName = document.createElement("div");
+          btnName.innerHTML = `<button id="productUpdateBtn" onclick="openProductModal()">수정/삭제</button>`;
+          document.querySelector(".productBtn").appendChild(btnName);
+        }
+      });
+  };
+
+  
+
+  // 초기에 getProduct 함수 호출
+  getProduct(productid);
+  showBtn();
+})();
+
+const updateProduct = async () => {
+  const name = document.getElementById("editProductName").value,
+    price = document.getElementById("editProductImg").value,
+    category = document.getElementById("editProductCategory").value,
+    productImage = document.getElementById("editProductImg").value,
+    password = document.getElementById("editProductPassword").value,
+    urlParams = new URL(location.href).searchParams,
+    productId = urlParams.get("id");
+  const req = {
+    name,
+    price,
+    category,
+    productImage,
+    password,
+  };
+  await fetch(`http://localhost:8080/products/${productId}`, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -89,10 +131,45 @@
     body: JSON.stringify(req),
   })
     .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      } else {
+        alert(res.message);
+        window.location.reload();
+      }
+    })
+    .catch((err) => {
+      console.error("상품수정 중 에러 발생");
+    });
+};
+const deleteProduct = async () => {
+const password = document.getElementById("editProductPassword").value,
+      urlParams = new URL(location.href).searchParams,
+      productId = urlParams.get("id");
+  const req = {
+    password,
+  };
+  await fetch(`http://localhost:8080/products/${productId}`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.errorMessage) {
+        alert(res.errorMessage);
+      } else {
+        alert(res.message);
+        window.location.reload();
+      }
+    })
+    .catch((err) => {
+      console.error("상품삭제 중 에러 발생");
+    });
   }
-  
-  
-
-  // 초기에 getProduct 함수 호출
-  getProduct(productid);
-})();
