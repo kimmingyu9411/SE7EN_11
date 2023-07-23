@@ -1,3 +1,4 @@
+const mailsender = require("../mail/mail.js");
 const UserService = require("../service/userService.js");
 
 class UserController {
@@ -44,12 +45,15 @@ class UserController {
 
   loginUser = async (req, res, next) => {
     const { email, password } = req.body;
+    
     const token = await this.userService.login(email, password);
     if (!token.accToken) {
       res.status(400).json({
         message: token.message,
       });
     } else {
+      res.cookie("Authorization", token.accToken);
+      res.cookie("refreshToken", token.refToken,{httpOnly:true, sameSite:'none'});
       res.status(200).json({
         message: "로그인 성공",
         accessToken: token.accToken,
@@ -105,6 +109,16 @@ class UserController {
       res.status(200).json({ message: "회원 탈퇴가 완료되었습니다." });
     }
   };
+
+  mail = (req, res, next)=>{
+    const {email} = req.body;
+    
+    const verifuNum = mailsender.sendKakaoMail(email);
+
+    res.status(200).json({
+      verifuNum
+    });
+  }
 }
 
 module.exports = UserController;
