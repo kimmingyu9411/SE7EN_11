@@ -14,9 +14,9 @@ const userController = new UserController();
 router.post('/signup',userController.createUser)
 router.post('/login',userController.loginUser)
 router.post('/logout',userController.logoutUser)
+router.post('/mail',userController.mail);
 
 router.get('/me',auth.verify,userController.profile);
-router.get('/mail',userController.mail);
 
 router.route('/:userId')
 .put(auth.verify,userController.updateUser)
