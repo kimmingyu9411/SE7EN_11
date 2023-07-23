@@ -60,7 +60,7 @@
   let totalAmount = 0;
 
   // 수량 변경에 따라 총 상품 금액을 업데이트하는 함수
-  function updateTotalPrice() {
+  function UpdateTotalPrice() {
     const numInput = document.getElementById("num");
     const productPrice = parseFloat(
       document
@@ -79,14 +79,17 @@
 
   // 등록하기 버튼 클릭 시 주문 처리 함수
 
+
   //사장님 버튼 생성
   const showBtn = async () => {
     await fetch("http://localhost:8080/users/me", {
       method: "GET",
+
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
+
     })
       .then((res) => res.json())
       .then((res) => {
@@ -173,3 +176,4 @@ const password = document.getElementById("editProductPassword").value,
       console.error("상품삭제 중 에러 발생");
     });
   }
+
