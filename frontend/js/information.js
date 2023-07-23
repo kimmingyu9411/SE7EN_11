@@ -153,25 +153,55 @@ const getUserinfo = async () => {
                                                     </div>
                                                     <!-- 상품생성 임시 데이터 -->
                                                     <div>
-                                                     <p id="productName">바밤바</p>
-                                                     <p id="productCategory">빙과류</p>
-                                                     <p id="productPrice">1000</p>
-                                                     <p id="productImg">바밤바 이미지</p>
-                                                     inputproductName
-                                                     <input id="inputproductName"/>
-                                                     inputproductCategory
-                                                     <input id="inputproductCategory"/>
-                                                     inputproductPrice
-                                                     <input id="inputproductPrice"/>
-                                                     inputproductImg
-                                                     <input id="inputproductImg"/>
-                                                     inputpassword
-                                                     <input id="inputpassword"/>
-                                                     <button onclick="createProduct()" class="closeBtn">메뉴 등록</button>
-                                                     <button onclick="updateProduct()" class="closeBtn">메뉴 수정</button>
-                                                     <button onclick="deleteProduct()" class="closeBtn">메뉴 삭제</button>
-                                                     </div>
+                                                     
                                                       <!-- 상품생성 임시 데이터 -->
+
+                                                      <div id="input_product">
+                                                      <h2>메뉴 등록</h2>
+                                                      <div>
+                                                        <strong>상품이름&nbsp</strong>
+                                                        <input
+                                                          placeholder="상품명을 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '상품명을 입력해주세요.'"
+                                                        />
+                                                      </div>
+                                                      <div>
+                                                        <strong>가격&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong>
+                                                        <input
+                                                          placeholder="가격을 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '가격을 입력해주세요.'"
+                                                        />
+                                                      </div>
+                                                      <div>
+                                                        <strong>카테고리&nbsp</strong>
+                                                        <input
+                                                          placeholder="카테고리를 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '카테고리를 입력해주세요.'"
+                                                        /><button>선택</button>
+                                                      </div>
+                                                      <div>
+                                                        <strong>이미지&nbsp&nbsp&nbsp&nbsp</strong>
+                                                        <input
+                                                          placeholder="상품 이미지를 넣어주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '상품 이미지를 넣어주세요.'"
+                                                        /><button>등록</button>
+                                                       </div>
+                                                       <div>
+                                                        <strong>비밀번호&nbsp</strong>
+                                                        <input
+                                                          placeholder="비밀번호를 입력해주세요."
+                                                          onfocus="this.placeholder = ''"
+                                                          onblur="this.placeholder = '비밀번호를 입력해주세요.'"
+                                                        />
+                                                       </div>
+                                                      <button onclick="closeModal()" id="InproBtn" class="closeBtn">메뉴 등록</button>
+                                                    </div>
+        </div>
+      </div>
                                                     `;
         document.querySelector(".information").appendChild(ownerinfo);
       } else {
