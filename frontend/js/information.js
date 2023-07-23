@@ -63,14 +63,14 @@ const getUserinfo = async () => {
                                         <li class="storeId" id="storeId">${storeId}</li>
                                     <div>
                                         <strong>가게이름&nbsp</strong>
-                                        <input id="name"
+                                        <input id="storeName"
                                         placeholder="${ownerStoreName}"
                                         onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = '${ownerStoreName}'"/>
                                     </div>
                                     <div>
                                         <strong>가게주소&nbsp</strong>
-                                        <input id="address"
+                                        <input id="storeAddress"
                                         placeholder="${ownerStoreAddress}"
                                         onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = '${ownerStoreAddress}'"/>
@@ -186,11 +186,11 @@ const getUserinfo = async () => {
                                 <li class="userId" id="userId">${userId}</li>
                                 <div>
                                 <strong>이 름&nbsp&nbsp&nbsp</strong>
-                                <input disabled placeholder="${userNickname}" />
+                                <input disabled placeholder="${userName}" />
                                 </div>
                                     <div>
                                         <strong>닉네임&nbsp</strong>
-                                        <input disabled placeholder="${userName}" />
+                                        <input disabled placeholder="${userNickname}" />
                                     </div>
                                     <div>
                                         <strong>이메일&nbsp</strong>
@@ -292,6 +292,7 @@ const updateUserinfo = async () => {
       console.log(res);
       if (res.message) {
         alert(res.message.message);
+        window.location.reload();
       }
     })
     .catch((err) => {
@@ -319,7 +320,7 @@ const deleteUserinfo = async () => {
         alert(res.errorMessage);
       } else {
         alert(res.Message);
-        location.href = "./main.html";
+        window.location.reload();
       }
     })
     .catch((err) => {
@@ -330,8 +331,8 @@ const deleteUserinfo = async () => {
 const updateStoreInfo = async () => {
   const storeId = document.getElementById("storeId").innerText;
   const req = {
-    name: document.getElementById("name").value,
-    address: document.getElementById("address").value,
+    name: document.getElementById("storeName").value,
+    address: document.getElementById("storeAddress").value,
     password: document.getElementById("storePassword").value,
   };
   await fetch(`http://localhost:8080/stores/${storeId}`, {
@@ -349,7 +350,7 @@ const updateStoreInfo = async () => {
         alert(res.errorMessage);
       } else {
         alert(res.message);
-        location.href = "./information.html";
+        window.location.reload();
       }
     })
     .catch((err) => {
@@ -376,7 +377,7 @@ const deleteStore = async () => {
         alert(res.errorMessage);
       } else {
         alert(res.message);
-        location.href = "./main.html";
+        window.location.reload();
       }
     })
     .catch((err) => {
