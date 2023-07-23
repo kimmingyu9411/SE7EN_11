@@ -45,11 +45,11 @@ class ProductController {
       storeId
     );
     if (createProduct.status === 400) {
-      res.status(400).json({ message: createProduct.errorMessage });
+      res.status(400).json({ errorMessage: createProduct.errorMessage });
     } else {
       res
         .status(200)
-        .json({ message: "제품 등록이 완료되었습니다.", createProduct });
+        .json({ message:createProduct.message, createProduct });
     }
   };
   // 해당 store의 사장님인지 확인하는 여부 절차 필요?
@@ -90,7 +90,7 @@ class ProductController {
     if (deleteProduct.status === 400) {
       res.status(400).json({ message: deleteProduct.errorMessage });
     } else {
-      res.status(200).json({ message: "상품이 삭제되었습니다." });
+      res.status(200).json({ message: deleteProduct.message });
     }
   };
 }
