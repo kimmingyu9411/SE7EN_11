@@ -12,9 +12,9 @@ const getUserinfo = async () => {
       console.log(res);
       $(".information").empty();
       if (res.data.isOwner) {
-        if(!res.data.store){
+        if (!res.data.store) {
           const ownerinfo = document.createElement("div");
-          ownerinfo.innerHTML=`<h1>스토어를 먼저 생성해주세요</h1>`
+          ownerinfo.innerHTML = `<h1>스토어를 먼저 생성해주세요</h1>`;
           return document.querySelector(".information").appendChild(ownerinfo);
         }
         const storeId = res.data.store.id;
