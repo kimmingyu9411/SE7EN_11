@@ -20,7 +20,6 @@
 
   // 상품 정보를 화면에 표시하는 함수
   function displayProduct(product) {
-    console.log(product);
     const cartWrap = document.querySelector("#cart_wrap");
     cartWrap.innerHTML = `
         <div class="left">
@@ -50,7 +49,12 @@
             <button type="button" id="orderBtn" onclick="updateCart()">등록하기</button>
             <button type="button" id="cartBtn">장바구니</button>
           </div>
-        </div>`;
+        </div>
+        <div class="bottom">
+          <button type="button" id="orderBtn">등록하기</button>
+          <button type="button" id="cartBtn">장바구니</button>
+        </div>
+      </div>`;
 
     // 수량 입력란에 이벤트 리스너 등록
     document.getElementById("num").addEventListener("input", updateTotalPrice);
@@ -173,11 +177,3 @@ const deleteProduct = async () => {
       console.error("상품삭제 중 에러 발생");
     });
 };
-
-function changePrice() {
-  const price = Number(
-    document.getElementById("productPrice").innerHTML.split(" ")[0]
-  );
-  const quantity = Number($("#num").val());
-  document.getElementById("totalPrice").innerHTML = price * quantity + " 원";
-}
