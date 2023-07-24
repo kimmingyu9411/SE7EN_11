@@ -6,7 +6,7 @@ const closeBtns = document.getElementsByClassName("close");
 const confirmOrderBtn = document.getElementById("confirmOrderBtn");
 const submitReviewBtn = document.getElementById("submitReviewBtn");
 
-reviewBtn.style.display = "none"; // Hide the "리뷰 남기기" button initially
+reviewBtn.style.display = "none";
 
 orderBtn.addEventListener("click", () => {
   orderModal.style.display = "block";
@@ -35,8 +35,8 @@ window.addEventListener("click", (event) => {
 confirmOrderBtn.addEventListener("click", () => {
   orderModal.style.display = "none";
   alert("주문이 완료되었습니다!");
-  orderBtn.style.display = "none"; // Hide the "구매" button
-  reviewBtn.style.display = "block"; // Show the "리뷰 남기기" button after purchase
+  orderBtn.style.display = "none";
+  reviewBtn.style.display = "block";
 });
 
 submitReviewBtn.addEventListener("click", () => {
