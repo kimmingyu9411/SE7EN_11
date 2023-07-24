@@ -1,7 +1,5 @@
-(function () {
-  const urlParams = new URL(location.href).searchParams;
-  const productId = urlParams.get("id");
-  console.log("productId", productId);
+const urlParams = new URL(location.href).searchParams;
+const productid = urlParams.get("id");
 
   // 상품 정보를 서버로부터 가져오는 함수
   async function getProduct(productId) {
@@ -54,27 +52,6 @@
       </div>`;
   }
 
-  // 총 상품 금액 초기값 설정
-  let totalAmount = 0;
-
-  // 수량 변경에 따라 총 상품 금액을 업데이트하는 함수
-  function UpdateTotalPrice() {
-    const numInput = document.getElementById("num");
-    const productPrice = parseFloat(
-      document
-        .getElementById("productPrice")
-        .innerText.replace(" 원", "")
-        .replace(",", "")
-    );
-    const numSelected = parseInt(numInput.value);
-
-    if (!isNaN(numSelected) && numSelected >= 1) {
-      totalAmount = productPrice * numSelected;
-      const totalPriceElement = document.getElementById("totalPrice");
-      totalPriceElement.textContent = `${totalAmount.toLocaleString()} 원`;
-    }
-  }
-
   // 등록하기 버튼 클릭 시 주문 처리 함수
   updateCart = async () => {
     const quantity = Number($('#num').val());
@@ -96,11 +73,32 @@
   };
 
   // 초기에 getProduct 함수 호출
-  getProduct(productId);
-})();
+  getProduct(productid);
 
 function changePrice(){
   const price = Number(document.getElementById('productPrice').innerHTML.split(' ')[0]);
   const quantity = Number($('#num').val());
   document.getElementById('totalPrice').innerHTML=price*quantity+' 원';
 }
+
+//사장님 버튼 생성
+showBtn = async () => {
+  await fetch("http://localhost:8080/users/me", {
+    method: "GET",
+
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      $(".productBtn").empty();
+      if (res.data.isOwner) {
+        const btnName = document.createElement("div");
+        btnName.innerHTML = `<button id="productUpdateBtn" onclick="openProductModal()">수정/삭제</button>`;
+        document.querySelector(".productBtn").appendChild(btnName);
+      }
+    });
+  }
