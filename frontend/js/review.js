@@ -13,7 +13,6 @@
 
 const urlParams = new URL(location.href).searchParams;
 const productId = urlParams.get("id");
-
 getProduct(productId);
 
 async function getProduct(productId) {
@@ -39,14 +38,39 @@ async function getProduct(productId) {
     const { content, star, nickname, id } = review;
 
     reviewUl.innerHTML += `
-        <li id="${id}">
-          <div class="reviewInfo">
-            <p class="review_nickname">${nickname}</p>
-            <p class="review_star">${star}</p>
-            <p class="review_content">${content}</p>
-          </div>
-        </li>
+    <div class="reviewInfo">
+    <li id="${id}">
+      <strong class="review_nickname">${nickname}</strong>
+      <p class="review_star">${star}</p>
+      <div class="review_content"><p>${content}</p></div>
+    </li>
+  </div>
       `;
   });
   reviewContainer.appendChild(reviewUl);
+}
+
+const reviewBox = {};
+
+async function postreview(productId, content, star) {
+  reviewBox.content = content;
+  reviewBox.star = star;
+
+  const option = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(reviewBox),
+  };
+
+  try {
+    const response = await fetch(
+      `http://localhost:8080/reviews?id=${productId}`,
+      option
+    );
+    const data = await response.json();
+  } catch (error) {
+    console.error("리뷰를 게시하는 도중 오류가 발생했습니다:", error);
+  }
 }
