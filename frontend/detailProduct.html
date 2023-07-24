@@ -11,91 +11,89 @@
       <h1 onclick="location.href='main.html'">SE7VEN_11</h1>
     </header>
     <main id="cart_wrap"></main>
-    <div class="productBtn">
+    <div class="productBtn"></div>
+
+    <div id="review-list">
+      <!-- 리뷰 목록이 여기에 동적으로 추가될 예정 -->
     </div>
 
-
-    <review>
-      <div class="reviewbox">
-        <h2>별점을 등록해주세요.</h2>
-        <input type="" name="password" placeholder="비밀번호를 입력해주세요." />
-        <textarea
-          name="review"
-          id="reviewText"
-          cols="30"
-          rows="10"
-          placeholder="상품리뷰를 등록해주세요."
-        ></textarea>
-        <button id="submitReviewBtn" type="submit">등록</button>
-      </div>
-
-      <div class="review-list">
-        <!-- 리뷰 목록이 여기에 동적으로 추가될 예정 -->
-      </div>
-    </review>
     <!-- 유저모달창 -->
     <div class="productModal" id="productModal">
       <div class="productModal-content">
-                      <!-- 모달창 내용 -->
-      <h2>정보 수정/삭제</h2>
-  <div>
-      <strong>상품이름&nbsp&nbsp&nbsp&nbsp</strong>
-      <input id="editProductName"
-      placeholder="상품이름"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '상품이름'"/>
-  </div>
-  <div>
-      <strong>상품이미지&nbsp</strong>
-      <input id="editProductImg"
-      placeholder="상품이미지"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '상품주소'"/>
-  </div>
-  <div>
-      <strong>상품가격&nbsp&nbsp&nbsp&nbsp</strong>
-  <input id="editProductPrice"
-      placeholder="상품가격"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '상품가격'"/>
-  </div>
-  <div>
-      <strong>카테고리&nbsp&nbsp&nbsp&nbsp</strong>
-      <select id="editProductCategory">
-        <option >과자</option>
-        <option >음료</option>
-        <option >생필품</option>
-        <option >도시락</option>
-        <option >의약품</option>
-        <option >라면</option>
-        <option >샌드위치</option>
-        <option >빵</option>
-        <option >빙과류</option>
-        <option >주류</option>
-        <option >냉동식품</option>
-        <option >시그니처</option>
-        </select>
-  </div>
-  <div>
-      <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
-      <input id="editProductPassword"
-      placeholder="비밀번호"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '비밀번호'"/>
-  </div>
-  <div class="btnBox">
-  <div>
-      <button onclick="updateProduct()" class="closeBtn">제품 수정</button>
-  </div>
-  <div>
-      <button onclick="deleteProduct()" class="closeBtn2">제품 삭제</button>
-  </div>
-  <div>
-  <button onclick="closeProductModal()" class="closeBtn3">닫기</button>
-  </div>
-  </div>
+        <!-- 모달창 내용 -->
+        <h2>정보 수정/삭제</h2>
+        <div>
+          <strong>상품이름&nbsp&nbsp&nbsp&nbsp</strong>
+          <input
+            id="editProductName"
+            placeholder="상품이름"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '상품이름'"
+          />
+        </div>
+        <div>
+          <strong>상품이미지&nbsp</strong>
+          <input
+            id="editProductImg"
+            placeholder="상품이미지"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '상품주소'"
+          />
+        </div>
+        <div>
+          <strong>상품가격&nbsp&nbsp&nbsp&nbsp</strong>
+          <input
+            id="editProductPrice"
+            placeholder="상품가격"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '상품가격'"
+          />
+        </div>
+        <div>
+          <strong>카테고리&nbsp&nbsp&nbsp&nbsp</strong>
+          <select id="editProductCategory">
+            <option>과자</option>
+            <option>음료</option>
+            <option>생필품</option>
+            <option>도시락</option>
+            <option>의약품</option>
+            <option>라면</option>
+            <option>샌드위치</option>
+            <option>빵</option>
+            <option>빙과류</option>
+            <option>주류</option>
+            <option>냉동식품</option>
+            <option>시그니처</option>
+          </select>
+        </div>
+        <div>
+          <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
+          <input
+            id="editProductPassword"
+            placeholder="비밀번호"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '비밀번호'"
+          />
+        </div>
+        <div class="btnBox">
+          <div>
+            <button onclick="updateProduct()" class="closeBtn">
+              제품 수정
+            </button>
+          </div>
+          <div>
+            <button onclick="deleteProduct()" class="closeBtn2">
+              제품 삭제
+            </button>
+          </div>
+          <div>
+            <button onclick="closeProductModal()" class="closeBtn3">
+              닫기
+            </button>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
   </body>
 </html>
 <script>
@@ -107,7 +105,6 @@
     var productModal = document.getElementById("productModal");
     productModal.style.display = "none";
   }
-
 </script>
 
 <script type="text/JavaScript" src="./js/cart.js"></script>
@@ -268,7 +265,7 @@
   .reviewbox button:hover {
     background-color: #718a8e;
   }
-  .productModal{
+  .productModal {
     display: none;
     position: absolute;
     top: 100px;
@@ -277,8 +274,8 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
   }
-.btnBox{
-  margin-top: 15px;
-  display: flex;
-}
+  .btnBox {
+    margin-top: 15px;
+    display: flex;
+  }
 </style>

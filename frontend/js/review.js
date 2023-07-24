@@ -47,7 +47,7 @@ async function getProduct(productId) {
   </div>
       `;
   });
-  reviewContainer.appendChild(reviewUl);
+  reviewContainer.append(reviewUl);
 }
 
 const reviewBox = {};
