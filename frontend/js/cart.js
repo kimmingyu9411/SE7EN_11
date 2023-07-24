@@ -57,26 +57,26 @@
     document.getElementById("orderBtn").addEventListener("click", placeOrder);
   }
 
-  // 총 상품 금액 초기값 설정
-  let totalAmount = 0;
+  // // 총 상품 금액 초기값 설정
+  // let totalAmount = 0;
 
-  // 수량 변경에 따라 총 상품 금액을 업데이트하는 함수
-  function UpdateTotalPrice() {
-    const numInput = document.getElementById("num");
-    const productPrice = parseFloat(
-      document
-        .getElementById("productPrice")
-        .innerText.replace(" 원", "")
-        .replace(",", "")
-    );
-    const numSelected = parseInt(numInput.value);
+  // // 수량 변경에 따라 총 상품 금액을 업데이트하는 함수
+  // function UpdateTotalPrice() {
+  //   const numInput = document.getElementById("num");
+  //   const productPrice = parseFloat(
+  //     document
+  //       .getElementById("productPrice")
+  //       .innerText.replace(" 원", "")
+  //       .replace(",", "")
+  //   );
+  //   const numSelected = parseInt(numInput.value);
 
-    if (!isNaN(numSelected) && numSelected >= 1) {
-      totalAmount = productPrice * numSelected;
-      const totalPriceElement = document.getElementById("totalPrice");
-      totalPriceElement.textContent = `${totalAmount.toLocaleString()} 원`;
-    }
-  }
+  //   if (!isNaN(numSelected) && numSelected >= 1) {
+  //     totalAmount = productPrice * numSelected;
+  //     const totalPriceElement = document.getElementById("totalPrice");
+  //     totalPriceElement.textContent = `${totalAmount.toLocaleString()} 원`;
+  //   }
+  // }
 
   // 등록하기 버튼 클릭 시 주문 처리 함수
 
