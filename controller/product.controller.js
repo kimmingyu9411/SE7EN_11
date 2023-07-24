@@ -47,9 +47,7 @@ class ProductController {
     if (createProduct.status === 400) {
       res.status(400).json({ errorMessage: createProduct.errorMessage });
     } else {
-      res
-        .status(200)
-        .json({ message:createProduct.message, createProduct });
+      res.status(200).json({ message: createProduct.message, createProduct });
     }
   };
   // 해당 store의 사장님인지 확인하는 여부 절차 필요?

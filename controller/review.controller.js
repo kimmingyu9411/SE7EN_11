@@ -48,7 +48,7 @@ class ReviewController {
     const deleteReview = await this.reviewService.deleteReview(
       reviewId,
       user,
-      password,
+      password
     );
     if (deleteReview.status === 400) {
       res.status(400).json({ message: deleteReview.errorMessage });

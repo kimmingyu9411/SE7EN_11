@@ -45,7 +45,7 @@ class UserController {
 
   loginUser = async (req, res, next) => {
     const { email, password } = req.body;
-    
+
     const token = await this.userService.login(email, password);
     if (!token.accToken) {
       res.status(400).json({
@@ -53,7 +53,10 @@ class UserController {
       });
     } else {
       res.cookie("Authorization", token.accToken);
-      res.cookie("refreshToken", token.refToken,{httpOnly:true, sameSite:'none'});
+      res.cookie("refreshToken", token.refToken, {
+        httpOnly: true,
+        sameSite: "none",
+      });
       res.status(200).json({
         message: "로그인 성공",
         accessToken: token.accToken,
@@ -110,25 +113,23 @@ class UserController {
     }
   };
 
-  mail = async (req, res, next)=>{
-    const {email} = req.body;
-    
+  mail = async (req, res, next) => {
+    const { email } = req.body;
+
     const result = await this.userService.mail(email);
 
-    if(result.isSuccessful){
+    if (result.isSuccessful) {
       const verifyNum = mailsender.sendNaverMail(email);
 
       res.status(200).json({
-        verifyNum
+        verifyNum,
       });
-    }else{
+    } else {
       res.status(400).json({
-        ErrorMessage:result.message
+        ErrorMessage: result.message,
       });
     }
-
-    
-  }
+  };
 }
 
 module.exports = UserController;
