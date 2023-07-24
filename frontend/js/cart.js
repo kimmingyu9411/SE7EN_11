@@ -22,27 +22,32 @@
   function displayProduct(product) {
     const cartWrap = document.querySelector("#cart_wrap");
     cartWrap.innerHTML = `
-      <div class="left">
-        <img src="${product.data.productImage}" alt="img" />
-      </div>
-      <div class="right">
-        <div class="top">
-          <h1 id="productTitle">${product.data.name}</h1>
-          <p id="productCategory">${product.data.category}</p>
-          <dl>
-            <dt>판매가격</dt>
-            <dd class="price" id="productPrice">${product.data.price.toLocaleString()} 원</dd>
-          </dl>
-          <div class="number">
-            <p class="ordername" id="productOrderName">수량</p>
-            <div class="ordernumber">
-              <input type="number" name="num" id="num" min="1" max="5" value="1"/>
-              <span class="num_price" id="productNumPrice">${product.data.price.toLocaleString()} 원</span>
+        <div class="left">
+          <img src="${product.data.productImage}" alt="img" />
+        </div>
+        <div class="right">
+          <div class="top">
+            <h1 id="productTitle">${product.data.name}</h1>
+            <p id="productCategory">${product.data.category}</p>
+            <dl>
+              <dt>판매가격</dt>
+              <dd class="price" id="productPrice">${product.data.price} 원</dd>
+            </dl>
+            <div class="number">
+              <p class="ordername" id="productOrderName">수량</p>
+              <div class="ordernumber">
+                <input type="number" name="num" id="num" min="1" max="5" value="1" onchange="changePrice()" />
+                <span class="num_price" id="productNumPrice">${product.data.price.toLocaleString()} 원</span>
+              </div>
+            </div>
+            <div class="totalprice">
+              <p>총 상품 금액</p>
+              <p class="result_price" id="totalPrice">${product.data.price.toLocaleString()} 원</p>
             </div>
           </div>
-          <div class="totalprice">
-            <p>총 상품 금액</p>
-            <p class="result_price" id="totalPrice">${product.data.price.toLocaleString()} 원</p>
+          <div class="bottom">
+            <button type="button" id="orderBtn" onclick="updateCart()">등록하기</button>
+            <button type="button" id="cartBtn">장바구니</button>
           </div>
         </div>
         <div class="bottom">
@@ -56,29 +61,28 @@
     document.getElementById("orderBtn").addEventListener("click", placeOrder);
   }
 
-  // 총 상품 금액 초기값 설정
-  let totalAmount = 0;
+  // // 총 상품 금액 초기값 설정
+  // let totalAmount = 0;
 
-  // 수량 변경에 따라 총 상품 금액을 업데이트하는 함수
-  function UpdateTotalPrice() {
-    const numInput = document.getElementById("num");
-    const productPrice = parseFloat(
-      document
-        .getElementById("productPrice")
-        .innerText.replace(" 원", "")
-        .replace(",", "")
-    );
-    const numSelected = parseInt(numInput.value);
+  // // 수량 변경에 따라 총 상품 금액을 업데이트하는 함수
+  // function UpdateTotalPrice() {
+  //   const numInput = document.getElementById("num");
+  //   const productPrice = parseFloat(
+  //     document
+  //       .getElementById("productPrice")
+  //       .innerText.replace(" 원", "")
+  //       .replace(",", "")
+  //   );
+  //   const numSelected = parseInt(numInput.value);
 
-    if (!isNaN(numSelected) && numSelected >= 1) {
-      totalAmount = productPrice * numSelected;
-      const totalPriceElement = document.getElementById("totalPrice");
-      totalPriceElement.textContent = `${totalAmount.toLocaleString()} 원`;
-    }
-  }
+  //   if (!isNaN(numSelected) && numSelected >= 1) {
+  //     totalAmount = productPrice * numSelected;
+  //     const totalPriceElement = document.getElementById("totalPrice");
+  //     totalPriceElement.textContent = `${totalAmount.toLocaleString()} 원`;
+  //   }
+  // }
 
   // 등록하기 버튼 클릭 시 주문 처리 함수
-
 
   //사장님 버튼 생성
   const showBtn = async () => {
@@ -89,7 +93,6 @@
       headers: {
         "Content-Type": "application/json",
       },
-
     })
       .then((res) => res.json())
       .then((res) => {
@@ -102,8 +105,6 @@
         }
       });
   };
-
-  
 
   // 초기에 getProduct 함수 호출
   getProduct(productid);
@@ -148,9 +149,9 @@ const updateProduct = async () => {
     });
 };
 const deleteProduct = async () => {
-const password = document.getElementById("editProductPassword").value,
-      urlParams = new URL(location.href).searchParams,
-      productId = urlParams.get("id");
+  const password = document.getElementById("editProductPassword").value,
+    urlParams = new URL(location.href).searchParams,
+    productId = urlParams.get("id");
   const req = {
     password,
   };
@@ -175,5 +176,4 @@ const password = document.getElementById("editProductPassword").value,
     .catch((err) => {
       console.error("상품삭제 중 에러 발생");
     });
-  }
-
+};

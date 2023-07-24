@@ -1,17 +1,17 @@
-const CartService = require('../service/cartService.js');
+const CartService = require("../service/cartService.js");
 
 class CartController {
   constructor() {
     this.cartService = new CartService();
   }
-  
+
   getCart = async (req, res, next) => {
     const user = res.locals.user;
     try {
       const cart = await this.cartService.getCart(user);
       res.status(200).json({
         message: " 장바구니 조회 성공",
-        cart
+        cart,
       });
     } catch (e) {
       console.error(e);
@@ -19,22 +19,26 @@ class CartController {
         message: "주문 조회 실패",
       });
     }
-  }
-  
+  };
+
   insertProductToCart = async (req, res, next) => {
     const user = res.locals.user;
     const productId = req.query.id;
     const quantity = req.body.quantity;
-    const result = await this.cartService.addProductInCart(user,productId,quantity);
+    const result = await this.cartService.addProductInCart(
+      user,
+      productId,
+      quantity
+    );
 
-    if(result.isSuccessful){
+    if (result.isSuccessful) {
       res.status(200).json({
-        message:"success.."
-      })
-    }else{
+        message: "success..",
+      });
+    } else {
       res.status(400).json({
-        message:"failed.."
-      })
+        message: "failed..",
+      });
     }
   };
 
@@ -42,16 +46,20 @@ class CartController {
     const user = res.locals.user;
     const quantity = req.body.quantity;
     const productId = req.query.id;
-    const result = await this.cartService.updateProductInCart(user,productId,quantity);
+    const result = await this.cartService.updateProductInCart(
+      user,
+      productId,
+      quantity
+    );
 
-    if(result.isSuccessful){
+    if (result.isSuccessful) {
       res.status(200).json({
-        message:"success.."
-      })
-    }else{
+        message: "success..",
+      });
+    } else {
       res.status(400).json({
-        message:"failed.."
-      })
+        message: "failed..",
+      });
     }
   };
 
@@ -59,18 +67,22 @@ class CartController {
     const { isOrdered, removeList } = req.body;
     const user = res.locals.user;
 
-    const result = await this.cartService.deleteProductsInCart(user, removeList, isOrdered);
+    const result = await this.cartService.deleteProductsInCart(
+      user,
+      removeList,
+      isOrdered
+    );
 
-    if(result.isSuccessful){
+    if (result.isSuccessful) {
       res.status(200).json({
-        message:"success.."
-      })
-    }else{
+        message: "success..",
+      });
+    } else {
       res.status(400).json({
-        message:"failed.."
-      })
+        message: "failed..",
+      });
     }
   };
 }
 
-module.exports = CartController
+module.exports = CartController;

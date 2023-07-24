@@ -11,9 +11,14 @@
       <h1 onclick="location.href='main.html'">SE7VEN_11</h1>
     </header>
     <main id="cart_wrap"></main>
-    <div class="productBtn">
+    <div class="productBtn"></div>
+
+    <div id="review-list">
+      <!-- 리뷰 목록이 여기에 동적으로 추가될 예정 -->
     </div>
 
+<<<<<<< HEAD
+=======
 
     <review>
       <div class="reviewbox">
@@ -33,69 +38,75 @@
         <!-- 리뷰 목록이 여기에 동적으로 추가될 예정 -->
       </div>
     </review>
+>>>>>>> e8ab828fbd0eeee99d01690c7397365b777ad9ae
     <!-- 유저모달창 -->
     <div class="productModal" id="productModal">
       <div class="productModal-content">
-                      <!-- 모달창 내용 -->
-      <h2>정보 수정/삭제</h2>
-  <div>
-      <strong>상품이름&nbsp&nbsp&nbsp&nbsp</strong>
-      <input id="editProductName"
-      placeholder="상품이름"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '상품이름'"/>
-  </div>
-  <div>
-      <strong>상품이미지&nbsp</strong>
-      <input id="editProductImg"
-      placeholder="상품이미지"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '상품주소'"/>
-  </div>
-  <div>
-      <strong>상품가격&nbsp&nbsp&nbsp&nbsp</strong>
-  <input id="editProductPrice"
-      placeholder="상품가격"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '상품가격'"/>
-  </div>
-  <div>
-      <strong>카테고리&nbsp&nbsp&nbsp&nbsp</strong>
-      <select id="editProductCategory">
-        <option >과자</option>
-        <option >음료</option>
-        <option >생필품</option>
-        <option >도시락</option>
-        <option >의약품</option>
-        <option >라면</option>
-        <option >샌드위치</option>
-        <option >빵</option>
-        <option >빙과류</option>
-        <option >주류</option>
-        <option >냉동식품</option>
-        <option >시그니처</option>
-        </select>
-  </div>
-  <div>
-      <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
-      <input id="editProductPassword"
-      placeholder="비밀번호"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = '비밀번호'"/>
-  </div>
-  <div class="btnBox">
-  <div>
-      <button onclick="updateProduct()" class="closeBtn">제품 수정</button>
-  </div>
-  <div>
-      <button onclick="deleteProduct()" class="closeBtn2">제품 삭제</button>
-  </div>
-  <div>
-  <button onclick="closeProductModal()" class="closeBtn3">닫기</button>
-  </div>
-  </div>
+        <!-- 모달창 내용 -->
+        <h2>상품 수정</h2>
+        <div>
+          <strong>상품이름&nbsp&nbsp&nbsp&nbsp</strong>
+          <input
+            id="editProductName"
+            placeholder="상품이름"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '상품이름'"
+          />
+        </div>
+        <div>
+          <strong>상품이미지&nbsp</strong>
+          <input
+            id="editProductImg"
+            placeholder="상품이미지"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '상품주소'"
+          />
+        </div>
+        <div>
+          <strong>상품가격&nbsp&nbsp&nbsp&nbsp</strong>
+          <input
+            id="editProductPrice"
+            placeholder="상품가격"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '상품가격'"
+          />
+        </div>
+        <div>
+          <strong>카테고리&nbsp&nbsp&nbsp&nbsp</strong>
+          <select id="editProductCategory">
+            <option>과자</option>
+            <option>음료</option>
+            <option>생필품</option>
+            <option>도시락</option>
+            <option>의약품</option>
+            <option>라면</option>
+            <option>샌드위치</option>
+            <option>빵</option>
+            <option>빙과류</option>
+            <option>주류</option>
+            <option>냉동식품</option>
+            <option>시그니처</option>
+          </select>
+        </div>
+        <div>
+          <strong>비밀번호&nbsp&nbsp&nbsp&nbsp</strong>
+          <input
+            id="editProductPassword"
+            placeholder="비밀번호"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '비밀번호'"
+          />
+        </div>
+
+        <div class="btnBox">
+          <button onclick="updateProduct()" class="closeBtn">제품 수정</button>
+
+          <button onclick="deleteProduct()" class="closeBtn2">제품 삭제</button>
+
+          <button onclick="closeProductModal()" class="closeBtn3">닫기</button>
+        </div>
       </div>
-  </div>
+    </div>
   </body>
 </html>
 <script>
@@ -107,7 +118,6 @@
     var productModal = document.getElementById("productModal");
     productModal.style.display = "none";
   }
-
 </script>
 
 <script type="text/JavaScript" src="./js/cart.js"></script>
@@ -216,59 +226,7 @@
     width: 120px;
   }
 
-  .reviewbox {
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, 50%);
-  }
-
-  .reviewbox h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
-  }
-
-  .reviewbox input {
-    width: 50%;
-    height: 50%;
-    padding: 0 20px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #86b0b6;
-  }
-
-  .reviewbox input:focus {
-    border: 1px solid #000;
-    outline: 0;
-  }
-
-  .reviewbox textarea {
-    width: 100%;
-    height: 150px;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #86b0b6;
-    resize: none;
-  }
-
-  .reviewbox textarea:focus {
-    border: 1px solid #000;
-    outline: 0;
-  }
-
-  .reviewbox button {
-    border: 0;
-    padding: 10px 30px;
-    background: #86b0b6;
-    font-size: 18px;
-    border-radius: 5px;
-    color: #fff;
-  }
-  .reviewbox button:hover {
-    background-color: #718a8e;
-  }
-  .productModal{
+  .productModal {
     display: none;
     position: absolute;
     top: 100px;
@@ -277,8 +235,60 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
   }
-.btnBox{
-  margin-top: 15px;
-  display: flex;
-}
+  .btnBox {
+    width: 100%;
+    margin-top: 60px;
+    display: flex;
+    cursor: pointer;
+  }
+
+  .btnBox button {
+    margin-left: 10px;
+    width: 150px;
+    background: #ff8a00;
+    border: none;
+    color: #fff;
+    height: 35px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .btnBox button:hover {
+    background: #cc0202;
+  }
+
+  #productUpdateBtn {
+    background: #ff8a00;
+    display: flex;
+    margin: 0 auto;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    width: 80px;
+    height: 20px;
+    padding: auto;
+    padding-left: 15px;
+    padding-top: 3px;
+  }
+
+  #productUpdateBtn:hover {
+    background: #006547;
+  }
+
+  .productModal-content {
+    text-align: center;
+    width: 350px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  .productModal-content h2 {
+    background: #006547;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .closeBtn3 {
+    margin-right: 8px;
+  }
 </style>

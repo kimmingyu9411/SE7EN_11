@@ -72,7 +72,7 @@ class StoreController {
         errorMessage: deleteStore.errorMessage,
       });
     } else {
-      res.status(200).json({message:deleteStore.message});
+      res.status(200).json({ message: deleteStore.message });
     }
   };
 }
