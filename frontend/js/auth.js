@@ -20,9 +20,9 @@ async function login(){
 
     const {message, accessToken, refreshToken } = await fetch('http://localhost:8080/users/login',options).then(d=>d.json());
     document.cookie=
-        `Authorization=${accessToken};`;
+        `Authorization=${accessToken}; Path=/;`;
     document.cookie=
-        `refreshToken=${refreshToken}`;
+        `refreshToken=${refreshToken}; Path=/;`;
     alert(message);
     if(accessToken&&refreshToken){
         location.href="./main.html"

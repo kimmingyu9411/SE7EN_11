@@ -1,7 +1,7 @@
 (function () {
   const urlParams = new URL(location.href).searchParams;
-  const productid = urlParams.get("id");
-  console.log("productId", productid);
+  const productId = urlParams.get("id");
+  console.log("productId", productId);
 
   // 상품 정보를 서버로부터 가져오는 함수
   async function getProduct(productId) {
@@ -21,6 +21,7 @@
 
   // 상품 정보를 화면에 표시하는 함수
   function displayProduct(product) {
+    console.log(product);
     const cartWrap = document.querySelector("#cart_wrap");
     cartWrap.innerHTML = `
       <div class="left">
@@ -32,12 +33,12 @@
           <p id="productCategory">${product.data.category}</p>
           <dl>
             <dt>판매가격</dt>
-            <dd class="price" id="productPrice">${product.data.price.toLocaleString()} 원</dd>
+            <dd class="price" id="productPrice">${product.data.price} 원</dd>
           </dl>
           <div class="number">
             <p class="ordername" id="productOrderName">수량</p>
             <div class="ordernumber">
-              <input type="number" name="num" id="num" min="1" max="5" value="1"/>
+              <input type="number" name="num" id="num" min="1" max="5" value="1" onchange="changePrice()" />
               <span class="num_price" id="productNumPrice">${product.data.price.toLocaleString()} 원</span>
             </div>
           </div>
@@ -47,14 +48,10 @@
           </div>
         </div>
         <div class="bottom">
-          <button type="button" id="orderBtn">등록하기</button>
+          <button type="button" id="orderBtn" onclick="updateCart()">등록하기</button>
           <button type="button" id="cartBtn">장바구니</button>
         </div>
       </div>`;
-
-    // 수량 입력란에 이벤트 리스너 등록
-    document.getElementById("num").addEventListener("input", updateTotalPrice);
-    document.getElementById("orderBtn").addEventListener("click", placeOrder);
   }
 
   // 총 상품 금액 초기값 설정
@@ -79,17 +76,31 @@
   }
 
   // 등록하기 버튼 클릭 시 주문 처리 함수
-  const updateTotalPrice = async () => {
-    await fetch(`http://localhost:8080/users/${userId}`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
+  updateCart = async () => {
+    const quantity = Number($('#num').val());
+    // console.log(document.cookie.split('; ')[0].split('=')[1]);
+    const option={
+      method:"POST",
+      header:{
+        'Content-Type':"application/json",
+        credentials:"include",
+        "Authorization":document.cookie.split('; ')[0].split('=')[1]
       },
-      body: JSON.stringify(req),
-    }).then((res) => res.json());
+      body:{
+        quantity:JSON.stringify(quantity)
+      }
+    };
+
+    const result = await fetch(`http://127.0.0.1:8080/cart?id=${productId}`,option).then(d=>d.json());
+    console.log(result);
   };
 
   // 초기에 getProduct 함수 호출
-  getProduct(productid);
+  getProduct(productId);
 })();
+
+function changePrice(){
+  const price = Number(document.getElementById('productPrice').innerHTML.split(' ')[0]);
+  const quantity = Number($('#num').val());
+  document.getElementById('totalPrice').innerHTML=price*quantity+' 원';
+}
