@@ -1,5 +1,4 @@
 const Log = require('../database/model/log.js');
-const Product = require('../database/model/product.js');
 
 class LogRepository{
     async getLogsByOwner(user,store){
@@ -7,13 +6,7 @@ class LogRepository{
         return {logs, isSuccessful:true};
     }
     async getLogsByCustomer(user){
-        const logs = await Log.findAll({
-            where:{userId:user.id},
-            include:{
-                model:Product,
-                as:'PurchaseDescription'
-            }
-        });
+        const logs = await Log.findAll({where:{userId:user.id}});
         return {logs, isSuccessful:true};
     }
 }

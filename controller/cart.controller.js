@@ -23,17 +23,17 @@ class CartController {
   
   insertProductToCart = async (req, res, next) => {
     const user = res.locals.user;
-    const productId = req.param.productId;
+    const productId = req.query.id;
     const quantity = req.body.quantity;
     const result = await this.cartService.addProductInCart(user,productId,quantity);
 
     if(result.isSuccessful){
       res.status(200).json({
-        message:"장바구니에 추가되었습니다."
+        message:"success.."
       })
     }else{
       res.status(400).json({
-        message:"장바구니에 추가가 실패하였습니다."
+        message:"failed.."
       })
     }
   };

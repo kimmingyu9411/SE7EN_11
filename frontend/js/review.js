@@ -1,5 +1,18 @@
-const url = new URL(location.href).searchParams;
-const productId = url.get("id");
+// const createReview = fetch(`http://localhost:8080/reviews?id=${productId}`, {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify({
+//     content: "content",
+//     star: "star",
+//   }),
+// })
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
+
+const urlParams = new URL(location.href).searchParams;
+const productId = urlParams.get("id");
 getProduct(productId);
 
 async function getProduct(productId) {
