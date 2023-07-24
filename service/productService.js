@@ -7,6 +7,12 @@ class ProductService {
   }
   //상품 등록
   createProduct = async (name, price, category, productImage, storeId) => {
+    if (!name || !price || !category || !productImage) {
+      return {
+        status: 400,
+        errorMessage: "모든 상품 데이터를 기입해야합니다.",
+      };
+    }
     try {
       return await this.productRepository.createProduct(
         name,
@@ -48,6 +54,12 @@ class ProductService {
     password,
     productImage
   ) => {
+    if (!user||!name||!price||!category||!password||!productImage){
+      return{
+        status: 400,
+        errorMessage: "데이터를 전부 기입해야합니다.",
+      }
+    }
     const match = await bcrypt.compare(password, user.password);
 
     if (!match) {
@@ -75,6 +87,12 @@ class ProductService {
 
   //상품 삭제
   deleteProduct = async (productId, user, password) => {
+    if(!password){
+      return{
+        status: 400,
+        errorMessage: "비밀번호를 입력해야합니다.",
+      }
+    }
     const match = await bcrypt.compare(password, user.password);
 
     if (!match) {
