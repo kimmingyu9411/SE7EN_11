@@ -152,3 +152,6 @@ SE7EN_11
    └─ userService.js
 
 ```
+
+![image](https://github.com/baechanyong1/SE7EN_11/assets/110149885/47f579bf-63df-444a-8dab-d18a452ef605)
+
